@@ -1,0 +1,26 @@
+{
+  "name": "Carolographie-App",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DegimbeLaurent/Carolographie-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DegimbeLaurent/Carolographie-App/issues"
+  },
+  "homepage": "https://github.com/DegimbeLaurent/Carolographie-App#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-server": "^0.12.3",
+    "parcel-bundler": "^1.12.5",
+    "socket.io": "^4.1.2"
+  }
+}
