@@ -12,5 +12,10 @@
     <div id="visite"></div>
     <script src="../client.js"></script>
     <script type="module" src="../phaser/main.js"></script>
+    <script>
+        window.onload = function(){
+            Client.socket.emit('newplayer', "visiteur X");
+        }
+    </script>
 </body>
 </html>
