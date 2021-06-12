@@ -1,6 +1,6 @@
 import {CST} from '/ph/CST.js';
-import { movePlayers } from '../classes/MovingPlayers.js';
-export class AbbeyScene extends Phaser.Scene{
+import { BaseScene } from '../scenes/BaseScene.js';
+export class AbbeyScene extends BaseScene {
     constructor(){
         super({
             key: CST.SCENES.ABBEY
@@ -23,6 +23,8 @@ export class AbbeyScene extends Phaser.Scene{
         const belowLayer2 = map.createLayer("grass", tileset, 0, 0);
         const belowLayer = map.createLayer("Houses", tileset, 0, 0);
         this.physics.add.sprite(500,500,"sprite");
+        let test = this.randomInt(10,100);
+        console.log(test);
     }
     update(){
         
