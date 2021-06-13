@@ -7,6 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="/website/visite.html">Visite virtuelle</a>
+    <input type="text" id="pseudo" value="" placeholder="Votre pseudo">
+    <button onclick="demoMap();">Démo</button>
+    <script>
+        function demoMap(){
+            let pseudo = document.getElementById("pseudo").value;
+            if(pseudo == ""){pseudo = "Visiteur";}
+            localStorage.setItem("pseudo", pseudo);
+            console.log(pseudo);
+            console.log(localStorage.getItem("pseudo"));
+            location.href = '/website/demo.html';
+        }
+    </script>
 </body>
 </html>

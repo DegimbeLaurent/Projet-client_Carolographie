@@ -1,4 +1,5 @@
 console.log("visiteur connecté!");
+
 var Client = {};
 Client.socket = io.connect();
 Client.socket.on('personalData', function (data, tablePlayers) {

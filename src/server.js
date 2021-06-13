@@ -37,19 +37,19 @@ for (var i = 0; i < nbRoutes; i++) {
 //======================================
 //   Importation des fonctions serveur
 //======================================
-const ServerFunctions = require('./phaser/classes/ServerFunctions.js');
+//const ServerFunctions = require('./phaser/classes/ServerFunctions.js');
 
+//=========================================
+//  Initialisation propriétés & variables
+//=========================================
+server.lastPlayerID = 0;
+var serverPlayers = [];
 //=================================
 //  Lancement serveur
 //=================================
 server.listen(process.env.PORT || 3000, function () {
     console.log('Listening on ' + server.address().port);
 });
-//=========================================
-//  Initialisation propriétés & variables
-//=========================================
-server.lastPlayerID = 0;
-var serverPlayers = [];
 //=================================
 //  A l'écoute des clients...
 //=================================
@@ -59,11 +59,11 @@ io.on('connection', function (socket) {
     //  Création d'un joueur entrant
     //=================================
     socket.on('newplayer', function (nickname) {            
-        let aleaX = ServerFunctions.randomInt(100, 400);
-        let aleaY = ServerFunctions.randomInt(100, 400);
+        let aleaX = randomInt(100, 400);
+        let aleaY = randomInt(100, 400);
         let now = new Date();
         socket.player = {
-            id: server.lastPlayderID++,
+            id: server.lastPlayerID++,
             nickname: 'unknown',
             x: aleaX,
             y: aleaY,
@@ -79,7 +79,7 @@ io.on('connection', function (socket) {
         socket.player.nickname = nickname;
         socket.player.newX = aleaX;
         socket.player.newY = aleaY;
-        console.log(nickname + ' is connected');
+        console.log(nickname + ' is connected ['+socket.player.id+']');
         serverPlayers.push(socket.player);
         io.to(socket.id).emit("personalData", socket.player, serverPlayers);
         socket.emit('allplayers', serverPlayers);
@@ -87,24 +87,32 @@ io.on('connection', function (socket) {
         socket.on('tchatMsg', function (msg) {
             io.emit('tchat', socket.player, msg);
         });
-    });
-    //=================================
-    //  Click pour se déplacer
-    //=================================
-    socket.on('click', function (data) {
-        console.log("on passe ici...");
-        //console.log(socket.player.nickname + ' moves to ' + data.x - 5 + ', ' + data.y);
-        socket.player.x = data.x;
-        socket.player.y = data.y;
-        io.emit('move', data.id, socket.player);
-    });
-    //=================================
-    //  Déconnection d'un joueur
-    //=================================
-    socket.on('disconnect', function () {
-        io.emit('remove', socket.player.id, socket.player.nickname);
-        serverPlayers = deleteDisconnectedPlayer(serverPlayers, socket.player);
-        io.emit('updateList', serverPlayers);
+        //=================================
+        //  Click pour se déplacer
+        //=================================
+        socket.on('click', function (data) {
+            //console.log(socket.player.nickname + ' moves to ' + data.x - 5 + ', ' + data.y);
+            socket.player.x = data.x;
+            socket.player.y = data.y;
+            io.emit('move', data.id, socket.player);
+        });
+        //=================================
+        //  Déconnection d'un joueur
+        //=================================
+        socket.on('disconnect', function () {
+            io.emit('remove', socket.player.id, socket.player.nickname);
+            serverPlayers = deleteDisconnectedPlayer(serverPlayers, socket.player);
+            io.emit('updateList', serverPlayers);
+        });
     });
 
 });
+function deleteDisconnectedPlayer(serverPlayers, disconnectedPlayer) {
+    let index = serverPlayers.indexOf(disconnectedPlayer);
+    if (index > -1) { serverPlayers.splice(index, 1); }
+    return serverPlayers;
+}
+
+function randomInt(low, high) {
+    return Math.floor(Math.random() * (high - low) + low);
+}

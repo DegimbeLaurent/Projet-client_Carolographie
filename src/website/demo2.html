@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.54.0/dist/phaser.min.js"></script>
-    <title>Visite</title>
+    <title>Demo map</title>
 </head>
+
 <body>
     <div id="visite"></div>
-    <script type="module" src="../phaser/main.js"></script>
-    <script src="../client.js"></script>
+    <script src="../phaser/classes/ServerFunctions.js"></script>
+    <script src="../phaser/demo2.js"></script>
+    <script src="../client_demo.js"></script>
     <script>
-        window.onload = function(){
+        window.onload = function () {
             //console.log(game);
-            Client.socket.emit('newplayer', "visiteur X");
+            Client.socket.emit('newplayer', localStorage.getItem('pseudo'));
         }
     </script>
 </body>
+
 </html>

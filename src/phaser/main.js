@@ -22,6 +22,7 @@ var config = {
 //====================================================
 var game = new Phaser.Game(config);
 game.speed = 300;
+game.players = [];
 console.table(config);
 console.table(game);
 console.log("test gameSpeed = "+ game.speed);
