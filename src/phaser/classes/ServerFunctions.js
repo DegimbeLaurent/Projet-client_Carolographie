@@ -209,7 +209,7 @@ function progressBar(Game){
 function hitPassage(){
     location.href = '/website/'+this;
 }
-function getXYPassage(scene, entrance){
+function getXYPassage(currentScene, entrance){
     let allPassages = [];
     allPassages["A1"] = {"E":[450,450],"N":[0,0],"NE":[0,0],"NW":[0,0],"SE":[0,0],"S":[400,400],"SW":[0,0],"W":[0,0]}
     allPassages["A2"] = {"E":[0,0],"N":[0,0],"NE":[0,0],"NW":[0,0],"SE":[0,0],"S":[0,0],"SW":[0,0],"W":[0,0]};
@@ -229,6 +229,12 @@ function getXYPassage(scene, entrance){
     allPassages["C4"] = {"E":[0,0],"N":[0,0],"NE":[0,0],"NW":[0,0],"SE":[0,0],"S":[0,0],"SW":[0,0],"W":[0,0]};
     allPassages["C5"] = {"E":[0,0],"N":[0,0],"NE":[0,0],"NW":[0,0],"SE":[0,0],"S":[0,0],"SW":[0,0],"W":[0,0]};
 
-    return allPassages[scene][entrance];
+    return allPassages[currentScene][entrance];
+}
+function getCoordEntrance(){
+    let currentScene = localStorage.getItem('currentScene');
+    let entrance = localStorage.getItem('entrance');
+    let coordEntrance = getXYPassage(currentScene,entrance);
+    return coordEntrance;
 }
 //module.exports = {deleteDisconnectedPlayer, randomInt};

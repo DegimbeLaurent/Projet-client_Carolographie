@@ -58,15 +58,13 @@ io.on('connection', function (socket) {
     //=================================
     //  Création d'un joueur entrant
     //=================================
-    socket.on('newplayer', function (nickname) {            
-        let aleaX = randomInt(100, 400);
-        let aleaY = randomInt(100, 400);
+    socket.on('newplayer', function (nickname,posXY) {         
         let now = new Date();
         socket.player = {
             id: server.lastPlayerID++,
             nickname: 'unknown',
-            x: aleaX,
-            y: aleaY,
+            x: posXY[0],
+            y: posXY[1],
             newX: 0,
             newY: 0,
             angle: 0,
@@ -77,13 +75,13 @@ io.on('connection', function (socket) {
             remove: false
         };
         socket.player.nickname = nickname;
-        socket.player.newX = aleaX;
-        socket.player.newY = aleaY;
+        socket.player.newX = posXY[0];
+        socket.player.newY = posXY[1];
         console.log(nickname + ' is connected ['+socket.player.id+']');
         serverPlayers.push(socket.player);
         io.to(socket.id).emit("personalData", socket.player, serverPlayers);
         socket.emit('allplayers', serverPlayers);
-        socket.broadcast.emit('newplayer', socket.player, serverPlayers);
+        socket.broadcast.emit('getNewplayer', socket.player, serverPlayers);
         socket.on('tchatMsg', function (msg) {
             io.emit('tchat', socket.player, msg);
         });

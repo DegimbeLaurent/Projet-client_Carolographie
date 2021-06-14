@@ -12,7 +12,7 @@ Client.sendClick = function (id, x, y) {
     Client.socket.emit('click', { id: id, x: x, y: y });
 };
 Client.socket.on('allplayers', function (data) {
-    Client.socket.on('newplayer', function (data, tablePlayers) {
+    Client.socket.on('getNewplayer', function (data, tablePlayers) {
         game.players = tablePlayers;
         console.log("Connexion nouveau joueur [" + data.id + "]");
         console.table(game.players);
