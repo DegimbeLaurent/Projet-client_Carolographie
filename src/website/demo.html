@@ -19,6 +19,7 @@
         window.onload = function () {
             //console.log(game);
             let coordEntrance = getCoordEntrance();
+            console.table(game);
             Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance);
         }
     </script>

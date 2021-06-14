@@ -63,8 +63,8 @@ io.on('connection', function (socket) {
         socket.player = {
             id: server.lastPlayerID++,
             nickname: 'unknown',
-            x: posXY[0],
-            y: posXY[1],
+            x: 600,
+            y: 600,
             newX: 0,
             newY: 0,
             angle: 0,

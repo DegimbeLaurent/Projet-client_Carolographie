@@ -7,6 +7,8 @@ Client.socket.on('personalData', function (data, tablePlayers) {
     game.players = tablePlayers;
     game.selfConnected = true;
     console.table(game.players);
+    //movePlayers(this, game.players);
+    //addNewPlayer(this, data);
 });
 Client.sendClick = function (id, x, y) {
     Client.socket.emit('click', { id: id, x: x, y: y });
@@ -36,7 +38,7 @@ Client.socket.on('allplayers', function (data) {
             game.players[idPl].newY = data.y;
             //console.table(game.players);
         }
-        game.players[idPl].newX = data.x;
-        game.players[idPl].newY = data.y;
+        //game.players[idPl].newX = data.x;
+        //game.players[idPl].newY = data.y;
     });
 });
