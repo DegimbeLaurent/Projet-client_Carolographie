@@ -19,6 +19,10 @@
         window.onload = function () {
             //console.log(game);
             Client.socket.emit('newplayer', localStorage.getItem('pseudo'));
+            console.log(getXYPassage("A1", "S"));
+            console.log(getXYPassage("A1", "E"));
+            console.log(getXYPassage("A1", "E")[0]);
+            console.log(getXYPassage("A1", "E")[1]);
         }
     </script>
 </body>
