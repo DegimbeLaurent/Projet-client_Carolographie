@@ -128,12 +128,12 @@ function stopPlayers(Game, players) {
         playerMap[player.nickname].y = playerMap[player.id].y - 35;
     });
 }
-function movePlayers(Game, players) {
+function movePlayers(Game, players) {    
     players.forEach((player) => {
         if ((player.x != player.newX) || (player.y != player.newY)) {
             let tgtSoldier = new Phaser.Math.Vector2();
             tgtSoldier.x = player.newX;
-            tgtSoldier.y = player.newY;
+            tgtSoldier.y = player.newY;            
             Game.physics.moveToObject(playerMap[player.id], tgtSoldier, game.speed);
         }
     });
@@ -207,6 +207,7 @@ function progressBar(Game){
     });
 }
 function hitPassage(){
+    localStorage.setItem("Players",game.players);
     location.href = '/website/'+this;
 }
 function getXYPassage(currentScene, entrance){

@@ -1,7 +1,7 @@
 console.log("visiteur connecté!");
 var Client = {};
 Client.socket = io.connect();
-Client.socket.on('personalData', function (data, tablePlayers) {
+Client.socket.on('personalData', function (data, tablePlayers,Game) {
     let perso = Object.entries(data);
     localStorage.setItem("personalData", perso);
     game.players = tablePlayers;
@@ -28,8 +28,9 @@ Client.socket.on('allplayers', function (data) {
     });
     Client.socket.on('move', function (id, data) {
         //movePlayer(data.id, data.nickname, data.x, data.y);
-        //console.log(game.players[id].nickname + " moves to " + data.x + ", " + data.y);
-        //console.table(game.players);
+        console.log(game.players[id].nickname + " moves to " + data.x + ", " + data.y);
+        console.table(game.players);
+        // localStorage.setItem("Players", game.players);
         //console.log("id to move -> " + id);
         //console.table(game.players[id]);
         let idPl = getIdPlayers(id);

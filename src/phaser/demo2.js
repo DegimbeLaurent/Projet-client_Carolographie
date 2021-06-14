@@ -55,7 +55,19 @@ function create(){
 
     passages["passageNord"] = this.physics.add.sprite(225,250,'passage_door');
     passages["passageNord"].body.immovable = true;
+
     this.physics.add.collider(passages["passageNord"],playerMap,hitPassage,null,"demo.html");
+
+    console.table(game.players);
+    let personalData = getPersonalData();
+    console.table(personalData);
+    //addNewPlayer(this, personalData);
+    // let id = parseInt(personalData.id);
+    // let x = parseInt(personalData.x);
+    // let y = parseInt(personalData.y);
+    // Client.sendClick(id, x, y);
+    let players = localStorage.getItem("Players");
+    console.table(players);
 }
 function update(){
     var mousePointer = this.input.activePointer;

@@ -28,11 +28,11 @@ function preload(){
     //============================================
     //  PROGRESS BAR
     //============================================
-    progressBar(this);
-     this.load.image('logo', '/img/sprite.png');
-     for (var i = 0; i < 250; i++) {
-         this.load.image('logo'+i, '/img/sprite.png');
-     }
+    //progressBar(this);
+    // this.load.image('logo', '/img/sprite.png');
+    // for (var i = 0; i < 250; i++) {
+    //     this.load.image('logo'+i, '/img/sprite.png');
+    // }
     //============================================
     //  PRELOAD IMAGES
     //============================================
@@ -63,4 +63,5 @@ function update(){
     updateConnectedPlayers(this, game.players, game.playersBU);
     movePlayers(this, game.players);
     stopPlayers(this, game.players);
+    localStorage.setItem("Players",game.players);
 }

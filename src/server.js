@@ -81,7 +81,7 @@ io.on('connection', function (socket) {
         serverPlayers.push(socket.player);
         io.to(socket.id).emit("personalData", socket.player, serverPlayers);
         socket.emit('allplayers', serverPlayers);
-        socket.broadcast.emit('getNewplayer', socket.player, serverPlayers);
+        //socket.broadcast.emit('getNewplayer', socket.player, serverPlayers);
         socket.on('tchatMsg', function (msg) {
             io.emit('tchat', socket.player, msg);
         });
