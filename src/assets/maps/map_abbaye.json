@@ -116,38 +116,22 @@
  "tiledversion":"1.6.0",
  "tileheight":128,
  "tilesets":[
-        {
-         "firstgid":1,
-         "source":"tsx\/grass_set.tsx"
-        }, 
-        {
-         "firstgid":11,
-         "source":"tsx\/bush.tsx"
-        }, 
-        {
-         "firstgid":12,
-         "source":"tsx\/flower_set.tsx"
-        }, 
-        {
-         "firstgid":20,
-         "source":"tsx\/wall_set.tsx"
-        }, 
-        {
-         "firstgid":35,
-         "source":"tsx\/roof_set.tsx"
-        }, 
-        {
-         "firstgid":47,
-         "source":"tsx\/ruine.tsx"
-        }, 
-        {
-         "firstgid":71,
-         "source":"tsx\/arbre.tsx"
-        }, 
-        {
-         "firstgid":72,
-         "source":"tsx\/gravel_set.tsx"
-        }],
+       { 
+       "columns":4,
+       "image":"tilesets\/flower_set.png",
+       "imageheight":256,
+       "imagewidth":1024,
+       "margin":0,
+       "name":"flower_set",
+       "spacing":0,
+       "tilecount":8,
+       "tiledversion":"1.5.0",
+       "tileheight":128,
+       "tilewidth":256,
+       "type":"tileset",
+       "version":1.5
+       }
+],
  "tilewidth":256,
  "type":"map",
  "version":"1.6",
