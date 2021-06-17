@@ -10,12 +10,16 @@
 </head>
 <body>
     <div id="visite"></div>
-    <script type="module" src="../phaser/main.js"></script>
+    <script src="../phaser/ServerFunctions.js"></script>
+    <script src="../phaser/scenes/LoadScene.js"></script>
+    <script src="../phaser/scenes/BaseScene.js"></script>
+    <script src="../phaser/main.js"></script>
     <script src="../client.js"></script>
     <script>
         window.onload = function(){
-            //console.log(game);
-            Client.socket.emit('newplayer', "visiteur X");
+            let coordEntrance = getCoordEntrance();
+            console.table(game);
+            Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance);
         }
     </script>
 </body>

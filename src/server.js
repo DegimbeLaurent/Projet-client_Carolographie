@@ -26,7 +26,8 @@ app.use('/ph_sc', express.static(__dirname + '/phaser/scenes'));
 //=================================
 let arrayRoutes = [
     {"route":"/",           "path":"/website/index.html"},
-    {"route":"/visite",     "path":"/website/visite.html"}
+    {"route":"/visite",     "path":"/website/visite.html"},
+    {"route":"/test_iso",     "path":"/website/test_iso.html"}
 ];
 var nbRoutes = arrayRoutes.length;
 for (var i = 0; i < nbRoutes; i++) {
