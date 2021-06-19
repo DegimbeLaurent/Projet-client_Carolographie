@@ -103,6 +103,9 @@ io.on('connection', function (socket) {
             serverPlayers = deleteDisconnectedPlayer(serverPlayers, socket.player);
             io.emit('updateList', serverPlayers);
         });
+        socket.on('testjs', function(msg){
+            console.log("MSG -> "+msg);
+        });
     });
 
 });

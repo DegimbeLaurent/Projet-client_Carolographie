@@ -1,10 +1,10 @@
 var LoadScene = new Phaser.Class({
-    Extends: Phaser.Scene,
+    Extends: TemplateScene,
     initialize: function(){
         Phaser.Scene.call(this, { "key": "LoadScene"});
     },
     init: function(){
-
+        playerMap = [];
     },
     preload: function(){
         // this.load.image('tiles', '/maps/iso-64x64-outside.png');
@@ -22,14 +22,19 @@ var LoadScene = new Phaser.Class({
         //this.load.tilemapTiledJSON("demo2", "/maps/demo2.json");
         //this.load.tilemapTiledJSON("map_abbaye", "/maps/map_abbaye.json");
         this.load.image('sprite', '/img/sprite.png');
+        this.load.image('background', '/img/background.png');
     },
     create: function(){
+        this.cameras.main.setBounds(0, 0, 1920 , 1080);
+        var bg = this.add.image(0,0,"background").setOrigin(0);
+        //game.Align.scaleToGameW(bg, 2);
         game.backgroundColor='#bd4545';
-        game.scale.on('enterfullscreen', function () { });
+        //game.scale.on('enterfullscreen', function () { });
         //==========================================
         //  CREATION DE LA MAP
         //==========================================
         var map = this.add.tilemap('demo1');
+        var coeffZoom = 1.2;
         var tileset1 = map.addTilesetImage('arbre', 'arbre');
         var tileset2 = map.addTilesetImage('bush', 'bush');
         var tileset3 = map.addTilesetImage('flower_set', 'flower_set');
@@ -62,18 +67,29 @@ var LoadScene = new Phaser.Class({
         //  AJOUT DU JOUEUR
         //==========================================
         //var arbre = this.add.image(500, 500, 'arbre').setInteractive();
-        var player = this.add.image(400, 400, 'sprite').setInteractive();
+        this.player = this.add.image(600, 500, 'sprite').setInteractive();
+        //var player;
+        //player.x = 450;
+        //player.y = 450;
         //==========================================
         //  DEPLACEMENT DU JOUEUR
         //==========================================
+        var Client = this.clientFunctions();
         var cursors = this.input.keyboard.createCursorKeys();
-        player.on('pointerdown', function(){
-            this.scene.start("BaseScene");
-        }, this);
+        // player.on('pointerdown', function(){
+            //     Client.socket.emit("testjs","helloooo");
+            //     this.scene.start("BaseScene");
+            //     //let coordEntrance = getCoordEntrance();
+            //     //console.table(game);
+            //     //Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance);
+            // }, this);
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
-        this.cameras.main.setZoom(1);
+        this.cameras.main.setSize(1920, 1080);
+        //this.cameras.main.startFollow(this.player);
+        // this.cameras.main.setZoom(coeffZoom);        
+        // this.cameras.main.centerOn(0,0);
         var controlConfig = {
             camera: this.cameras.main,
             left: cursors.left,
@@ -85,9 +101,51 @@ var LoadScene = new Phaser.Class({
             maxSpeed: 0.4
         };
         controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+        //==========================================
+        //  GESTION CLIENT - SERVER
+        //==========================================
+        Client.socket.on('personalData', function (data, tablePlayers) {
+            let perso = Object.entries(data);
+            localStorage.setItem("personalData", perso);
+            game.players = tablePlayers;
+            game.selfConnected = true;
+            console.table(game.players);
+            //console.table(game);
+            //movePlayers(this, game.players);
+            //addNewPlayer(game, data);
+        });
+        Client.sendClick = function (id, x, y) {
+            // let xmod = Math.round(coeffZoom * x);
+            // let ymod = Math.round(coeffZoom * y);
+            // Client.socket.emit('click', { id: id, x: xmod, y: ymod });
+            Client.socket.emit('click', { id: id, x: x, y: y });
+            console.log("x="+x+" & y="+y+"["+id+"]");
+        };
+        this.input.mouse.disableContextMenu();
+        this.input.on('pointerup', function (pointer) {
+            if (pointer.leftButtonReleased()) {
+                //rotateSprite(playerMap[id], pointer.x, pointer.y);
+                if(localStorage.getItem("playerId") != ""){
+                    Client.sendClick(localStorage.getItem("playerId"), pointer.x, pointer.y);
+                    //this.cameras.main.centerOn(pointer.x,pointer.y);
+                    this.cameras.main.startFollow(this.player);
+                    console.log("yes: "+ localStorage.getItem("playerId"));
+                }else{
+                    console.log("no");
+                }
+                //this.clickOnMap(id, pointer);
+            }
+        }, this);
+        game.selfConnected = false;
     },
     update: function(time, delta){
         controls.update(delta);
+        var mousePointer = this.input.activePointer;
+        this.removeDisconnectedPlayers(this, game.players);
+        this.updateConnectedPlayers(this, game.players, game.playersBU);
+        //showUsersConnected(game.players);
+        this.movePlayers(this, game.players);
+        this.stopPlayers(this, game.players);
     },
     changeScene: function(){
         this.scene.start("BaseScene");

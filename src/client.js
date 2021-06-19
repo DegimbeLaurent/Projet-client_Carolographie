@@ -1,17 +1,19 @@
 console.log("visiteur connecté!");
 var Client = {};
 Client.socket = io.connect();
-Client.socket.on('personalData', function (data, tablePlayers,Game) {
+Client.socket.on('personalData', function (data, tablePlayers) {
     let perso = Object.entries(data);
     localStorage.setItem("personalData", perso);
     game.players = tablePlayers;
     game.selfConnected = true;
     console.table(game.players);
+    //console.table(game);
     //movePlayers(this, game.players);
-    //addNewPlayer(this, data);
+    //addNewPlayer(game, data);
 });
 Client.sendClick = function (id, x, y) {
     Client.socket.emit('click', { id: id, x: x, y: y });
+    console.log("x="+x+" & y="+y);
 };
 Client.socket.on('allplayers', function (data) {
     Client.socket.on('getNewplayer', function (data, tablePlayers) {
