@@ -25,8 +25,10 @@ var LoadScene = new Phaser.Class({
         this.load.image('background', '/img/background.png');
     },
     create: function(){
-        this.cameras.main.setBounds(0, 0, 1920 , 1080);
-        var bg = this.add.image(0,0,"background").setOrigin(0);
+        this.physics.world.setBounds(0,0,5000, 5000);
+        //this.cameras.main.setBounds(0, 0, 1000 , 1000);
+        //this.cameras.main.setSize(500, 580);
+        //var bg = this.add.image(0,0,"background").setOrigin(0);
         //game.Align.scaleToGameW(bg, 2);
         game.backgroundColor='#bd4545';
         //game.scale.on('enterfullscreen', function () { });
@@ -67,15 +69,15 @@ var LoadScene = new Phaser.Class({
         //  AJOUT DU JOUEUR
         //==========================================
         //var arbre = this.add.image(500, 500, 'arbre').setInteractive();
-        this.player = this.add.image(600, 500, 'sprite').setInteractive();
-        //var player;
+        //var player = this.add.image(600, 500, 'sprite');
+        var player;
         //player.x = 450;
         //player.y = 450;
         //==========================================
         //  DEPLACEMENT DU JOUEUR
         //==========================================
         var Client = this.clientFunctions();
-        var cursors = this.input.keyboard.createCursorKeys();
+        //var cursors = this.input.keyboard.createCursorKeys();
         // player.on('pointerdown', function(){
             //     Client.socket.emit("testjs","helloooo");
             //     this.scene.start("BaseScene");
@@ -86,41 +88,41 @@ var LoadScene = new Phaser.Class({
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
-        this.cameras.main.setSize(1920, 1080);
+        //this.cameras.main.setSize(1920, 1080);
         //this.cameras.main.startFollow(this.player);
         // this.cameras.main.setZoom(coeffZoom);        
         // this.cameras.main.centerOn(0,0);
-        var controlConfig = {
-            camera: this.cameras.main,
-            left: cursors.left,
-            right: cursors.right,
-            up: cursors.up,
-            down: cursors.down,
-            acceleration: 0.04,
-            drag: 0.0005,
-            maxSpeed: 0.4
-        };
-        controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+        // var controlConfig = {
+        //     camera: this.cameras.main,
+        //     left: cursors.left,
+        //     right: cursors.right,
+        //     up: cursors.up,
+        //     down: cursors.down,
+        //     acceleration: 0.04,
+        //     drag: 0.0005,
+        //     maxSpeed: 0.4
+        // };
+        // controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
         //==========================================
         //  GESTION CLIENT - SERVER
         //==========================================
-        Client.socket.on('personalData', function (data, tablePlayers) {
-            let perso = Object.entries(data);
-            localStorage.setItem("personalData", perso);
-            game.players = tablePlayers;
-            game.selfConnected = true;
-            console.table(game.players);
-            //console.table(game);
-            //movePlayers(this, game.players);
-            //addNewPlayer(game, data);
-        });
-        Client.sendClick = function (id, x, y) {
-            // let xmod = Math.round(coeffZoom * x);
-            // let ymod = Math.round(coeffZoom * y);
-            // Client.socket.emit('click', { id: id, x: xmod, y: ymod });
-            Client.socket.emit('click', { id: id, x: x, y: y });
-            console.log("x="+x+" & y="+y+"["+id+"]");
-        };
+        // Client.socket.on('personalData', function (data, tablePlayers) {
+        //     let perso = Object.entries(data);
+        //     localStorage.setItem("personalData", perso);
+        //     game.players = tablePlayers;
+        //     game.selfConnected = true;
+        //     console.table(game.players);
+        //     //console.table(game);
+        //     //movePlayers(this, game.players);
+        //     //addNewPlayer(game, data);
+        // });
+        // Client.sendClick = function (id, x, y) {
+        //     // let xmod = Math.round(coeffZoom * x);
+        //     // let ymod = Math.round(coeffZoom * y);
+        //     // Client.socket.emit('click', { id: id, x: xmod, y: ymod });
+        //     Client.socket.emit('click', { id: id, x: x, y: y });
+        //     console.log("x="+x+" & y="+y+"["+id+"]");
+        // };
         this.input.mouse.disableContextMenu();
         this.input.on('pointerup', function (pointer) {
             if (pointer.leftButtonReleased()) {
@@ -128,8 +130,8 @@ var LoadScene = new Phaser.Class({
                 if(localStorage.getItem("playerId") != ""){
                     Client.sendClick(localStorage.getItem("playerId"), pointer.x, pointer.y);
                     //this.cameras.main.centerOn(pointer.x,pointer.y);
-                    this.cameras.main.startFollow(this.player);
-                    console.log("yes: "+ localStorage.getItem("playerId"));
+                    //this.cameras.main.startFollow(player);
+                    console.log("yes: "+ localStorage.getItem("playerId") + "["+pointer.x+","+pointer.y+"]");
                 }else{
                     console.log("no");
                 }
@@ -139,15 +141,26 @@ var LoadScene = new Phaser.Class({
         game.selfConnected = false;
     },
     update: function(time, delta){
-        controls.update(delta);
+        //controls.update(delta);
         var mousePointer = this.input.activePointer;
         this.removeDisconnectedPlayers(this, game.players);
         this.updateConnectedPlayers(this, game.players, game.playersBU);
         //showUsersConnected(game.players);
         this.movePlayers(this, game.players);
         this.stopPlayers(this, game.players);
+        //this.cameras.main.startFollow(this.player);
+        //this.cameras.main.setFollowOffset(-300, 225);
+        this.centerMap();
     },
     changeScene: function(){
         this.scene.start("BaseScene");
+    },
+    centerMap: function(){
+        let myId = parseInt(localStorage.getItem("playerId"));
+        if(playerMap[myId] != null){
+            //console.log(playerMap[myId].x + ","+playerMap[myId].y);
+            this.cameras.main.startFollow(playerMap[myId]);
+        }
+        //this.cameras.main.follow(playerMap[myId], Phaser.Camera.FOLLOW_LOCKON);
     }
 });

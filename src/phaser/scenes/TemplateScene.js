@@ -231,9 +231,10 @@ var TemplateScene = new Phaser.Class({
                             game.players[idPl].x = player.newX;
                             game.players[idPl].y = player.newY;
                             if(idPl == myId){
-                                this.player.x = player.newX;
-                                this.player.y = player.newY;
-                                this.cameras.main.startFollow(this.player);
+                                player.x = player.newX;
+                                player.y = player.newY;
+                                //this.cameras.main.startFollow(this.player);
+                                //this.cameras.main.setFollowOffset(-500, 500);
                             }
                             //console.table(game.players);
                         }
