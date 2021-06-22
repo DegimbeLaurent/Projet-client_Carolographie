@@ -16,7 +16,7 @@ var config = {
         }
     },
     pixelArt: true,
-    backgroundColor: '#bd4545',
+    backgroundColor: '#000000',
     parent: 'visite',
     scene: [ LoadScene, BaseScene ]
 };

@@ -1,16 +1,12 @@
 var LoadScene = new Phaser.Class({
     Extends: TemplateScene,
-    initialize: function(){
-        Phaser.Scene.call(this, { "key": "LoadScene"});
+    initialize: function(config){
+        Phaser.Scene.call(this, config);
     },
     init: function(){
         playerMap = [];
     },
     preload: function(){
-        // this.load.image('tiles', '/maps/iso-64x64-outside.png');
-        // this.load.image('tiles2', '/maps/iso-64x64-building.png');
-        // this.load.tilemapTiledJSON('map', '/maps/isorpg.json');
-
         this.load.image("arbre", "/maps/tilesets/arbre.png");
         this.load.image("bush", "/maps/tilesets/bush.png");
         this.load.image("flower_set", "/maps/tilesets/flower_set.png");
@@ -18,25 +14,21 @@ var LoadScene = new Phaser.Class({
         this.load.image("gravel_set", "/maps/tilesets/gravel_set.png");
         this.load.image("ruine", "/maps/tilesets/ruine.png");
         this.load.image("wall_set", "/maps/tilesets/wall_set.png");
-        this.load.tilemapTiledJSON("demo1", "/maps/demo1.json");
+        //this.load.tilemapTiledJSON("demo1", "/maps/demo1.json");
         //this.load.tilemapTiledJSON("demo2", "/maps/demo2.json");
-        //this.load.tilemapTiledJSON("map_abbaye", "/maps/map_abbaye.json");
+        this.load.tilemapTiledJSON("map_abbaye", "/maps/map_abbaye.json");
         this.load.image('sprite', '/img/sprite.png');
         this.load.image('background', '/img/background.png');
     },
-    create: function(){
-        this.physics.world.setBounds(0,0,5000, 5000);
-        //this.cameras.main.setBounds(0, 0, 1000 , 1000);
-        //this.cameras.main.setSize(500, 580);
-        //var bg = this.add.image(0,0,"background").setOrigin(0);
-        //game.Align.scaleToGameW(bg, 2);
-        game.backgroundColor='#bd4545';
-        //game.scale.on('enterfullscreen', function () { });
+    create: function(config){
+        game.backgroundColor='#000000';
+        console.table(config);
         //==========================================
         //  CREATION DE LA MAP
         //==========================================
-        var map = this.add.tilemap('demo1');
-        var coeffZoom = 1.2;
+        this.cameras.main.setBounds(-8000, -200, 12200 , 6500);
+        this.physics.world.setBounds(-8000,-200, 12200, 6500);
+        var map = this.add.tilemap('map_abbaye');
         var tileset1 = map.addTilesetImage('arbre', 'arbre');
         var tileset2 = map.addTilesetImage('bush', 'bush');
         var tileset3 = map.addTilesetImage('flower_set', 'flower_set');
@@ -46,76 +38,39 @@ var LoadScene = new Phaser.Class({
         var tileset7 = map.addTilesetImage('wall_set', 'wall_set');
         var layer1 = map.createLayer('ground', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ]);
         var layer2 = map.createLayer('ruine', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ]);
-        var layer3 = map.createLayer('nature', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ]);
-        //var layer2=
-        // var tileset1 = map.addTilesetImage('iso-64x64-outside', 'tiles');
-        // var tileset2 = map.addTilesetImage('iso-64x64-building', 'tiles2');
-        // var layer1 = map.createLayer('Tile Layer 1', [ tileset1, tileset2 ]);
-        // var layer2 = map.createLayer('Tile Layer 2', [ tileset1, tileset2 ]);
-        // var layer3 = map.createLayer('Tile Layer 3', [ tileset1, tileset2 ]);
-        // var layer4 = map.createLayer('Tile Layer 4', [ tileset1, tileset2 ]);
-        // var layer5 = map.createLayer('Tile Layer 5', [ tileset1, tileset2 ]);
-        var text = this.add.text(
-            640, 
-            360, 
-            "Hello World 1", 
-            {
-                fontSize: 50,
-                color: "#000000",
-                fontStyle: "bold"
-            }
-        ).setOrigin(0.5);
+        var layer3 = map.createLayer('building', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ]);
+        var layer4 = map.createLayer('natur', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ]);
         //==========================================
         //  AJOUT DU JOUEUR
         //==========================================
-        //var arbre = this.add.image(500, 500, 'arbre').setInteractive();
-        //var player = this.add.image(600, 500, 'sprite');
-        var player;
-        //player.x = 450;
-        //player.y = 450;
+        player = this.physics.add.image(500,500,'sprite');
+        player.setCollideWorldBounds(true);
+        playerVelocity = 300;
         //==========================================
         //  DEPLACEMENT DU JOUEUR
         //==========================================
-        var Client = this.clientFunctions();
-        //var cursors = this.input.keyboard.createCursorKeys();
-        // player.on('pointerdown', function(){
-            //     Client.socket.emit("testjs","helloooo");
-            //     this.scene.start("BaseScene");
-            //     //let coordEntrance = getCoordEntrance();
-            //     //console.table(game);
-            //     //Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance);
-            // }, this);
+        cursors = this.input.keyboard.createCursorKeys();
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
-        //this.cameras.main.setSize(1920, 1080);
-        //this.cameras.main.startFollow(this.player);
-        // this.cameras.main.setZoom(coeffZoom);        
-        // this.cameras.main.centerOn(0,0);
-        // var controlConfig = {
-        //     camera: this.cameras.main,
-        //     left: cursors.left,
-        //     right: cursors.right,
-        //     up: cursors.up,
-        //     down: cursors.down,
-        //     acceleration: 0.04,
-        //     drag: 0.0005,
-        //     maxSpeed: 0.4
-        // };
-        // controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+        this.cameras.main.startFollow(player, true, 0.1, 0.1);
+        var coeffZoom = 1;
+        this.cameras.main.setZoom(coeffZoom);
+        controlConfig = {
+            camera: this.cameras.main,
+            left: cursors.left,
+            right: cursors.right,
+            up: cursors.up,
+            down: cursors.down,
+            acceleration: 0.04,
+            drag: 0.0005,
+            maxSpeed: 0.4
+        };
+        controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
         //==========================================
         //  GESTION CLIENT - SERVER
         //==========================================
-        // Client.socket.on('personalData', function (data, tablePlayers) {
-        //     let perso = Object.entries(data);
-        //     localStorage.setItem("personalData", perso);
-        //     game.players = tablePlayers;
-        //     game.selfConnected = true;
-        //     console.table(game.players);
-        //     //console.table(game);
-        //     //movePlayers(this, game.players);
-        //     //addNewPlayer(game, data);
-        // });
+        var Client = this.clientFunctions();
         // Client.sendClick = function (id, x, y) {
         //     // let xmod = Math.round(coeffZoom * x);
         //     // let ymod = Math.round(coeffZoom * y);
@@ -124,43 +79,32 @@ var LoadScene = new Phaser.Class({
         //     console.log("x="+x+" & y="+y+"["+id+"]");
         // };
         this.input.mouse.disableContextMenu();
-        this.input.on('pointerup', function (pointer) {
-            if (pointer.leftButtonReleased()) {
-                //rotateSprite(playerMap[id], pointer.x, pointer.y);
-                if(localStorage.getItem("playerId") != ""){
-                    Client.sendClick(localStorage.getItem("playerId"), pointer.x, pointer.y);
-                    //this.cameras.main.centerOn(pointer.x,pointer.y);
-                    //this.cameras.main.startFollow(player);
-                    console.log("yes: "+ localStorage.getItem("playerId") + "["+pointer.x+","+pointer.y+"]");
-                }else{
-                    console.log("no");
-                }
-                //this.clickOnMap(id, pointer);
-            }
-        }, this);
         game.selfConnected = false;
     },
     update: function(time, delta){
-        //controls.update(delta);
+        controls.update(delta);
+        player.setVelocity(0);
+        // Mouvements latéraux joueur
+        if (cursors.left.isDown){
+            player.setVelocityX(-playerVelocity);
+            //console.log(player.x);
+        }else if (cursors.right.isDown){player.setVelocityX(playerVelocity);}
+        // Mouvements verticaux joueur
+        if (cursors.up.isDown){player.setVelocityY(-playerVelocity);}
+        else if (cursors.down.isDown){player.setVelocityY(playerVelocity);}
+
         var mousePointer = this.input.activePointer;
         this.removeDisconnectedPlayers(this, game.players);
         this.updateConnectedPlayers(this, game.players, game.playersBU);
-        //showUsersConnected(game.players);
         this.movePlayers(this, game.players);
         this.stopPlayers(this, game.players);
-        //this.cameras.main.startFollow(this.player);
-        //this.cameras.main.setFollowOffset(-300, 225);
-        this.centerMap();
     },
     changeScene: function(){
         this.scene.start("BaseScene");
     },
-    centerMap: function(){
-        let myId = parseInt(localStorage.getItem("playerId"));
-        if(playerMap[myId] != null){
+    centerMap: function(myPlayer){
             //console.log(playerMap[myId].x + ","+playerMap[myId].y);
-            this.cameras.main.startFollow(playerMap[myId]);
-        }
+            //this.cameras.main.startFollow(myPlayer);
         //this.cameras.main.follow(playerMap[myId], Phaser.Camera.FOLLOW_LOCKON);
     }
 });
