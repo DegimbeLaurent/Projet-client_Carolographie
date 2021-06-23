@@ -1,0 +1,81 @@
+// Modules
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+@import '_Color';
+@import '_Base';
+@import '_Blockquote';
+@import '_Button';
+@import '_Code';
+@import '_Divider';
+@import '_Form';
+@import '_Grid';
+@import '_Link';
+@import '_List';
+@import '_Spacing';
+@import '_Table';
+@import '_Typography';
+@import '_Image';
+@import '_Utility';
+
+
+header {
+    height: 90px;
+    .nav-logo {
+        height: 90px;
+    }
+    .nav {
+        padding-top: 20px;
+    }
+}
+main {
+    .image {
+        max-height: 500px;
+        border-radius: 5px;
+    }
+    .getCode {
+    background-image: url("/Assets/img/carteFerarrisSoleilmont.PNG");
+    background-repeat: no-repeat;
+    }
+    .feedBack {
+        padding: 0;
+    }
+    form {
+        padding: 50px 0;
+    } 
+    fieldset {
+        padding: 50px;
+        background-color: $color-tertiary;
+        margin: 15px auto;
+        max-width: 350px;
+        border-radius: 5px;
+        h3 {
+            margin: 25px 0 100px 0;
+        }
+        label {
+            text-align: left;
+        }
+        input {
+            background-color: $color-quinary;
+        }
+    }
+    .leftAlign {
+        text-align: left;
+    }
+    .row .leftAlign {
+        padding: 0 25px;
+    } 
+    button {
+        a {
+            color: $color-tertiary;
+          }
+          a:hover {
+              color: $color-tertiary;
+          }
+    }
+}
+footer {
+    height: 45px;
+    text-align: center;
+}
+
+

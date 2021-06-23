@@ -1,28 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="desciption" content="Carolographie Charleroi exposition virtuel visite">
+    <meta name="keywords" content="Carolographie Charleroi exposition virtuel visite">
+    <title>Carolographie</title>
+    <link rel="stylesheet" href="/Assets/Css/style.css">
 </head>
+
 <body>
-    <input type="text" id="pseudo" value="" placeholder="Votre pseudo">
-    <button onclick="demoMap();">Démo</button>
-    <script>
-        function demoMap(){
-            let pseudo = document.getElementById("pseudo").value;
-            if(pseudo == ""){pseudo = "Visiteur";}
-            localStorage.clear();
-            localStorage.setItem("pseudo", pseudo);
-            localStorage.setItem("currentScene","A1");
-            localStorage.setItem("entrance","S");
-            localStorage.setItem("Players", []);
-            localStorage.setItem("playerId", "");
-            console.log(pseudo);
-            console.log(localStorage.getItem("pseudo"));
-            location.href = '/website/visite.html';
-        }
-    </script>
+    <header class="container">
+        <div class="row">
+            <div class="column column-20"><a href="https://www.carolographie.be/"><img class="nav-logo"
+                        src="/Assets/img/favicon-carolographie-wb.png"></a></div>
+            <div class="column column-80 nav"></div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="row">
+            <div class="column">
+                <h1>Exposition Carolographie</h1>
+                <img class="image" src="/Assets/img/Abbaye.jpg">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <button><a href="/pre-login">Bienvenue, par ici la visite</a></button>
+            </div>
+        </div>
+    </main>
+    <footer class="container">
+        <div class="row">
+            <div class="column column-50">
+                ©Carolographie
+            </div>
+            <!-- <div class="column column-75">
+                partenaires: <a href="http://www.promethea.be/">ASBL Prométhéa</a> et <a href="https://www.promethea.be/Les%20Partenaires">les entreprises mécènes du Prix Sambria</a>
+            </div> -->
+        </div>
+    </footer>
 </body>
 </html>

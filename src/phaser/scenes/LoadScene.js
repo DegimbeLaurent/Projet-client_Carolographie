@@ -53,7 +53,7 @@ var LoadScene = new Phaser.Class({
         //==========================================
         player = this.physics.add.image(500,500,'sprite');
         player.setCollideWorldBounds(true);
-        playerVelocity = 600;
+        playerVelocity = 200;
         //==========================================
         //  DEPLACEMENT DU JOUEUR
         //==========================================
@@ -75,6 +75,10 @@ var LoadScene = new Phaser.Class({
             maxSpeed: 0.4
         };
         controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+        //=== Test
+        var quitGame = this.physics.add.image(0,0);
+        quitGame.fixedToCamera = true;
+        quitGame.cameraOffset = 200;
         //==========================================
         //  GESTION CLIENT - SERVER
         //==========================================
