@@ -49,22 +49,6 @@ var LoadScene = new Phaser.Class({
         var layer80 = map.createLayer('roofs', [tileset80],0, -372);
         var layer90 = map.createLayer('roofs_invisible', [tileset80],0,-372);
         //==========================================
-        // var tileset1 = map.addTilesetImage('arbre', 'arbre');
-        // var tileset2 = map.addTilesetImage('bush', 'bush');
-        // var tileset3 = map.addTilesetImage('flower_set', 'flower_set');
-        // var tileset4 = map.addTilesetImage('grass_set', 'grass_set');
-        // var tileset5 = map.addTilesetImage('gravel_set', 'gravel_set');
-        // var tileset6 = map.addTilesetImage('ruine', 'ruine');
-        // var tileset7 = map.addTilesetImage('wall_set', 'wall_set');
-        //var layer1 = map.createLayer('ground', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ]);
-        //var layer1 = map.createLayer('ground', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ],512,256);
-        //var layer2 = map.createLayer('ruine', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ]);
-        //var layer2 = map.createLayer('ruine', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ],512,128);
-        //var layer3 = map.createLayer('building', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ]);
-        //var layer3 = map.createLayer('building', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ],512,-192);
-        //var layer4 = map.createLayer('natur', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ]);
-        //var layer4 = map.createLayer('natur', [ tileset1, tileset2, tileset3, tileset4, tileset5, tileset6, tileset7 ],512,128);
-        //==========================================
         //  AJOUT DU JOUEUR
         //==========================================
         player = this.physics.add.image(500,500,'sprite');
@@ -78,7 +62,7 @@ var LoadScene = new Phaser.Class({
         //  GESTION DE LA CAMERA
         //==========================================
         this.cameras.main.startFollow(player, true, 0.1, 0.1);
-        var coeffZoom = 0.5;
+        var coeffZoom = 1.2;
         this.cameras.main.setZoom(coeffZoom);
         controlConfig = {
             camera: this.cameras.main,
