@@ -29,7 +29,9 @@ let arrayRoutes = [
     {"route":"/visite",     "path":"/website/visite.html"},
     {"route":"/test_iso",     "path":"/website/test_iso.html"},
     {"route":"/pre-login",     "path":"/website/pre-login.html"},
-    {"route":"/login",     "path":"/website/login.html"}
+    {"route":"/login",     "path":"/website/login.html"},
+    {"route":"/remerciements",     "path":"/website/remerciements.html"}
+
 ];
 var nbRoutes = arrayRoutes.length;
 for (var i = 0; i < nbRoutes; i++) {
