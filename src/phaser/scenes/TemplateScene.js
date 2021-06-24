@@ -86,14 +86,26 @@ var TemplateScene = new Phaser.Class({
         });
         return Client;
     },
-    addNewPlayer: function(Game, dataPlayer) {
+    getItemNamed: function(Game, type, name) {
+        let listItems = Game.add.scene.children.list;
+        Game.add.scene.children.list.forEach((item) =>{
+            console.log(item.name+"/"+name);
+            console.log(item.type+"/"+type);
+            console.table(item.value);
+            if((item.type == type)&&(item.name == name)){return item.value;}
+            if(item.name == name){return item;}
+        });
+        return null;
+    },
+    addNewPlayer: function(Game, dataPlayer, player) {
         let id = dataPlayer.id;
         let nickname = dataPlayer.nickname;
         let x = dataPlayer.x;
         let y = dataPlayer.y;
         let personalData = this.getPersonalData();
         if (personalData["id"] == id) {
-            playerMap[id] = Game.physics.add.sprite(x, y, 'sprite');
+            //playerMap[id] = Game.physics.add.sprite(x, y, 'sprite');
+            playerMap[id] = player;
             // Game.cameras.main.startFollow(playerMap[id]);
             // Game.cameras.main.centerOn(x,y);
         } else {
@@ -105,10 +117,12 @@ var TemplateScene = new Phaser.Class({
         playerMap[id].setCollideWorldBounds(true);
         playerMap[id].angle = 0;
         playerMap[id].setOrigin(0.5, 0.5);
-        playerMap[nickname] = Game.add.text(x + this.centerName(nickname), y - 35, nickname, {
+        playerMap[nickname] = Game.add.text(x + this.centerName(nickname), y - 50, nickname, {
             fontFamily: 'Fresh Lychee',
-            fontSize: 14,
-            color: '#000000',
+            fontSize: 12,
+            color: '#ffffff',
+            backgroundColor: '#000000',
+            padding: 5,
         });
         if (personalData["id"] == id) {
             //Game.physics.add.collider(playerMap[id], bulletsMap, hitBullet, null, this);
@@ -185,12 +199,12 @@ var TemplateScene = new Phaser.Class({
         }
         return false;
     },
-    updateConnectedPlayers: function(Game, players, playersBU) {
+    updateConnectedPlayers: function(Game, players, playersBU, player) {
         if (this.compareArrays(players, playersBU) == false) {
             let max = players.length;
             for (let i = 0; i < max; i++) {
                 if (this.presentInArray(players[i]["id"], playersBU) == false) {
-                    this.addNewPlayer(Game, players[i]);
+                    this.addNewPlayer(Game, players[i], player);
                 }
             }
             let maxBU = playersBU.length;
@@ -242,7 +256,7 @@ var TemplateScene = new Phaser.Class({
                 }
             }
             playerMap[player.nickname].x = playerMap[player.id].x + this.centerName(player.nickname);
-            playerMap[player.nickname].y = playerMap[player.id].y - 35;
+            playerMap[player.nickname].y = playerMap[player.id].y - 50;
         });
     },getIdPlayers:function(idPlayer){
         let max = game.players.length;
@@ -255,7 +269,7 @@ var TemplateScene = new Phaser.Class({
     centerName: function(name) {
         let lgName = name.length;
         let posName = [30, 24, 20, 18, 16, 12, 8, 4];
-        return posName[lgName - 1] - 40;
+        return posName[lgName - 1] - 30;
     },
     convertArrayToObject: function(array){
         let arrayK = array.map(w => array.indexOf(w) % 2 == 0 ? w : null).filter(w => w !== null);  // CREATE ARRAY KEYS

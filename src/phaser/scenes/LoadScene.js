@@ -26,6 +26,19 @@ var LoadScene = new Phaser.Class({
         game.backgroundColor='#000000';
         console.table(config);
         //==========================================
+        //  GESTION CLIENT - SERVER
+        //==========================================
+        var Client = this.clientFunctions();
+        // Client.sendClick = function (id, x, y) {
+        //     // let xmod = Math.round(coeffZoom * x);
+        //     // let ymod = Math.round(coeffZoom * y);
+        //     // Client.socket.emit('click', { id: id, x: xmod, y: ymod });
+        //     Client.socket.emit('click', { id: id, x: x, y: y });
+        //     console.log("x="+x+" & y="+y+"["+id+"]");
+        // };
+        this.input.mouse.disableContextMenu();
+        game.selfConnected = false;
+        //==========================================
         //  CREATION DE LA MAP
         //==========================================
         this.cameras.main.setBounds(-8000, -200, 12600 , 6500);
@@ -40,24 +53,23 @@ var LoadScene = new Phaser.Class({
         var tileset70 = map.addTilesetImage('wall_set', 'wall_set');
         var tileset80 = map.addTilesetImage('roof_set', 'roof_set');
         var layer10 = map.createLayer('ground', [tileset10, tileset20]);
-        var layer20 = map.createLayer('flowers', [tileset30]);
+        var layer20 = map.createLayer('flowers', [tileset30]);        
+            //==========================================
+            //  AJOUT DU JOUEUR
+            //==========================================
+            player = this.physics.add.image(500,500,'sprite');
+            player.name = "myPlayer";
+            player.setCollideWorldBounds(true);
+            playerVelocity = 200;
+            cursors = this.input.keyboard.createCursorKeys();
+            //==========================================    
         var layer30 = map.createLayer('ruines', [tileset40],0,-128);
         var layer40 = map.createLayer('bushes', [tileset50],0,-128);
         var layer50 = map.createLayer('arbres', [tileset60],0, -512);
         var layer60 = map.createLayer('walls', [tileset70],0, -472);
         var layer70 = map.createLayer('walls_invisible', [tileset70],0, -472);
         var layer80 = map.createLayer('roofs', [tileset80],0, -372);
-        var layer90 = map.createLayer('roofs_invisible', [tileset80],0,-372);
-        //==========================================
-        //  AJOUT DU JOUEUR
-        //==========================================
-        player = this.physics.add.image(500,500,'sprite');
-        player.setCollideWorldBounds(true);
-        playerVelocity = 200;
-        //==========================================
-        //  DEPLACEMENT DU JOUEUR
-        //==========================================
-        cursors = this.input.keyboard.createCursorKeys();
+        var layer90 = map.createLayer('roofs_invisible', [tileset80],0,-372);        
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
@@ -79,19 +91,6 @@ var LoadScene = new Phaser.Class({
         var quitGame = this.physics.add.image(0,0);
         quitGame.fixedToCamera = true;
         quitGame.cameraOffset = 200;
-        //==========================================
-        //  GESTION CLIENT - SERVER
-        //==========================================
-        var Client = this.clientFunctions();
-        // Client.sendClick = function (id, x, y) {
-        //     // let xmod = Math.round(coeffZoom * x);
-        //     // let ymod = Math.round(coeffZoom * y);
-        //     // Client.socket.emit('click', { id: id, x: xmod, y: ymod });
-        //     Client.socket.emit('click', { id: id, x: x, y: y });
-        //     console.log("x="+x+" & y="+y+"["+id+"]");
-        // };
-        this.input.mouse.disableContextMenu();
-        game.selfConnected = false;
     },
     update: function(time, delta){
         controls.update(delta);
@@ -116,7 +115,7 @@ var LoadScene = new Phaser.Class({
 
         var mousePointer = this.input.activePointer;
         this.removeDisconnectedPlayers(this, game.players);
-        this.updateConnectedPlayers(this, game.players, game.playersBU);
+        this.updateConnectedPlayers(this, game.players, game.playersBU, player);
         this.movePlayers(this, game.players);
         this.stopPlayers(this, game.players);
     },
