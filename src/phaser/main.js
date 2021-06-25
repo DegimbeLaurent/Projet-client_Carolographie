@@ -27,6 +27,8 @@ var player;
 game.speed = 300;
 game.players = [];
 game.playersBU = [];
+        var Client = {};
+        Client.socket = io.connect();
 // console.table(config);
 // console.table(game);
 // console.log("test gameSpeed = "+ game.speed);

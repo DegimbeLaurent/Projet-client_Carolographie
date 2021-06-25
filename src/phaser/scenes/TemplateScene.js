@@ -13,8 +13,8 @@ var TemplateScene = new Phaser.Class({
     },
     clientFunctions: function(){
         console.log("visiteur connecté!");
-        var Client = {};
-        Client.socket = io.connect();
+        // var Client = {};
+        // Client.socket = io.connect();
         if(localStorage.getItem('personalData') == null){
             let coordEntrance = this.getCoordEntrance();
             Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance);
@@ -43,9 +43,9 @@ var TemplateScene = new Phaser.Class({
         Client.socket.on('move', function (id, data) {
             //movePlayer(data.id, data.nickname, data.x, data.y);
             //console.log(game.players[id].nickname + " moves to " + data.x + ", " + data.y);
-            console.table(game.players);
+            //console.table(game.players);
             // localStorage.setItem("Players", game.players);
-            console.log("id to move -> " + id);
+            //console.log("id to move -> " + id);
             //console.table(game.players[id]);
             //let idPl = parseInt(this.getIdPlayers(parseInt(id)));
             // game.players.forEach((player) => {
@@ -57,8 +57,8 @@ var TemplateScene = new Phaser.Class({
             // })
             for(i=0;i<game.players.length;i++){
                 if(game.players[i].id == id){
-                    game.players[i].newX = data.x;
-                    game.players[i].newY = data.y;
+                    game.players[i].newX = Math.round(data.x);
+                    game.players[i].newY = Math.round(data.y);
                 }
             }
             // if(idPl != -1){
@@ -109,7 +109,7 @@ var TemplateScene = new Phaser.Class({
             // Game.cameras.main.startFollow(playerMap[id]);
             // Game.cameras.main.centerOn(x,y);
         } else {
-            playerMap[id] = Game.physics.add.sprite(x, y, 'sprite');
+            playerMap[id] = Game.physics.add.sprite(x, y, 'sprite').setDepth(25);
         }
         playerMap[id].id = id;
         playerMap[id].nickname = nickname;
@@ -123,7 +123,7 @@ var TemplateScene = new Phaser.Class({
             color: '#ffffff',
             backgroundColor: '#000000',
             padding: 5,
-        });
+        }).setDepth(25);
         if (personalData["id"] == id) {
             //Game.physics.add.collider(playerMap[id], bulletsMap, hitBullet, null, this);
             // Game.input.mouse.disableContextMenu();
@@ -222,13 +222,15 @@ var TemplateScene = new Phaser.Class({
         let myObj = this.convertArrayToObject(personalData);
         return myObj;
     },
-    movePlayers: function(Game, players) {    
+    movePlayers: function(Game, players, plId) { 
         players.forEach((player) => {
             if ((player.x != player.newX) || (player.y != player.newY)) {
                 let tgtSoldier = new Phaser.Math.Vector2();
                 tgtSoldier.x = player.newX;
-                tgtSoldier.y = player.newY;            
-                Game.physics.moveToObject(playerMap[player.id], tgtSoldier, game.speed);
+                tgtSoldier.y = player.newY;     
+                if (plId != player.id) {   
+                    Game.physics.moveToObject(playerMap[player.id], tgtSoldier, game.speed);
+                }
             }
         });
     },

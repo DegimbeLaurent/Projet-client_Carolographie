@@ -52,24 +52,24 @@ var LoadScene = new Phaser.Class({
         var tileset60 = map.addTilesetImage('arbre', 'arbre');
         var tileset70 = map.addTilesetImage('wall_set', 'wall_set');
         var tileset80 = map.addTilesetImage('roof_set', 'roof_set');
-        var layer10 = map.createLayer('ground', [tileset10, tileset20]);
-        var layer20 = map.createLayer('flowers', [tileset30]);        
+        var layer10 = map.createLayer('ground', [tileset10, tileset20]).setDepth(10);
+        var layer20 = map.createLayer('flowers', [tileset30]).setDepth(20);        
             //==========================================
             //  AJOUT DU JOUEUR
             //==========================================
-            player = this.physics.add.image(500,500,'sprite');
+            player = this.physics.add.image(500,500,'sprite').setDepth(25);
             player.name = "myPlayer";
             player.setCollideWorldBounds(true);
-            playerVelocity = 200;
+            playerVelocity = 2;
             cursors = this.input.keyboard.createCursorKeys();
             //==========================================    
-        var layer30 = map.createLayer('ruines', [tileset40],0,-128);
-        var layer40 = map.createLayer('bushes', [tileset50],0,-128);
-        var layer50 = map.createLayer('arbres', [tileset60],0, -512);
-        var layer60 = map.createLayer('walls', [tileset70],0, -472);
-        var layer70 = map.createLayer('walls_invisible', [tileset70],0, -472);
-        var layer80 = map.createLayer('roofs', [tileset80],0, -372);
-        var layer90 = map.createLayer('roofs_invisible', [tileset80],0,-372);        
+        var layer30 = map.createLayer('ruines', [tileset40],0,-128).setDepth(30);
+        var layer40 = map.createLayer('bushes', [tileset50],0,-128).setDepth(40);
+        var layer50 = map.createLayer('arbres', [tileset60],0, -512).setDepth(50);
+        var layer60 = map.createLayer('walls', [tileset70],0, -472).setDepth(60);
+        var layer70 = map.createLayer('walls_invisible', [tileset70],0, -472).setDepth(70);
+        var layer80 = map.createLayer('roofs', [tileset80],0, -372).setDepth(80);
+        var layer90 = map.createLayer('roofs_invisible', [tileset80],0,-372).setDepth(90);        
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
@@ -84,7 +84,7 @@ var LoadScene = new Phaser.Class({
             down: cursors.down,
             acceleration: 0.04,
             drag: 0.0005,
-            maxSpeed: 0.4
+            maxSpeed: 0.2
         };
         controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
         //=== Test
@@ -95,28 +95,42 @@ var LoadScene = new Phaser.Class({
     update: function(time, delta){
         controls.update(delta);
         player.setVelocity(0);
+        let plId = parseInt(localStorage.getItem("playerId"));
         // Mouvements latéraux joueur
         if (cursors.left.isDown){
-            player.setVelocityX(-playerVelocity * 2);
-            player.setVelocityY(playerVelocity);
+            //player.setVelocityX(-playerVelocity * 2);
+            //player.setVelocityY(playerVelocity);
+            console.log("[["+plId+"]]");
+            player.x -= Math.round(playerVelocity*2);
+            player.y += Math.round(playerVelocity);
+            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
             //console.log(player.x);
         }else if (cursors.right.isDown){
-            player.setVelocityX(playerVelocity * 2);
-            player.setVelocityY(-playerVelocity);
+            //player.setVelocityX(playerVelocity * 2);
+            //player.setVelocityY(-playerVelocity);
+            player.x += Math.round(playerVelocity*2);
+            player.y -= Math.round(playerVelocity);
+            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
         }
         // Mouvements verticaux joueur
         if (cursors.up.isDown){
-            player.setVelocityX(-playerVelocity * 2);
-            player.setVelocityY(-playerVelocity);
+            //player.setVelocityX(-playerVelocity * 2);
+            //player.setVelocityY(-playerVelocity);
+            player.x -= Math.round(playerVelocity*2);
+            player.y -= Math.round(playerVelocity);
+            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
         }else if (cursors.down.isDown){
-            player.setVelocityX(playerVelocity * 2);
-            player.setVelocityY(playerVelocity);
+            //player.setVelocityX(playerVelocity * 2);
+            //player.setVelocityY(playerVelocity);
+            player.x += Math.round(playerVelocity*2);
+            player.y += Math.round(playerVelocity);
+            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
         }
 
         var mousePointer = this.input.activePointer;
         this.removeDisconnectedPlayers(this, game.players);
         this.updateConnectedPlayers(this, game.players, game.playersBU, player);
-        this.movePlayers(this, game.players);
+        this.movePlayers(this, game.players, plId);
         this.stopPlayers(this, game.players);
     },
     changeScene: function(){
