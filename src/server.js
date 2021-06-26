@@ -82,7 +82,7 @@ io.on('connection', function (socket) {
         socket.player.nickname = nickname;
         socket.player.newX = posXY[0];
         socket.player.newY = posXY[1];
-        console.log(nickname + ' is connected ['+socket.player.id+']');
+        //console.log(nickname + ' is connected ['+socket.player.id+']');
         serverPlayers.push(socket.player);
         io.to(socket.id).emit("personalData", socket.player, serverPlayers);
         socket.emit('allplayers', serverPlayers);

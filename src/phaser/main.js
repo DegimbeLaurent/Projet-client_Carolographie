@@ -24,6 +24,7 @@ var config = {
 var game = new Phaser.Game(config);
 var playerMap;
 var player;
+var minimap;
 game.speed = 300;
 game.players = [];
 game.playersBU = [];

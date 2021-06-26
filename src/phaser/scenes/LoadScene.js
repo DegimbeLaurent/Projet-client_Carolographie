@@ -20,11 +20,12 @@ var LoadScene = new Phaser.Class({
         //this.load.tilemapTiledJSON("map_abbaye", "/maps/map_abbaye.json");
         this.load.tilemapTiledJSON("map_visite", "/maps/map_visite.json");
         this.load.image('sprite', '/img/sprite.png');
-        this.load.image('background', '/img/background.png');
+        //this.load.image('background', '/img/background.png');
+        this.load.image('minimap', '/img/minimap.png');
     },
     create: function(config){
         game.backgroundColor='#000000';
-        console.table(config);
+        //console.table(config);
         //==========================================
         //  GESTION CLIENT - SERVER
         //==========================================
@@ -69,7 +70,8 @@ var LoadScene = new Phaser.Class({
         var layer60 = map.createLayer('walls', [tileset70],0, -472).setDepth(60);
         var layer70 = map.createLayer('walls_invisible', [tileset70],0, -472).setDepth(70);
         var layer80 = map.createLayer('roofs', [tileset80],0, -372).setDepth(80);
-        var layer90 = map.createLayer('roofs_invisible', [tileset80],0,-372).setDepth(90);        
+        var layer90 = map.createLayer('roofs_invisible', [tileset80],0,-372).setDepth(90);
+        
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
@@ -86,11 +88,18 @@ var LoadScene = new Phaser.Class({
             drag: 0.0005,
             maxSpeed: 0.2
         };
-        controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
-        //=== Test
-        var quitGame = this.physics.add.image(0,0);
-        quitGame.fixedToCamera = true;
-        quitGame.cameraOffset = 200;
+        //controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
+        controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
+        //==========================================
+        //  CREATION DE LA MINIMAP
+        //==========================================  
+        let lgMax = Math.round(DEFAULT_WIDTH / 4);
+        let htMax = Math.round(DEFAULT_HEIGHT / 4);
+        this.minimap = this.cameras.add(DEFAULT_WIDTH - lgMax, DEFAULT_HEIGHT - htMax, lgMax, htMax).setZoom(0.1).setName('mini').startFollow(player, true, 0.1, 0.1);
+        this.minimap.setBackgroundColor(0x002244);
+        this.minimap.scrollX = 1600;
+        this.minimap.scrollY = 900;
+
     },
     update: function(time, delta){
         controls.update(delta);
@@ -100,7 +109,7 @@ var LoadScene = new Phaser.Class({
         if (cursors.left.isDown){
             //player.setVelocityX(-playerVelocity * 2);
             //player.setVelocityY(playerVelocity);
-            console.log("[["+plId+"]]");
+            //console.log("[["+plId+"]]");
             player.x -= Math.round(playerVelocity*2);
             player.y += Math.round(playerVelocity);
             Client.socket.emit('click', { id: plId, x: player.x, y: player.y })

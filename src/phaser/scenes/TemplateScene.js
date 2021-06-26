@@ -12,7 +12,7 @@ var TemplateScene = new Phaser.Class({
 
     },
     clientFunctions: function(){
-        console.log("visiteur connecté!");
+        //console.log("visiteur connecté!");
         // var Client = {};
         // Client.socket = io.connect();
         if(localStorage.getItem('personalData') == null){
@@ -25,13 +25,13 @@ var TemplateScene = new Phaser.Class({
         }
         Client.socket.on('personalData', function (data, tablePlayers) {
             let perso = Object.entries(data);
-            console.table(perso);
-            console.log(perso[0][1]);
+            //console.table(perso);
+            //console.log(perso[0][1]);
             localStorage.setItem("personalData", perso);
             localStorage.setItem("playerId", parseInt(perso[0][1]));
             game.players = tablePlayers;
             game.selfConnected = true;
-            console.table(game.players);
+            //console.table(game.players);
             //===
             let plId = parseInt(perso[0][1]);
             let tabTemp = [];
@@ -53,7 +53,7 @@ var TemplateScene = new Phaser.Class({
         });
         Client.sendClick = function (id, x, y) {
             Client.socket.emit('click', { id: id, x: x, y: y });
-            console.log("x="+x+" & y="+y);
+            //console.log("x="+x+" & y="+y);
         };
         Client.socket.on('move', function (id, data) {
             for(i=0;i<game.players.length;i++){
@@ -66,12 +66,12 @@ var TemplateScene = new Phaser.Class({
         Client.socket.on('allplayers', function (data) {
             Client.socket.on('getNewplayer', function (data, tablePlayers) {
                 game.players = tablePlayers;
-                console.log("Connexion nouveau joueur [" + data.id + "]");
-                console.table(game.players);
+                //console.log("Connexion nouveau joueur [" + data.id + "]");
+                //console.table(game.players);
             }, this);
             Client.socket.on('remove', function (id, nickname) {
-                console.log("Removing ["+id+"] ["+nickname+"]");
-                console.table(game.players);
+                //console.log("Removing ["+id+"] ["+nickname+"]");
+                //console.table(game.players);
                 //console.table(game.players[id]);
                 let tabTemp = [];
                 for(i=0;i<game.players.length;i++){
@@ -86,12 +86,12 @@ var TemplateScene = new Phaser.Class({
                     }
                 }
                 game.players = tabTemp;
-                console.log("Removed...");
-                console.table(game.players);
+                //console.log("Removed...");
+                //console.table(game.players);
             });
             Client.socket.on('updateList', function (tablePlayers){
                 game.players = tablePlayers;
-                console.table(game.players);
+                //console.table(game.players);
             });
 
         });
@@ -100,9 +100,9 @@ var TemplateScene = new Phaser.Class({
     getItemNamed: function(Game, type, name) {
         let listItems = Game.add.scene.children.list;
         Game.add.scene.children.list.forEach((item) =>{
-            console.log(item.name+"/"+name);
-            console.log(item.type+"/"+type);
-            console.table(item.value);
+            //console.log(item.name+"/"+name);
+            //console.log(item.type+"/"+type);
+            //console.table(item.value);
             if((item.type == type)&&(item.name == name)){return item.value;}
             if(item.name == name){return item;}
         });
@@ -162,7 +162,7 @@ var TemplateScene = new Phaser.Class({
         let tabTemp = [];
         players.forEach((player) => {
             if (player.remove == true) {
-                console.log("ok, joueur déco enlevé...");
+                //console.log("ok, joueur déco enlevé...");
                 playerMap[player.nickname].destroy();
                 playerMap[player.id].destroy();
                 delete playerMap[player.id];
@@ -257,7 +257,7 @@ var TemplateScene = new Phaser.Class({
         });
     },getIdPlayers:function(idPlayer){
         let max = game.players.length;
-        console.log("on passe ici!");
+        //console.log("on passe ici!");
         for (let i = 0; i < max; i++) {
             if (game.players[i]["id"] == idPlayer) { return i; }
         }
@@ -276,6 +276,6 @@ var TemplateScene = new Phaser.Class({
     },
     clickOnMap: function(id, pointer){
         //Client.sendClick(id, pointer.x, pointer.y);
-        console.log("on passe par ici!");
+        //console.log("on passe par ici!");
     }
 });
