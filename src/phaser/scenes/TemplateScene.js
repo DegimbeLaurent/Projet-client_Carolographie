@@ -18,10 +18,10 @@ var TemplateScene = new Phaser.Class({
         if(localStorage.getItem('personalData') == null){
             let coordEntrance = this.getCoordEntrance();
             Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance);
-            console.log("localstorage créé!");
+            //console.log("localstorage créé!");
         }else{
-            console.log("localstorage existe...");
-            console.table(game.players);
+            //console.log("localstorage existe...");
+            //console.table(game.players);
         }
         Client.socket.on('personalData', function (data, tablePlayers) {
             let perso = Object.entries(data);
@@ -32,42 +32,36 @@ var TemplateScene = new Phaser.Class({
             game.players = tablePlayers;
             game.selfConnected = true;
             console.table(game.players);
-            //console.table(game);
-            //movePlayers(this, game.players);
-            //addNewPlayer(this, data);
+            //===
+            let plId = parseInt(perso[0][1]);
+            let tabTemp = [];
+            game.players.forEach((player) => {
+                player.newX = player.x - 1;
+                player.newY = player.y - 1;
+                tabTemp.push(player);
+                // if ((player.x != player.newX) || (player.y != player.newY)) {
+                //     let tgtSoldier = new Phaser.Math.Vector2();
+                //     tgtSoldier.x = player.newX;
+                //     tgtSoldier.y = player.newY;     
+                //     if (plId != player.id) {   
+                //         Game.physics.moveToObject(playerMap[player.id], tgtSoldier, game.speed);
+                //     }
+                // }
+            });
+            game.players = tabTemp;
+            //===
         });
         Client.sendClick = function (id, x, y) {
             Client.socket.emit('click', { id: id, x: x, y: y });
             console.log("x="+x+" & y="+y);
         };
         Client.socket.on('move', function (id, data) {
-            //movePlayer(data.id, data.nickname, data.x, data.y);
-            //console.log(game.players[id].nickname + " moves to " + data.x + ", " + data.y);
-            //console.table(game.players);
-            // localStorage.setItem("Players", game.players);
-            //console.log("id to move -> " + id);
-            //console.table(game.players[id]);
-            //let idPl = parseInt(this.getIdPlayers(parseInt(id)));
-            // game.players.forEach((player) => {
-            //     console.log("playerIndex -> " + player.indexOf);
-            //     if(player.id == id){
-            //         game.players[player.index].newX = data.x;
-            //         game.players[player.index].newY = data.y;                    
-            //     }
-            // })
             for(i=0;i<game.players.length;i++){
                 if(game.players[i].id == id){
                     game.players[i].newX = Math.round(data.x);
                     game.players[i].newY = Math.round(data.y);
                 }
             }
-            // if(idPl != -1){
-            //     game.players[idPl].newX = data.x;
-            //     game.players[idPl].newY = data.y;
-            //     //console.table(game.players);
-            // }
-            //game.players[idPl].newX = data.x;
-            //game.players[idPl].newY = data.y;
         });
         Client.socket.on('allplayers', function (data) {
             Client.socket.on('getNewplayer', function (data, tablePlayers) {
@@ -75,8 +69,25 @@ var TemplateScene = new Phaser.Class({
                 console.log("Connexion nouveau joueur [" + data.id + "]");
                 console.table(game.players);
             }, this);
-            Client.socket.on('remove', function (id, nickname, data) {
-                game.players[id].remove = true;
+            Client.socket.on('remove', function (id, nickname) {
+                console.log("Removing ["+id+"] ["+nickname+"]");
+                console.table(game.players);
+                //console.table(game.players[id]);
+                let tabTemp = [];
+                for(i=0;i<game.players.length;i++){
+                    if(game.players[i].id == id){
+                        game.players[i].remove = true;  
+                        playerMap[game.players[i].id].destroy();
+                        playerMap[game.players[i].nickname].destroy();
+                        delete playerMap[game.players[i].id];
+                        delete playerMap[game.players[i].nickname];
+                    }else{
+                        tabTemp.push(game.players[i]);
+                    }
+                }
+                game.players = tabTemp;
+                console.log("Removed...");
+                console.table(game.players);
             });
             Client.socket.on('updateList', function (tablePlayers){
                 game.players = tablePlayers;
@@ -104,10 +115,7 @@ var TemplateScene = new Phaser.Class({
         let y = dataPlayer.y;
         let personalData = this.getPersonalData();
         if (personalData["id"] == id) {
-            //playerMap[id] = Game.physics.add.sprite(x, y, 'sprite');
             playerMap[id] = player;
-            // Game.cameras.main.startFollow(playerMap[id]);
-            // Game.cameras.main.centerOn(x,y);
         } else {
             playerMap[id] = Game.physics.add.sprite(x, y, 'sprite').setDepth(25);
         }
@@ -118,24 +126,9 @@ var TemplateScene = new Phaser.Class({
         playerMap[id].angle = 0;
         playerMap[id].setOrigin(0.5, 0.5);
         playerMap[nickname] = Game.add.text(x + this.centerName(nickname), y - 50, nickname, {
-            fontFamily: 'Fresh Lychee',
+            fontFamily: "Arial Black",
             fontSize: 12,
-            color: '#ffffff',
-            backgroundColor: '#000000',
-            padding: 5,
-        }).setDepth(25);
-        if (personalData["id"] == id) {
-            //Game.physics.add.collider(playerMap[id], bulletsMap, hitBullet, null, this);
-            // Game.input.mouse.disableContextMenu();
-            // Game.input.on('pointerup', function (pointer) {
-            //     if (pointer.leftButtonReleased()) {
-            //         //rotateSprite(playerMap[id], pointer.x, pointer.y);
-            //         //Client.sendClick(id, pointer.x, pointer.y);
-            //         this.clickOnMap(id, pointer);
-            //     }
-            // }, Game);
-            // game.selfConnected = false;
-        }
+        }).setDepth(25).setStroke('#000000', 4);
     },
     getCoordEntrance: function(){
         let currentScene = localStorage.getItem('currentScene');
@@ -169,15 +162,17 @@ var TemplateScene = new Phaser.Class({
         let tabTemp = [];
         players.forEach((player) => {
             if (player.remove == true) {
-                playerMap[player.id].destroy();
+                console.log("ok, joueur déco enlevé...");
                 playerMap[player.nickname].destroy();
+                playerMap[player.id].destroy();
                 delete playerMap[player.id];
                 delete playerMap[player.nickname];
             } else {
                 tabTemp.push(player);
             }
         });
-        game.players = tabTemp;
+        //game.players = tabTemp;
+        return tabTemp;
     },
     compareArrays: function(play, playBU) {
         if (play.length != playBU.length) {

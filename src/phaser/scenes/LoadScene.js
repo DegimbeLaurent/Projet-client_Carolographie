@@ -128,7 +128,7 @@ var LoadScene = new Phaser.Class({
         }
 
         var mousePointer = this.input.activePointer;
-        this.removeDisconnectedPlayers(this, game.players);
+        game.players = this.removeDisconnectedPlayers(this, game.players);
         this.updateConnectedPlayers(this, game.players, game.playersBU, player);
         this.movePlayers(this, game.players, plId);
         this.stopPlayers(this, game.players);

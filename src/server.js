@@ -99,6 +99,12 @@ io.on('connection', function (socket) {
             socket.player.x = data.x;
             socket.player.y = data.y;
             io.emit('move', data.id, socket.player);
+            for(i=0;i<serverPlayers.length;i++){
+                if(serverPlayers[i].id == socket.player.id){
+                    serverPlayers[i].newX = data.x;
+                    serverPlayers[i].newY = data.y;
+                }
+            }
         });
         //=================================
         //  Déconnection d'un joueur
@@ -106,7 +112,7 @@ io.on('connection', function (socket) {
         socket.on('disconnect', function () {
             io.emit('remove', socket.player.id, socket.player.nickname);
             serverPlayers = deleteDisconnectedPlayer(serverPlayers, socket.player);
-            io.emit('updateList', serverPlayers);
+            //io.emit('updateList', serverPlayers);
         });
         socket.on('testjs', function(msg){
             console.log("MSG -> "+msg);
