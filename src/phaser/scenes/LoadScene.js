@@ -7,20 +7,9 @@ var LoadScene = new Phaser.Class({
         playerMap = [];
     },
     preload: function(){
-        this.load.image("arbre", "/maps/tilesets/arbre.png");
-        this.load.image("bush", "/maps/tilesets/bush.png");
-        this.load.image("flower_set", "/maps/tilesets/flower_set.png");
-        this.load.image("grass_set", "/maps/tilesets/grass_set.png");
-        this.load.image("gravel_set", "/maps/tilesets/gravel_set.png");
-        this.load.image("ruine", "/maps/tilesets/ruine.png");
-        this.load.image("wall_set", "/maps/tilesets/wall_set.png");
-        this.load.image("roof_set", "/maps/tilesets/roof_set.png");
-        //this.load.tilemapTiledJSON("demo1", "/maps/demo1.json");
-        //this.load.tilemapTiledJSON("demo2", "/maps/demo2.json");
-        //this.load.tilemapTiledJSON("map_abbaye", "/maps/map_abbaye.json");
-        this.load.tilemapTiledJSON("map_visite", "/maps/map_visite.json");
+        this.load.image('set_tuile', '/assets/maps/set_tuile.png');
+        this.load.tilemapTiledJSON("map_visite", "/maps/map_abbaye_V2.json");
         this.load.image('sprite', '/img/sprite.png');
-        //this.load.image('background', '/img/background.png');
         this.load.image('minimap', '/img/minimap.png');
     },
     create: function(config){
@@ -30,13 +19,6 @@ var LoadScene = new Phaser.Class({
         //  GESTION CLIENT - SERVER
         //==========================================
         var Client = this.clientFunctions();
-        // Client.sendClick = function (id, x, y) {
-        //     // let xmod = Math.round(coeffZoom * x);
-        //     // let ymod = Math.round(coeffZoom * y);
-        //     // Client.socket.emit('click', { id: id, x: xmod, y: ymod });
-        //     Client.socket.emit('click', { id: id, x: x, y: y });
-        //     console.log("x="+x+" & y="+y+"["+id+"]");
-        // };
         this.input.mouse.disableContextMenu();
         game.selfConnected = false;
         //==========================================
@@ -45,16 +27,9 @@ var LoadScene = new Phaser.Class({
         this.cameras.main.setBounds(-8000, -200, 12600 , 6500);
         this.physics.world.setBounds(-8000,-200, 12600, 6500);
         var map = this.add.tilemap('map_visite');
-        var tileset10 = map.addTilesetImage('grass_set', 'grass_set');
-        var tileset20 = map.addTilesetImage('gravel_set', 'gravel_set');
-        var tileset30 = map.addTilesetImage('flower_set', 'flower_set');
-        var tileset40 = map.addTilesetImage('ruine', 'ruine');
-        var tileset50 = map.addTilesetImage('bush', 'bush');
-        var tileset60 = map.addTilesetImage('arbre', 'arbre');
-        var tileset70 = map.addTilesetImage('wall_set', 'wall_set');
-        var tileset80 = map.addTilesetImage('roof_set', 'roof_set');
-        var layer10 = map.createLayer('ground', [tileset10, tileset20]).setDepth(10);
-        var layer20 = map.createLayer('flowers', [tileset30]).setDepth(20);        
+        var tileset10 = map.addTilesetImage('set_tuile', 'set_tuile');
+        var layer10 = map.createLayer('ground', [tileset10]).setDepth(10);
+        var layer20 = map.createLayer('flower', [tileset10]).setDepth(20);        
             //==========================================
             //  AJOUT DU JOUEUR
             //==========================================
@@ -64,13 +39,30 @@ var LoadScene = new Phaser.Class({
             playerVelocity = 2;
             cursors = this.input.keyboard.createCursorKeys();
             //==========================================    
-        var layer30 = map.createLayer('ruines', [tileset40],0,-128).setDepth(30);
-        var layer40 = map.createLayer('bushes', [tileset50],0,-128).setDepth(40);
-        var layer50 = map.createLayer('arbres', [tileset60],0, -512).setDepth(50);
-        var layer60 = map.createLayer('walls', [tileset70],0, -472).setDepth(60);
-        var layer70 = map.createLayer('walls_invisible', [tileset70],0, -472).setDepth(70);
-        var layer80 = map.createLayer('roofs', [tileset80],0, -372).setDepth(80);
-        var layer90 = map.createLayer('roofs_invisible', [tileset80],0,-372).setDepth(90);
+        var layer30 = map.createLayer('buisson', [tileset10]).setDepth(30);
+        var layer40 = map.createLayer('tp', [tileset10]).setDepth(40);
+        var layer50 = map.createLayer('ruine stage 2', [tileset10]).setDepth(50);
+        var layer60 = map.createLayer('ruine top', [tileset10]).setDepth(60);
+        var layer70 = map.createLayer('ruine bottom', [tileset10]).setDepth(70);
+        var layer80 = map.createLayer('ruine stage', [tileset10]).setDepth(80);
+        var layer90 = map.createLayer('building bottom', [tileset10]).setDepth(90);
+        var layer100 = map.createLayer('building top ', [tileset10]).setDepth(100);
+        var layer110 = map.createLayer('building transparanse', [tileset10]).setDepth(110);
+        var layer120 = map.createLayer('correction', [tileset10]).setDepth(120);
+        var layer130 = map.createLayer('roof 2', [tileset10]).setDepth(130);
+        var layer140 = map.createLayer('roof 1', [tileset10]).setDepth(140);
+        var layer150 = map.createLayer('tronc', [tileset10]).setDepth(150);
+        var layer160 = map.createLayer('arbre', [tileset10]).setDepth(160);
+        var layer170 = map.createLayer('chappelle', [tileset10]).setDepth(170);
+        var layer180 = map.createLayer('chappelle center', [tileset10]).setDepth(180);
+        var layer190 = map.createLayer('chappelle top', [tileset10]).setDepth(190);
+        //var layer30 = map.createLayer('ruines', [tileset10],0,-128).setDepth(30);
+        //var layer40 = map.createLayer('bushes', [tileset10],0,-128).setDepth(40);
+        //var layer50 = map.createLayer('arbres', [tileset10],0, -512).setDepth(50);
+        //var layer60 = map.createLayer('walls', [tileset10],0, -472).setDepth(60);
+        //var layer70 = map.createLayer('walls_invisible', [tileset10],0, -472).setDepth(70);
+        //var layer80 = map.createLayer('roofs', [tileset10],0, -372).setDepth(80);
+        //var layer90 = map.createLayer('roofs_invisible', [tileset10],0,-372).setDepth(90);
         
         //==========================================
         //  GESTION DE LA CAMERA
@@ -107,30 +99,21 @@ var LoadScene = new Phaser.Class({
         let plId = parseInt(localStorage.getItem("playerId"));
         // Mouvements latéraux joueur
         if (cursors.left.isDown){
-            //player.setVelocityX(-playerVelocity * 2);
-            //player.setVelocityY(playerVelocity);
-            //console.log("[["+plId+"]]");
             player.x -= Math.round(playerVelocity*2);
             player.y += Math.round(playerVelocity);
             Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
             //console.log(player.x);
         }else if (cursors.right.isDown){
-            //player.setVelocityX(playerVelocity * 2);
-            //player.setVelocityY(-playerVelocity);
             player.x += Math.round(playerVelocity*2);
             player.y -= Math.round(playerVelocity);
             Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
         }
         // Mouvements verticaux joueur
         if (cursors.up.isDown){
-            //player.setVelocityX(-playerVelocity * 2);
-            //player.setVelocityY(-playerVelocity);
             player.x -= Math.round(playerVelocity*2);
             player.y -= Math.round(playerVelocity);
             Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
         }else if (cursors.down.isDown){
-            //player.setVelocityX(playerVelocity * 2);
-            //player.setVelocityY(playerVelocity);
             player.x += Math.round(playerVelocity*2);
             player.y += Math.round(playerVelocity);
             Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
