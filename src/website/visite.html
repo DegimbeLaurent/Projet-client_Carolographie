@@ -6,13 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <style media='screen' type='text/css'>
+        @font-face {
+            font-family: berry_rotunda;
+            src: url('../assets/fonts/Berry\ Rotunda.ttf');
+            font-weight: 400;
+            font-weight: normal;
+        }
+    </style>
     <title>Visite</title>
 </head>
 <body>
     <div id="visite"></div>
+    <div style="font-family:berry_rotunda; position:absolute; left:-1000px; visibility:hidden;">.</div>
     <script src="../phaser/scenes/TemplateScene.js"></script>
     <script src="../phaser/scenes/LoadScene.js"></script>
     <script src="../phaser/scenes/BaseScene.js"></script>
+    <script src="../phaser/scenes/RoomTemplate.js"></script>
+    <script src="../phaser/scenes/PicturesTemplate.js"></script>
+    <script src="../phaser/scenes/districtC/DcRoom.js"></script>
+    <script src="../phaser/scenes/districtC/DcPicture1.js"></script>
+    <script src="../phaser/scenes/districtC/DcPicture2.js"></script>
+    <script src="../phaser/scenes/districtC/DcPicture3.js"></script>
+    <script src="../phaser/scenes/districtC/DcPicture4.js"></script>
+    <script src="../phaser/scenes/districtE/DeRoom.js"></script>
+    <script src="../phaser/scenes/districtE/DePicture1.js"></script>
+    <script src="../phaser/scenes/districtE/DePicture2.js"></script>
+    <script src="../phaser/scenes/districtE/DePicture3.js"></script>
+    <script src="../phaser/scenes/districtE/DePicture4.js"></script>
     <script src="../phaser/main.js"></script>
     <script>
         window.onload = function(){

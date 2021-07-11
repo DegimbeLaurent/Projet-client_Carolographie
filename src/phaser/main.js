@@ -18,7 +18,7 @@ var config = {
     pixelArt: true,
     backgroundColor: '#000000',
     parent: 'visite',
-    scene: [ LoadScene, BaseScene ]
+    scene: [ LoadScene, BaseScene, DcRoom, DcPicture1, DcPicture2, DcPicture3, DcPicture4, DeRoom, DePicture1, DePicture2, DePicture3, DePicture4 ]
 };
 //====================================================
 var game = new Phaser.Game(config);

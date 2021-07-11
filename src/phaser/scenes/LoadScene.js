@@ -1,7 +1,8 @@
 var LoadScene = new Phaser.Class({
     Extends: TemplateScene,
-    initialize: function(config){
+    initialize: function LoadScene(config){
         Phaser.Scene.call(this, config);
+        //Phaser.Scene.call(this, {"key":"LoadScene"});
     },
     init: function(){
         playerMap = [];
@@ -11,10 +12,42 @@ var LoadScene = new Phaser.Class({
         this.load.tilemapTiledJSON("map_visite", "/maps/map_abbaye_V2.json");
         this.load.image('sprite', '/img/sprite.png');
         this.load.image('minimap', '/img/minimap.png');
+        this.load.image('parchemin', '/img/parchemin.jpg');
+        this.load.image('pierre_gravee', '/img/pierre_gravee.png');
+        //this.load.bitmapFont('myfont', '/assets/fonts/Berry-Rotunda.png','/assets/fonts/BerryRotunda.xml');
+        // PICTURES
+            // DISTRICT NORD
+                this.load.image('DNT1_00', '/img/visit/districtN/DN-T1/DNT1_00.jpg');
+                this.load.image('DNT1_01', '/img/visit/districtN/DN-T1/DNT1_01.JPG');
+                this.load.image('DNT1_02', '/img/visit/districtN/DN-T1/DNT1_02.JPG');
+                this.load.image('DNT1_03', '/img/visit/districtN/DN-T1/DNT1_03.JPG');
     },
     create: function(config){
+        console.log("on passe ici...");
         game.backgroundColor='#000000';
         //console.table(config);
+        //==========================================
+        //  TEST POLICE
+        //==========================================
+        //this.add.text(400,400,"Test fon Berry Rotunda !!!",{fontFamily: "myfont",fontSize: 12,color:0xffffff});
+        // let px = 500;
+        // let py = 500;
+        // var parchemin = this.add.image(px,py,"parchemin").setDepth(998);
+        // var pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
+        // this.add.text(px-950, py-250, "D", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+        // this.add.text(px-900, py-235, "istrict Nord - Le Parc de la Serna à Jumet", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+        // this.add.text(px+330, py+200, "Q", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+        // this.add.text(px+375, py+215, "uitter", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+        // var DNT1_00 = this.physics.add.image(px-300, py+110, "DNT1_00").setDepth(9101).setScale(0.4);
+        // var DNT1_01 = this.physics.add.image(px-850, py-40, "DNT1_01").setDepth(9101).setScale(0.7);
+        // var DNT1_02 = this.physics.add.image(px-850, py+160, "DNT1_02").setDepth(9101).setScale(0.75);
+        // var DNT1_03 = this.physics.add.image(px-850, py+360, "DNT1_03").setDepth(9101).setScale(1);
+        // let txt = "À deux pas de l’Aéroport de Gosselies, se trouve le Parc de la Serna,";
+        // this.add.text(px-650, py+380, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
+        // txt = "un des poumons verts de la région.";
+        // this.add.text(px-650, py+420, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
+        
+        //this.add.DynamicBitmapText(this,150,400, 'myfont', 'Test Berry Rotunda!',36);
         //==========================================
         //  GESTION CLIENT - SERVER
         //==========================================
@@ -81,7 +114,7 @@ var LoadScene = new Phaser.Class({
             maxSpeed: 0.2
         };
         //controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
-        controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
+        controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig, game);
         //==========================================
         //  CREATION DE LA MINIMAP
         //==========================================  
@@ -91,7 +124,67 @@ var LoadScene = new Phaser.Class({
         this.minimap.setBackgroundColor(0x002244);
         this.minimap.scrollX = 1600;
         this.minimap.scrollY = 900;
+        //this.scene.start("DcRoom");
+        this.minimap.visible = false;
+        //==========================================
+        //  AJOUT DES PORTAILS
+        //==========================================
+        var fondsNoir = this.add.rectangle(0, 0, 12600 , 6500, 0x000000).setDepth(1);   
+        this.add.text(-20,-65,"Portails",{fontFamily: "Arial Black",fontSize: 12});
+        //=================
+        //  PORTAIL NORD
+        //=================
+        var portailN = this.add.rectangle(0, 0, 50, 75, 0x92623A).setDepth(999).setInteractive();
+        portailN.on("pointerup", function(){
+            //============
+            //  INIT
+            //============
+            let x = 0; let y = 0;
+            fondsNoir.setDepth(9000);
+            var sortieN = this.add.rectangle(x+150,y,50, 75, 0x92623A).setDepth(9101).setInteractive();
+            player.setDepth(9199);
+            this.minimap.visible = false;
+            //============
+            //  CHEVALET 1
+            //============
+            // Le Parc de la Serna à Jumet
+            var chevaletDNP1 = this.add.rectangle(0, 0, 50, 75, 0x92623A).setInteractive().setDepth(9001);
+            chevaletDNP1.on("pointerup", function(){
+                let x = 0;  let y = 0
+                fondsNoir.setDepth(9100);
+                var DNT1_00 = this.physics.add.image(x+200, y+200, "DNT1_00").setDepth(9101);
+                var sortie = this.add.rectangle(x+150,y,50, 75, 0x92623A).setDepth(9101);
+                sortie.setInteractive();
+                sortie.on("pointerup", function(){
+                    DNT1_00.destroy();
+                    sortie.destroy();
+                    fondsNoir.setDepth(9000);
+                })
+            }, this);                
+                //============
+                //  CHEVALET 2
+                //============
+                
+                //============
+                //  CHEVALET 3
+                //============
+                
+                //============
+                //  CHEVALET 4
+                //============
 
+                //============
+                //  SORTIE
+                //============
+                sortieN.on("pointerup", function(){
+                    layer40.setDepth(40);
+                    player.setDepth(25);
+                    this.minimap.visible = true;
+                    fondsNoir.setDepth(1);
+                    sortieN.destroy(0);
+                    chevaletDNP1.destroy(0);
+                }, this);
+            },this);
     },
     update: function(time, delta){
         controls.update(delta);
@@ -125,12 +218,43 @@ var LoadScene = new Phaser.Class({
         this.movePlayers(this, game.players, plId);
         this.stopPlayers(this, game.players);
     },
-    changeScene: function(){
-        this.scene.start("BaseScene");
+    changeScene: function(nameScene, gameData){
+        this.scene.start(nameScene, gameData);
     },
     centerMap: function(myPlayer){
             //console.log(playerMap[myId].x + ","+playerMap[myId].y);
             //this.cameras.main.startFollow(myPlayer);
         //this.cameras.main.follow(playerMap[myId], Phaser.Camera.FOLLOW_LOCKON);
+    },showPictures: function(refPic, x, y){
+        switch(refPic){
+            case "DC-P1":console.log("Affichage infos DC Picture1"); break;
+            case "DC-P2":break;
+            case "DC-P3":break;
+            case "DC-P4":break;
+            case "DE-P1":break;
+            case "DE-P2":break;
+            case "DE-P3":break;
+            case "DE-P4":break;
+            case "DN-P1":
+                DNT1_00.setDepth(9101);
+                console.log("Affichage infos DN Picture1"); break;
+            case "DN-P2":break;
+            case "DN-P3":break;
+            case "DN-P4":break;
+            case "DO-P1":break;
+            case "DO-P2":break;
+            case "DO-P3":break;
+            case "DO-P4":break;
+            case "DS-P1":break;
+            case "DS-P2":break;
+            case "DS-P3":break;
+            case "DS-P4":break;            
+        }
+    },
+    showImage: function(x,y){
+
+    },
+    showText: function(x,y){
+
     }
 });

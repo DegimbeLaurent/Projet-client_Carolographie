@@ -1,6 +1,7 @@
 var TemplateScene = new Phaser.Class({
     Extends: Phaser.Scene,
-    initialize: function(){
+    initialize: function(config){
+        Phaser.Scene.call(this, config);
     },
     init: function(){
     },
@@ -234,6 +235,8 @@ var TemplateScene = new Phaser.Class({
         players.forEach((player) => {
             if ((player.x != player.newX) || (player.y != player.newY)) {
                 let distance = Phaser.Math.Distance.Between(playerMap[player.id].x, playerMap[player.id].y, player.newX, player.newY);
+                // console.log("player.id = "+player.id);
+                // console.log("playerMap[player.id] = "+playerMap[player.id]);
                 if (playerMap[player.id].body.speed > 0) {
                     if (distance < 4) {
                         playerMap[player.id].body.reset(player.newX, player.newY);
