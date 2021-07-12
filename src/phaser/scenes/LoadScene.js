@@ -21,6 +21,18 @@ var LoadScene = new Phaser.Class({
                 this.load.image('DNT1_01', '/img/visit/districtN/DN-T1/DNT1_01.JPG');
                 this.load.image('DNT1_02', '/img/visit/districtN/DN-T1/DNT1_02.JPG');
                 this.load.image('DNT1_03', '/img/visit/districtN/DN-T1/DNT1_03.JPG');
+                this.load.image('DNT2_00', '/img/visit/districtN/DN-T2/DNT2_00.jpg');
+                this.load.image('DNT2_01', '/img/visit/districtN/DN-T2/DNT2_01.jpg');
+                this.load.image('DNT2_02', '/img/visit/districtN/DN-T2/DNT2_02.jpg');
+                //this.load.image('DNT2_03', '/img/visit/districtN/DN-T1/DNT2_03.JPG');
+/*                 this.load.image('DNT3_00', '/img/visit/districtN/DN-T1/DNT3_00.jpg');
+                this.load.image('DNT3_01', '/img/visit/districtN/DN-T1/DNT3_01.JPG');
+                this.load.image('DNT3_02', '/img/visit/districtN/DN-T1/DNT3_02.JPG');
+                this.load.image('DNT3_03', '/img/visit/districtN/DN-T1/DNT3_03.JPG');
+                this.load.image('DNT4_00', '/img/visit/districtN/DN-T1/DNT4_00.jpg');
+                this.load.image('DNT4_01', '/img/visit/districtN/DN-T1/DNT4_01.JPG');
+                this.load.image('DNT4_02', '/img/visit/districtN/DN-T1/DNT4_02.JPG');
+                this.load.image('DNT4_03', '/img/visit/districtN/DN-T1/DNT4_03.JPG'); */
     },
     create: function(config){
         console.log("on passe ici...");
@@ -29,7 +41,7 @@ var LoadScene = new Phaser.Class({
         //==========================================
         //  TEST POLICE
         //==========================================
-        //this.add.text(400,400,"Test fon Berry Rotunda !!!",{fontFamily: "myfont",fontSize: 12,color:0xffffff});
+        //this.add.text(400,400,"Test font Berry Rotunda !!!",{fontFamily: "myfont",fontSize: 12,color:0xffffff});
         // let px = 500;
         // let py = 500;
         // var parchemin = this.add.image(px,py,"parchemin").setDepth(998);
@@ -138,51 +150,187 @@ var LoadScene = new Phaser.Class({
         portailN.on("pointerup", function(){
             //============
             //  INIT
-            //============
-            let x = 0; let y = 0;
-            fondsNoir.setDepth(9000);
-            var sortieN = this.add.rectangle(x+150,y,50, 75, 0x92623A).setDepth(9101).setInteractive();
+            //============         
+            let x = 0; let y = 0;   
+            var px = 500;
+            var py = 500;
             player.setDepth(9199);
             this.minimap.visible = false;
+            var chevaletDNP1;
+            var chevaletDNP2;
+            var parchemin;
+            var pierre_gravee;
+            var sortieN = this.add.rectangle(x+150,y,50, 75, 0xffffff).setDepth(9101).setInteractive();
+            pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
+            fondsNoir.setDepth(950); // A REMPLACER PAR LE LAYER DE LA ROOM QUAND IL SERA DISPO
+            portailN.setDepth(1);
             //============
             //  CHEVALET 1
             //============
             // Le Parc de la Serna à Jumet
-            var chevaletDNP1 = this.add.rectangle(0, 0, 50, 75, 0x92623A).setInteractive().setDepth(9001);
-            chevaletDNP1.on("pointerup", function(){
-                let x = 0;  let y = 0
-                fondsNoir.setDepth(9100);
-                var DNT1_00 = this.physics.add.image(x+200, y+200, "DNT1_00").setDepth(9101);
-                var sortie = this.add.rectangle(x+150,y,50, 75, 0x92623A).setDepth(9101);
-                sortie.setInteractive();
-                sortie.on("pointerup", function(){
-                    DNT1_00.destroy();
-                    sortie.destroy();
-                    fondsNoir.setDepth(9000);
-                })
-            }, this);                
+                chevaletDNP1 = this.add.rectangle(0, 0, 50, 75, 0x926215).setInteractive().setDepth(9001);
+                chevaletDNP1.on("pointerup", function(){
+                    //======================================
+                    var chevalet1_titre_majuscule = this.add.text(px-950, py-250, "D", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+                    var chevalet1_titre_texte = this.add.text(px-900, py-235, "istrict Nord - Le Parc de la Serna à Jumet", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+                    var chevalet1_quitter_majuscule = this.add.text(px+330, py+200, "Q", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+                    var chevalet1_quitter_texte = this.add.text(px+375, py+215, "uitter", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+                    var DNT1_00 = this.physics.add.image(px-300, py+110, "DNT1_00").setDepth(9101).setScale(0.4);
+                    var DNT1_01 = this.physics.add.image(px-850, py-40, "DNT1_01").setDepth(9101).setScale(0.7);
+                    var DNT1_02 = this.physics.add.image(px-850, py+160, "DNT1_02").setDepth(9101).setScale(0.75);
+                    var DNT1_03 = this.physics.add.image(px-850, py+360, "DNT1_03").setDepth(9101).setScale(1);
+                    let txt = "À deux pas de l’Aéroport de Gosselies, se trouve le Parc de la Serna,";
+                    var chevalet1_legende_ligne1 = this.add.text(px-650, py+380, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
+                    txt = "un des poumons verts de la région.";
+                    var chevalet1_legende_ligne2 = this.add.text(px-650, py+420, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
+                    //======================================
+                    let x = 0;  let y = 0;
+                    fondsNoir.setDepth(950);
+                    chevaletDNP1.setDepth(1);
+                    player.setDepth(25);
+                    parchemin = this.add.image(px,py,"parchemin").setDepth(990);
+                    var sortie1 = this.add.rectangle(x+150,y,50, 75, 0xffffff).setDepth(9101);
+                    sortie1.setInteractive();
+                    sortie1.on("pointerup", function(){
+                        DNT1_00.destroy();
+                        DNT1_01.destroy();
+                        DNT1_02.destroy();
+                        DNT1_03.destroy();
+                        chevalet1_legende_ligne1.destroy();
+                        chevalet1_legende_ligne2.destroy();
+                        chevalet1_titre_majuscule.destroy();
+                        chevalet1_titre_texte.destroy();
+                        chevalet1_quitter_majuscule.destroy();
+                        chevalet1_quitter_texte.destroy();
+                        sortie1.destroy();
+                        fondsNoir.setDepth(9000);
+                        chevaletDNP1.setDepth(9001);
+                        parchemin.destroy();
+                        player.setDepth(9199);
+                    })
+                }, this);             
                 //============
                 //  CHEVALET 2
                 //============
-                
+                // L’Aéroport et l’Aéropole de Gosselies
+/*                 chevaletDNP2 = this.add.rectangle(150, 0, 50, 75, 0x92623A).setInteractive().setDepth(9001);
+                chevaletDNP2.on("pointerup", function(){
+                    //======================================                    
+                    titre_majuscule = this.add.text(px-950, py-250, "D", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+                    titre_texte = this.add.text(px-900, py-235, "istrict Nord - L’Aéroport et l’Aéropole de Gosselies", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+                    quitter_majuscule = this.add.text(px+330, py+200, "Q", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+                    quitter_texte = this.add.text(px+375, py+215, "uitter", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+                    var DNT2_00 = this.physics.add.image(px-300, py+110, "DNT2_00").setDepth(9101).setScale(0.2);
+                    var DNT2_01 = this.physics.add.image(px-850, py-40, "DNT2_01").setDepth(9101).setScale(0.2);
+                    var DNT2_02 = this.physics.add.image(px-850, py+160, "DNT2_02").setDepth(9101).setScale(0.25);
+                    let txt = "Gosselies et l’aviation, une grande histoire d’amour!";
+                    legende_ligne1 = this.add.text(px-650, py+380, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
+                    //======================================
+                    let x = 0;  let y = 0;
+                    var sortie2 = this.add.rectangle(x+150,y,50, 75, 0xffffff).setDepth(9101);
+                    fondsNoir.setDepth(9100);
+                    sortie2.setInteractive();
+                    sortie2.on("pointerup", function(){
+                        DNT2_00.destroy();
+                        DNT2_01.destroy();
+                        DNT2_02.destroy();
+                        legende_ligne1.destroy();
+                        titre_majuscule.destroy();
+                        titre_texte.destroy();
+                        quitter_majuscule.destroy();
+                        quitter_texte.destroy();
+                        sortie2.destroy();
+                        fondsNoir.setDepth(0);
+                        parchemin.destroy();
+                    })
+                }, this);  */
                 //============
                 //  CHEVALET 3
                 //============
-                
+                // Le Parc de la Serna à Jumet
+/*                 var chevaletDNP1 = this.add.rectangle(0, 0, 50, 75, 0x92623A).setInteractive().setDepth(9001);
+                chevaletDNP1.on("pointerup", function(){
+                    //======================================
+                    let px = 500;
+                    let py = 500;
+                    parchemin = this.add.image(px,py,"parchemin").setDepth(998);
+                    pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
+                    this.add.text(px-950, py-250, "D", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+                    this.add.text(px-900, py-235, "istrict Nord - Le Parc de la Serna à Jumet", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+                    this.add.text(px+330, py+200, "Q", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+                    this.add.text(px+375, py+215, "uitter", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+                    var DNT3_00 = this.physics.add.image(px-300, py+110, "DNT3_00").setDepth(9101).setScale(0.4);
+                    var DNT3_01 = this.physics.add.image(px-850, py-40, "DNT3_01").setDepth(9101).setScale(0.7);
+                    var DNT3_02 = this.physics.add.image(px-850, py+160, "DNT3_02").setDepth(9101).setScale(0.75);
+                    var DNT3_03 = this.physics.add.image(px-850, py+360, "DNT3_03").setDepth(9101).setScale(1);
+                    let txt = "À deux pas de l’Aéroport de Gosselies, se trouve le Parc de la Serna,";
+                    this.add.text(px-650, py+380, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
+                    txt = "un des poumons verts de la région.";
+                    this.add.text(px-650, py+420, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
+                    //======================================
+                    let x = 0;  let y = 0
+                    fondsNoir.setDepth(9100);
+                    var sortie = this.add.rectangle(x+150,y,50, 75, 0x92623A).setDepth(9101);
+                    sortie.setInteractive();
+                    sortie.on("pointerup", function(){
+                        DNT3_00.destroy();
+                        DNT3_01.destroy();
+                        DNT3_02.destroy();
+                        DNT3_03.destroy();
+                        sortie.destroy();
+                        fondsNoir.setDepth(9000);
+                    })
+                }, this);  */
                 //============
                 //  CHEVALET 4
                 //============
-
+                // Le Parc de la Serna à Jumet
+/*                 var chevaletDNP1 = this.add.rectangle(0, 0, 50, 75, 0x92623A).setInteractive().setDepth(9001);
+                chevaletDNP1.on("pointerup", function(){
+                    //======================================
+                    let px = 500;
+                    let py = 500;
+                    parchemin = this.add.image(px,py,"parchemin").setDepth(998);
+                    pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
+                    this.add.text(px-950, py-250, "D", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+                    this.add.text(px-900, py-235, "istrict Nord - Le Parc de la Serna à Jumet", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+                    this.add.text(px+330, py+200, "Q", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
+                    this.add.text(px+375, py+215, "uitter", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
+                    var DNT4_00 = this.physics.add.image(px-300, py+110, "DNT4_00").setDepth(9101).setScale(0.4);
+                    var DNT4_01 = this.physics.add.image(px-850, py-40, "DNT4_01").setDepth(9101).setScale(0.7);
+                    var DNT4_02 = this.physics.add.image(px-850, py+160, "DNT4_02").setDepth(9101).setScale(0.75);
+                    var DNT4_03 = this.physics.add.image(px-850, py+360, "DNT4_03").setDepth(9101).setScale(1);
+                    let txt = "À deux pas de l’Aéroport de Gosselies, se trouve le Parc de la Serna,";
+                    this.add.text(px-650, py+380, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
+                    txt = "un des poumons verts de la région.";
+                    this.add.text(px-650, py+420, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
+                    //======================================
+                    let x = 0;  let y = 0
+                    fondsNoir.setDepth(9100);
+                    var sortie = this.add.rectangle(x+150,y,50, 75, 0x92623A).setDepth(9101);
+                    sortie.setInteractive();
+                    sortie.on("pointerup", function(){
+                        DNT4_00.destroy();
+                        DNT4_01.destroy();
+                        DNT4_02.destroy();
+                        DNT4_03.destroy();
+                        sortie.destroy();
+                        fondsNoir.setDepth(9000);
+                    })
+                }, this);  */
                 //============
                 //  SORTIE
                 //============
                 sortieN.on("pointerup", function(){
                     layer40.setDepth(40);
                     player.setDepth(25);
-                    this.minimap.visible = true;
+                    //this.minimap.visible = true;
                     fondsNoir.setDepth(1);
+                    portailN.setDepth(999);
+                    pierre_gravee.destroy();
                     sortieN.destroy(0);
-                    chevaletDNP1.destroy(0);
+                    if(chevaletDNP1 != undefined){chevaletDNP1.destroy(0);}
+                    //parchemin.setDepth(0);                    
                 }, this);
             },this);
     },
