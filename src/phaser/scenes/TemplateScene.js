@@ -17,7 +17,8 @@ var TemplateScene = new Phaser.Class({
         // var Client = {};
         // Client.socket = io.connect();
         if(localStorage.getItem('personalData') == null){
-            let coordEntrance = this.getCoordEntrance();
+            //let coordEntrance = this.getCoordEntrance();
+            let coordEntrance = [0,0];
             Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance);
             //console.log("localstorage créé!");
         }else{
@@ -97,6 +98,14 @@ var TemplateScene = new Phaser.Class({
 
         });
         return Client;
+    },
+    initLocalStorage: function(){
+        let pseudo = localStorage.getItem("pseudo");
+        localStorage.clear();
+        localStorage.setItem("pseudo", pseudo);
+        localStorage.setItem("Players", []);
+        localStorage.setItem("playerId", "");
+        console.log("initialisation...");
     },
     getItemNamed: function(Game, type, name) {
         let listItems = Game.add.scene.children.list;
