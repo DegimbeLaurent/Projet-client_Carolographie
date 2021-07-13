@@ -55,7 +55,7 @@ var DnRoom = new Phaser.Class({
         //==========================================
         //  AJOUT DU JOUEUR
         //==========================================
-        player = this.physics.add.image(500,500,'sprite').setDepth(25);
+        player = this.physics.add.image(0,0,'sprite').setDepth(25);
         player.name = "myPlayer";
         player.setCollideWorldBounds(true);
         playerVelocity = 2;
@@ -64,7 +64,7 @@ var DnRoom = new Phaser.Class({
         //  GESTION DE LA CAMERA
         //==========================================
         this.cameras.main.startFollow(player, true, 0.1, 0.1);
-        var coeffZoom = 1.2;
+        var coeffZoom = 1;
         this.cameras.main.setZoom(coeffZoom);
         controlConfig = {
             camera: this.cameras.main,
@@ -83,149 +83,93 @@ var DnRoom = new Phaser.Class({
             //============
             //  INIT
             //============         
-            let x = 0; let y = 0;   
-            var px = 500;
-            var py = 500;
-            player.setDepth(9199);
-            var chevaletDNP1;
-            var chevaletDNP2;
-            var parchemin;
-            var pierre_gravee;
-            var sortieN = this.add.rectangle(x+150,y,50, 75, 0xffffff).setDepth(9101).setInteractive();
-            pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
-            var fondsNoir = this.add.rectangle(0, 0, 12600 , 6500, 0x000000).setDepth(1);   
-            fondsNoir.setDepth(950); // A REMPLACER PAR LE LAYER DE LA ROOM QUAND IL SERA DISPO
+            let x = 0; let y = 0; var px = 0; var py = 0; let txt = "";
+            player.setDepth(9099);
+            //var pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
+            var fondsEcran = this.add.rectangle(0, 0, 12600 , 6500, 0xf4edde).setDepth(950); // A REMPLACER PAR LE LAYER DE LA ROOM QUAND IL SERA DISPO
+            var fontFam = "Montserrat";
+            var toDestroy = [];
+            camSubject = "room";
+            var sortieN = this.add.rectangle(x+350,y,50, 75, 0xffffff).setDepth(9100).setInteractive();
             //============
             //  CHEVALET 1
             //============
             // Le Parc de la Serna à Jumet
-                chevaletDNP1 = this.add.rectangle(0, 0, 50, 75, 0x926215).setInteractive().setDepth(9001);
-                chevaletDNP1.on("pointerup", function(){
-                    //======================================
-                    var chevalet1_titre_majuscule = this.add.text(px-950, py-250, "D", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
-                    var chevalet1_titre_texte = this.add.text(px-900, py-235, "istrict Nord - Le Parc de la Serna à Jumet", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
-                    var chevalet1_quitter_majuscule = this.add.text(px+330, py+200, "Q", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
-                    var chevalet1_quitter_texte = this.add.text(px+375, py+215, "uitter", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
-                    var DNT1_00 = this.physics.add.image(px-300, py+110, "DNT1_00").setDepth(9101).setScale(0.4);
-                    var DNT1_01 = this.physics.add.image(px-850, py-40, "DNT1_01").setDepth(9101).setScale(0.7);
-                    var DNT1_02 = this.physics.add.image(px-850, py+160, "DNT1_02").setDepth(9101).setScale(0.75);
-                    var DNT1_03 = this.physics.add.image(px-850, py+360, "DNT1_03").setDepth(9101).setScale(1);
-                    let txt = "À deux pas de l’Aéroport de Gosselies, se trouve le Parc de la Serna,";
-                    var chevalet1_legende_ligne1 = this.add.text(px-650, py+380, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
-                    txt = "un des poumons verts de la région.";
-                    var chevalet1_legende_ligne2 = this.add.text(px-650, py+420, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
-                    //======================================
-                    let x = 0;  let y = 0;
-                    fondsNoir.setDepth(950);
-                    chevaletDNP1.setDepth(1);
-                    //player.setDepth(25);
-                    parchemin = this.add.image(px,py,"parchemin").setDepth(990);
-                    var sortie1 = this.add.rectangle(x+150,y,50, 75, 0xffffff).setDepth(9101);
-                    sortie1.setInteractive();
-                    sortie1.on("pointerup", function(){
-                        DNT1_00.destroy();
-                        DNT1_01.destroy();
-                        DNT1_02.destroy();
-                        DNT1_03.destroy();
-                        chevalet1_legende_ligne1.destroy();
-                        chevalet1_legende_ligne2.destroy();
-                        chevalet1_titre_majuscule.destroy();
-                        chevalet1_titre_texte.destroy();
-                        chevalet1_quitter_majuscule.destroy();
-                        chevalet1_quitter_texte.destroy();
-                        sortie1.destroy();
-                        fondsNoir.setDepth(9000);
-                        chevaletDNP1.setDepth(9001);
-                        parchemin.destroy();
-                        player.setDepth(9199);
-                    })
-                }, this);             
-                //============
-                //  CHEVALET 2
-                //============
-                // L’Aéroport et l’Aéropole de Gosselies
-/*                 chevaletDNP2 = this.add.rectangle(150, 0, 50, 75, 0x92623A).setInteractive().setDepth(9001);
-                chevaletDNP2.on("pointerup", function(){
-                    //======================================                    
-                    titre_majuscule = this.add.text(px-950, py-250, "D", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
-                    titre_texte = this.add.text(px-900, py-235, "istrict Nord - L’Aéroport et l’Aéropole de Gosselies", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
-                    quitter_majuscule = this.add.text(px+330, py+200, "Q", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
-                    quitter_texte = this.add.text(px+375, py+215, "uitter", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
-                    var DNT2_00 = this.physics.add.image(px-300, py+110, "DNT2_00").setDepth(9101).setScale(0.2);
-                    var DNT2_01 = this.physics.add.image(px-850, py-40, "DNT2_01").setDepth(9101).setScale(0.2);
-                    var DNT2_02 = this.physics.add.image(px-850, py+160, "DNT2_02").setDepth(9101).setScale(0.25);
-                    let txt = "Gosselies et l’aviation, une grande histoire d’amour!";
-                    legende_ligne1 = this.add.text(px-650, py+380, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
-                    //======================================
-                    let x = 0;  let y = 0;
-                    var sortie2 = this.add.rectangle(x+150,y,50, 75, 0xffffff).setDepth(9101);
-                    fondsNoir.setDepth(9100);
-                    sortie2.setInteractive();
-                    sortie2.on("pointerup", function(){
-                        DNT2_00.destroy();
-                        DNT2_01.destroy();
-                        DNT2_02.destroy();
-                        legende_ligne1.destroy();
-                        titre_majuscule.destroy();
-                        titre_texte.destroy();
-                        quitter_majuscule.destroy();
-                        quitter_texte.destroy();
-                        sortie2.destroy();
-                        fondsNoir.setDepth(0);
-                        parchemin.destroy();
-                    })
-                }, this);  */
-                //============
-                //  CHEVALET 3
-                //============
+            var chevaletDNP1 = this.add.rectangle(0, 0, 50, 75, 0x926215).setInteractive().setDepth(9001);
+            chevaletDNP1.on("pointerup", function(){
+                //======================================
+                toDestroy.push(this.add.text(px-225, py-100, "District Nord - Le Parc de la Serna à Jumet", {fontFamily: fontFam, fontSize: 30,color: '#000000'}).setDepth(9101));
+                toDestroy.push(this.physics.add.image(px, py+300, "DNT1_00").setDepth(9101));
+                toDestroy.push(this.physics.add.image(px-350, py+900, "DNT1_01").setDepth(9101));
+                toDestroy.push(this.physics.add.image(px-350, py+1200, "DNT1_02").setDepth(9101));
+                toDestroy.push(this.physics.add.image(px-350, py+1450, "DNT1_03").setDepth(9101));
+                txt = "À deux pas de l’Aéroport de Gosselies, se trouve le Parc de la Serna, un des poumons verts de la région.";
+                toDestroy.push(this.add.text(px-400, py+650, txt, {fontFamily: fontFam,fontSize: 20,color: '#000000'}).setDepth(999));
+                //======================================
+                var arrayShadows = this.addShadows(toDestroy, [1,2,3,4]);
+                arrayShadows.forEach((item) => {toDestroy.push(item);})
+                camSubject = "chevalet";
+                chevaletDNP1.setDepth(1);
+                player.setDepth(1);
+                var sortie1 = this.add.rectangle(x+50,y+1700,50, 75, 0xffffff).setDepth(9101);
+                sortieN.setDepth(949);
+                sortie1.setInteractive();
+                sortie1.on("pointerup", function(){
+                    sortie1.destroy();
+                    toDestroy.forEach((item) => {item.destroy();})
+                    fondsEcran.setDepth(9000);
+                    sortieN.setDepth(9100);
+                    chevaletDNP1.setDepth(9001);
+                    player.setDepth(9199);
+                    player.y = 200;
+                    camSubject = "room";
+                })
+            }, this);             
+            //============
+            //  CHEVALET 2
+            //============
+            // L’Aéroport et l’Aéropole de Gosselies
 
-                //============
-                //  SORTIE
-                //============
-                sortieN.on("pointerup", function(){
+            //============
+            //  CHEVALET 3
+            //============
+            
+            //============
+            //  SORTIE
+            //============
+            sortieN.on("pointerup", function(){
+                if(camSubject == "room"){
                     localStorage.setItem("insideRoom", false);
                     Client.socket.emit("goOutRoom");
                     Client.socket.on("okGoOutRoom", function(){
                         location.href = '/website/visite.html';
                     });
-                    // layer40.setDepth(40);
-                    // player.setDepth(25);
-                    // fondsNoir.setDepth(1);
-                    // pierre_gravee.destroy();
-                    // sortieN.destroy(0);
-                    // if(chevaletDNP1 != undefined){chevaletDNP1.destroy(0);}             
-                }, this);
-    },
-    update: function(time, delta){
-        controls.update(delta);
-        player.setVelocity(0);
-        let plId = parseInt(localStorage.getItem("playerId"));
-        // Mouvements latéraux joueur
-        if (cursors.left.isDown){
-            player.x -= Math.round(playerVelocity*2);
-            player.y += Math.round(playerVelocity);
-            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
-            //console.log(player.x);
-        }else if (cursors.right.isDown){
-            player.x += Math.round(playerVelocity*2);
-            player.y -= Math.round(playerVelocity);
-            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
+                };            
+            }, this);
+        },
+        update: function(time, delta){
+            controls.update(delta);
+            player.setVelocity(0);
+            let plId = parseInt(localStorage.getItem("playerId"));
+            if (cursors.left.isDown){
+                player.x -= Math.round(playerVelocity*2);
+                Client.socket.emit('click', { id: plId, x: player.x, y: player.y });
+            }else if (cursors.right.isDown){
+                player.x += Math.round(playerVelocity*2);
+                Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
+            }
+            if (cursors.up.isDown){
+                player.y -= Math.round(playerVelocity*3);
+                Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
+            }else if (cursors.down.isDown){
+                player.y += Math.round(playerVelocity*3);
+                Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
+            }
+            var mousePointer = this.input.activePointer;
+            game.players = this.removeDisconnectedPlayers(this, game.players);
+            this.movePlayers(this, game.players, plId);
+        },
+        changeScene: function(nameScene, gameData){
+            this.scene.start(nameScene, gameData);
         }
-        // Mouvements verticaux joueur
-        if (cursors.up.isDown){
-            player.x -= Math.round(playerVelocity*2);
-            player.y -= Math.round(playerVelocity);
-            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
-        }else if (cursors.down.isDown){
-            player.x += Math.round(playerVelocity*2);
-            player.y += Math.round(playerVelocity);
-            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
-        }
-
-        var mousePointer = this.input.activePointer;
-        game.players = this.removeDisconnectedPlayers(this, game.players);
-    },
-    changeScene: function(nameScene, gameData){
-        this.scene.start(nameScene, gameData);
-    }
 });

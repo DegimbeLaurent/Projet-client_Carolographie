@@ -109,6 +109,15 @@ var TemplateScene = new Phaser.Class({
         localStorage.setItem("playerId", "");
         console.log("initialisation...");
     },
+    addShadows: function(dataArray, shadowsArray){
+        let arrayTemp = [];
+        shadowsArray.forEach((indice) => {
+            let baseRect = dataArray[indice];
+            //console.table(baseRect);
+            arrayTemp.push(this.add.rectangle(baseRect.x - 8, baseRect.y + 8, baseRect.width, baseRect.height).setFillStyle(0x000000, 0.1).setDepth(9100));
+        });
+        return arrayTemp;
+    },
     getItemNamed: function(Game, type, name) {
         let listItems = Game.add.scene.children.list;
         Game.add.scene.children.list.forEach((item) =>{
