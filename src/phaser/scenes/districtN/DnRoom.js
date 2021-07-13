@@ -118,7 +118,7 @@ var DnRoom = new Phaser.Class({
                     let x = 0;  let y = 0;
                     fondsNoir.setDepth(950);
                     chevaletDNP1.setDepth(1);
-                    player.setDepth(25);
+                    //player.setDepth(25);
                     parchemin = this.add.image(px,py,"parchemin").setDepth(990);
                     var sortie1 = this.add.rectangle(x+150,y,50, 75, 0xffffff).setDepth(9101);
                     sortie1.setInteractive();
@@ -183,7 +183,11 @@ var DnRoom = new Phaser.Class({
                 //  SORTIE
                 //============
                 sortieN.on("pointerup", function(){
-                    location.href = '/website/visite.html';
+                    localStorage.setItem("insideRoom", false);
+                    Client.socket.emit("goOutRoom");
+                    Client.socket.on("okGoOutRoom", function(){
+                        location.href = '/website/visite.html';
+                    });
                     // layer40.setDepth(40);
                     // player.setDepth(25);
                     // fondsNoir.setDepth(1);

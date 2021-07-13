@@ -63,13 +63,13 @@ io.on('connection', function (socket) {
     //=================================
     //  Création d'un joueur entrant
     //=================================
-    socket.on('newplayer', function (nickname,posXY) {         
+    socket.on('newplayer', function (nickname,posXY, inside) {         
         let now = new Date();
         socket.player = {
             id: server.lastPlayerID++,
             nickname: 'unknown',
-            x: 600,
-            y: 600,
+            x: 1,
+            y: 1,
             newX: 0,
             newY: 0,
             angle: 0,
@@ -77,7 +77,8 @@ io.on('connection', function (socket) {
             hit: 0,
             bullets: 100,
             reload: now.getTime(),
-            remove: false
+            remove: false,
+            insideRoom: inside
         };
         socket.player.nickname = nickname;
         socket.player.newX = posXY[0];
@@ -92,6 +93,26 @@ io.on('connection', function (socket) {
         //socket.broadcast.emit('getNewplayer', socket.player, serverPlayers);
         socket.on('tchatMsg', function (msg) {
             io.emit('tchat', socket.player, msg);
+        });
+        //=================================
+        //  Joueur rentre dans une pièce
+        //=================================
+        socket.on('enterRoom', function(){
+            socket.player.insideRoom = true;
+            updateServerPlayers(socket.player);
+            io.emit('updateList', serverPlayers);
+            console.log(socket.player.nickname+" entre dans le portail...");
+            io.to(socket.id).emit("okEnterRoom");
+        });
+        //=================================
+        //  Joueur sort d'une pièce
+        //=================================
+        socket.on('goOutRoom', function(){
+            socket.player.insideRoom = false;
+            updateServerPlayers(socket.player);
+            io.emit('updateList', serverPlayers);
+            console.log(socket.player.nickname+" sort du portail...");
+            io.to(socket.id).emit("okGoOutRoom");
         });
         //=================================
         //  Click pour se déplacer
@@ -130,4 +151,12 @@ function deleteDisconnectedPlayer(serverPlayers, disconnectedPlayer) {
 
 function randomInt(low, high) {
     return Math.floor(Math.random() * (high - low) + low);
+}
+function updateServerPlayers(playerData){
+    for(let i=0; i<serverPlayers.length; i++){
+        if(serverPlayers[i].nickname == playerData.nickname){
+            serverPlayers[i] = playerData;
+        }
+    }
+    io.emit('updateList', serverPlayers);
 }

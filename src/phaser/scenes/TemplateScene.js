@@ -19,7 +19,7 @@ var TemplateScene = new Phaser.Class({
         if(localStorage.getItem('personalData') == null){
             //let coordEntrance = this.getCoordEntrance();
             let coordEntrance = [0,0];
-            Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance);
+            Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance, localStorage.getItem('insideRoom'));
             //console.log("localstorage créé!");
         }else{
             //console.log("localstorage existe...");
@@ -101,8 +101,10 @@ var TemplateScene = new Phaser.Class({
     },
     initLocalStorage: function(){
         let pseudo = localStorage.getItem("pseudo");
+        let insideRoom = localStorage.getItem("insideRoom");
         localStorage.clear();
         localStorage.setItem("pseudo", pseudo);
+        localStorage.setItem("insideRoom", insideRoom);
         localStorage.setItem("Players", []);
         localStorage.setItem("playerId", "");
         console.log("initialisation...");
@@ -234,7 +236,14 @@ var TemplateScene = new Phaser.Class({
                 tgtSoldier.x = player.newX;
                 tgtSoldier.y = player.newY;     
                 if (plId != player.id) {   
-                    Game.physics.moveToObject(playerMap[player.id], tgtSoldier, game.speed);
+                    if(player.insideRoom == "false"){
+                        if((player.x == 1)&&(player.y == 1)){
+                            Game.physics.moveToObject(playerMap[player.id], tgtSoldier, 3000);                            
+                        }else{
+                            Game.physics.moveToObject(playerMap[player.id], tgtSoldier, game.speed);
+                        }
+                    }
+                    //console.log("["+player.insideRoom+"]");
                 }
             }
         });

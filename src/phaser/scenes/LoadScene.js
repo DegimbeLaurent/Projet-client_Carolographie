@@ -148,9 +148,23 @@ var LoadScene = new Phaser.Class({
         //  PORTAIL NORD
         //=================
         console.log("Scene A");
+        var buttonTest = this.add.rectangle(100,100, 30, 30, 0xaabb22).setDepth(9101).setInteractive();
+        buttonTest.on("pointerup", function(){
+            window.open("http://www.google.com", "_blank");
+            console.log("on clique sur le bouton!...");
+        });
+        var testText = this.add.text(100,200,"Aujourd’hui, des stigmates de l’incendie y sont encore visibles, \ncomme en témoignent les photos. On vous invite à regarder notamment les photos du bois brûlé de l’escalier signe du l’endroit où la propagation des flammes a pu être interrompue. ").setDepth(9101);
+        testText.lines = 5;
+        testText.width = 250;
+        // testText.setTextBounds(100,200,200,400);
+        //this.graphics.strokeRect(100,200,200,400);
         var portailN = this.add.rectangle(0, 0, 50, 75, 0x92623A).setDepth(999).setInteractive();
         portailN.on("pointerup", function(){
-            location.href = '/website/portail-n.html';
+            localStorage.setItem("insideRoom", true);
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){
+                location.href = '/website/portail-n.html';
+            });
         })            
     },
     update: function(time, delta){
