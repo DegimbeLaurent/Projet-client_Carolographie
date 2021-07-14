@@ -1,7 +1,4 @@
 //====================================================
-//import { config } from './config.js';
-// import {LoadScene} from "./scenes/LoadScene.js";
-// import {AbbeyScene} from "./scenes/AbbeyScene.js";
 const ratio = Math.max(window.innerWidth / window.innerHeight, window.innerHeight / window.innerWidth);
 const DEFAULT_HEIGHT = window.innerHeight-20;
 const DEFAULT_WIDTH = window.innerWidth-20;
@@ -18,21 +15,17 @@ var config = {
     pixelArt: true,
     backgroundColor: '#000000',
     parent: 'visite',
-    key: 'LoadScene',
-    scene: [ LoadScene, DnRoom, DcRoom, DeRoom ]
+    key: 'DoRoom',
+    scene: [ DoRoom, LoadScene]
 };
 //====================================================
 var game = new Phaser.Game(config);
 var playerMap;
 var player;
 var minimap;
+var camSubject;
 game.speed = 300;
 game.players = [];
 game.playersBU = [];
-        var Client = {};
-        Client.socket = io.connect();
-// console.table(config);
-// console.table(game);
-// console.log("test gameSpeed = "+ game.speed);
-// console.log("test config_width = "+ config.width);
-// export {game};
+var Client = {};
+Client.socket = io.connect();

@@ -93,7 +93,7 @@ var DnRoom = new Phaser.Class({
             let x = 0; let y = 0; var px = 0; var py = 0; let txt = "";
             player.setDepth(9099);
             //var pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
-            var fondsEcran = this.add.rectangle(0, 0, 12600 , 6500, 0xf4edde).setDepth(1); // A REMPLACER PAR LE LAYER DE LA ROOM QUAND IL SERA DISPO
+            var fondsEcran = this.add.rectangle(0, 0, 12600 , 6500, 0xf4edde).setDepth(1); 
             var fontFam = "Montserrat";
             var fontSZ = 24;
             var fontSZLgd = 20;

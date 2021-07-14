@@ -139,13 +139,11 @@ var LoadScene = new Phaser.Class({
         this.minimap.setBackgroundColor(0x002244);
         this.minimap.scrollX = 1600;
         this.minimap.scrollY = 900;
-        //this.scene.start("DcRoom");
-        this.minimap.visible = false;
+        //this.minimap.visible = false;
         //==========================================
         //  AJOUT DES PORTAILS
         //==========================================
         var fondsNoir = this.add.rectangle(0, 0, 12600 , 6500, 0x000000).setDepth(1);   
-        this.add.text(-20,-65,"Portails",{fontFamily: "Arial Black",fontSize: 12}).setDepth(9101);
         //=================
         //  PORTAIL NORD
         //=================
@@ -161,14 +159,46 @@ var LoadScene = new Phaser.Class({
         // testText.setTextBounds(100,200,200,400);
         //this.graphics.strokeRect(100,200,200,400);
         //var portailN = this.add.rectangle(0, 0, 50, 75, 0x92623A).setDepth(999).setInteractive();
-        var portailN = this.physics.add.image(0,0,"portail_ferme").setInteractive().setDepth(999);
+        var portailN = this.physics.add.image(130,730,"portail_ferme").setInteractive().setDepth(999);
         portailN.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
             Client.socket.emit("enterRoom");
             Client.socket.on("okEnterRoom", function(){
                 location.href = '/website/portail-n.html';
             });
-        })            
+        })    
+        var portailC = this.physics.add.image(540,1790,"portail_ferme").setInteractive().setDepth(999);
+        portailC.on("pointerup", function(){
+            localStorage.setItem("insideRoom", true);
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){
+                location.href = '/website/portail-c.html';
+            });
+        }) 
+        var portailO = this.physics.add.image(-2040,1550,"portail_ferme").setInteractive().setDepth(999);
+        portailO.on("pointerup", function(){
+            localStorage.setItem("insideRoom", true);
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){
+                location.href = '/website/portail-o.html';
+            });
+        }) 
+        var portailE = this.physics.add.image(140,2650,"portail_ferme").setInteractive().setDepth(999);
+        portailE.on("pointerup", function(){
+            localStorage.setItem("insideRoom", true);
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){
+                location.href = '/website/portail-e.html';
+            });
+        })         
+        var portailS = this.physics.add.image(-1150,3290,"portail_ferme").setInteractive().setDepth(999);
+        portailS.on("pointerup", function(){
+            localStorage.setItem("insideRoom", true);
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){
+                location.href = '/website/portail-s.html';
+            });
+        }) 
     },
     update: function(time, delta){
         controls.update(delta);
