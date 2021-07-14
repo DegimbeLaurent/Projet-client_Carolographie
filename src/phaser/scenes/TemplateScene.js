@@ -109,12 +109,15 @@ var TemplateScene = new Phaser.Class({
         localStorage.setItem("playerId", "");
         console.log("initialisation...");
     },
-    addShadows: function(dataArray, shadowsArray){
+    addShadows: function(dataArray){
         let arrayTemp = [];
-        shadowsArray.forEach((indice) => {
-            let baseRect = dataArray[indice];
-            //console.table(baseRect);
-            arrayTemp.push(this.add.rectangle(baseRect.x - 8, baseRect.y + 8, baseRect.width, baseRect.height).setFillStyle(0x000000, 0.1).setDepth(9100));
+        dataArray.forEach((item) => {
+            console.log(item.type);
+            if(item.type == "Image"){
+                arrayTemp.push(this.add.rectangle(item.x - 8, item.y + 8, item.width, item.height).setFillStyle(0x000000, 0.1).setDepth(9100));
+            }else if(item.type == "Text"){
+                //arrayTemp.push(this.add.rectangle(item.x, item.y, item.width, item.height).setFillStyle(0x000000, 0.1).setDepth(9100));
+            }
         });
         return arrayTemp;
     },
