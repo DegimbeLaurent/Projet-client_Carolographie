@@ -9,12 +9,16 @@ var DnRoom = new Phaser.Class({
         playerMap = [];
     },
     preload: function(){
-        this.load.image('set_tuile', '/assets/maps/set_tuile.png');
-        this.load.tilemapTiledJSON("map_visite", "/maps/map_abbaye_V2.json");
+        this.load.image('set_district', '/assets/maps/set_district.png');
+        this.load.tilemapTiledJSON("map_room", "/maps/district.json");
         this.load.image('sprite', '/img/sprite.png');
         this.load.image('minimap', '/img/minimap.png');
         this.load.image('parchemin', '/img/parchemin.jpg');
         this.load.image('pierre_gravee', '/img/pierre_gravee.png');
+        this.load.image('chevalet_g', '/img/chevalet_g.png');
+        this.load.image('chevalet_d', '/img/chevalet_d.png');
+        this.load.image('portail_ferme', '/img/portail_ferme.png');
+        this.load.image('portail_ouvert', '/img/portail_ouvert.png');
         // PICTURES
             // DISTRICT NORD
                 this.load.image('DNT1_00', '/img/visit/districtN/DN-T1/DNT1_00.jpg');
@@ -49,14 +53,16 @@ var DnRoom = new Phaser.Class({
         //==========================================
         this.cameras.main.setBounds(-8000, -200, 12600 , 6500);
         this.physics.world.setBounds(-8000,-200, 12600, 6500);
-        var map = this.add.tilemap('map_visite');
-        var tileset10 = map.addTilesetImage('set_tuile', 'set_tuile');
+        var map = this.add.tilemap('map_room');
+        var tileset10 = map.addTilesetImage('set_district', 'set_district');
         var layer10 = map.createLayer('ground', [tileset10]).setDepth(10);
-        var layer20 = map.createLayer('flower', [tileset10]).setDepth(20);        
+        var layer20 = map.createLayer('ground2', [tileset10]).setDepth(20);        
+        var layer30 = map.createLayer('wall', [tileset10]).setDepth(30);        
+        var layer40 = map.createLayer('wall2', [tileset10]).setDepth(40);        
         //==========================================
         //  AJOUT DU JOUEUR
         //==========================================
-        player = this.physics.add.image(0,0,'sprite').setDepth(25);
+        player = this.physics.add.image(100,900,'sprite').setDepth(50).setScale(2);
         player.name = "myPlayer";
         player.setCollideWorldBounds(true);
         playerVelocity = 2;
@@ -64,9 +70,9 @@ var DnRoom = new Phaser.Class({
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
-        this.cameras.main.startFollow(player, true, 0.1, 0.1);
-        var coeffZoom = 1;
-        this.cameras.main.setZoom(coeffZoom);
+        var mainCam = this.cameras.main.startFollow(player, true, 0.1, 0.1);
+        var coeffZoom = 0.8;
+        mainCam.setZoom(coeffZoom);
         controlConfig = {
             camera: this.cameras.main,
             left: cursors.left,
@@ -87,7 +93,7 @@ var DnRoom = new Phaser.Class({
             let x = 0; let y = 0; var px = 0; var py = 0; let txt = "";
             player.setDepth(9099);
             //var pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
-            var fondsEcran = this.add.rectangle(0, 0, 12600 , 6500, 0xf4edde).setDepth(950); // A REMPLACER PAR LE LAYER DE LA ROOM QUAND IL SERA DISPO
+            var fondsEcran = this.add.rectangle(0, 0, 12600 , 6500, 0xf4edde).setDepth(1); // A REMPLACER PAR LE LAYER DE LA ROOM QUAND IL SERA DISPO
             var fontFam = "Montserrat";
             var fontSZ = 24;
             var fontSZLgd = 20;
@@ -97,7 +103,8 @@ var DnRoom = new Phaser.Class({
             var colTxt = px-100;
             var toDestroy = []; var toDestroy2 = []; var toDestroy3 = []; var toDestroy4 = [];
             camSubject = "room";
-            var sortieN = this.add.rectangle(x+350,y+100,50, 75, 0xffffff).setDepth(9100).setInteractive();
+            //var sortieN = this.add.rectangle(x+350,y+100,50, 75, 0xffffff).setDepth(9100).setInteractive();
+            var sortieN = this.physics.add.image(100,975,"portail_ouvert").setInteractive().setDepth(9100);
             var chevaletDNP1;
             var chevaletDNP2;
             var chevaletDNP3;
@@ -106,7 +113,7 @@ var DnRoom = new Phaser.Class({
             //  CHEVALET 1
             //============
             // Le Parc de la Serna à Jumet
-            chevaletDNP1 = this.add.rectangle(0, 0, 50, 75, 0x926215).setInteractive().setDepth(9001);
+            chevaletDNP1 = this.physics.add.image(-525,575,"chevalet_g").setInteractive().setDepth(9001);
             chevaletDNP1.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 1
@@ -143,29 +150,35 @@ var DnRoom = new Phaser.Class({
                 chevaletDNP2.setDepth(1);
                 chevaletDNP3.setDepth(1);
                 chevaletDNP4.setDepth(1);
+                fondsEcran.setDepth(51);
                 player.setDepth(1);
-                var sortie1 = this.add.rectangle(x+50,y+2000,50, 75, 0xffffff).setDepth(9101);
-                sortieN.setDepth(949);
+                player.x = 0;
+                player.y = 300;
+                mainCam.setZoom(1.0);
+                var sortie1 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                sortieN.setDepth(50);
                 sortie1.setInteractive();
                 sortie1.on("pointerup", function(){
                     sortie1.destroy();
                     toDestroy.forEach((item) => {item.destroy();})
-                    fondsEcran.setDepth(9000);
+                    fondsEcran.setDepth(1);
                     sortieN.setDepth(9100);
                     chevaletDNP1.setDepth(9001);
                     chevaletDNP2.setDepth(9001);
                     chevaletDNP3.setDepth(9001);
                     chevaletDNP4.setDepth(9001);
                     player.setDepth(9199);
-                    player.y = 200;
+                    player.x = 100;
+                    player.y = 600;
                     camSubject = "room";
+                    mainCam.setZoom(0.8);
                 })
             }, this);             
             //============
             //  CHEVALET 2
             //============
             // L’Aéroport et l’Aéropole de Gosselies
-            chevaletDNP2 = this.add.rectangle(100, 0, 50, 75, 0x926215).setInteractive().setDepth(9001);
+            chevaletDNP2 = this.physics.add.image(-140,380,"chevalet_g").setInteractive().setDepth(9001);
             chevaletDNP2.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 2
@@ -202,29 +215,35 @@ var DnRoom = new Phaser.Class({
                 chevaletDNP2.setDepth(1);
                 chevaletDNP3.setDepth(1);
                 chevaletDNP4.setDepth(1);
+                fondsEcran.setDepth(51);
                 player.setDepth(1);
-                var sortie2 = this.add.rectangle(x+100,y+2000,50, 75, 0xffffff).setDepth(9101);
-                sortieN.setDepth(949);
+                player.x = 0;
+                player.y = 300;
+                mainCam.setZoom(1.0);
+                var sortie2 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                sortieN.setDepth(50);
                 sortie2.setInteractive();
                 sortie2.on("pointerup", function(){
                     sortie2.destroy();
                     toDestroy2.forEach((item) => {item.destroy();})
-                    fondsEcran.setDepth(9000);
+                    fondsEcran.setDepth(1);
                     sortieN.setDepth(9100);
                     chevaletDNP1.setDepth(9001);
                     chevaletDNP2.setDepth(9001);
                     chevaletDNP3.setDepth(9001);
                     chevaletDNP4.setDepth(9001);
                     player.setDepth(9199);
-                    player.y = 200;
+                    player.x = 100;
+                    player.y = 600;
                     camSubject = "room";
+                    mainCam.setZoom(0.8);
                 })
             }, this); 
             //============
             //  CHEVALET 3
             //============
             // Jumet.bio
-            chevaletDNP3 = this.add.rectangle(200, 0, 50, 75, 0x926215).setInteractive().setDepth(9001);
+            chevaletDNP3 = this.physics.add.image(375,380,"chevalet_d").setInteractive().setDepth(9001);
             chevaletDNP3.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 3
@@ -261,29 +280,35 @@ var DnRoom = new Phaser.Class({
                 chevaletDNP2.setDepth(1);
                 chevaletDNP3.setDepth(1);
                 chevaletDNP4.setDepth(1);
+                fondsEcran.setDepth(51);
                 player.setDepth(1);
-                var sortie3 = this.add.rectangle(x+100,y+2000,50, 75, 0xffffff).setDepth(9101);
-                sortieN.setDepth(949);
+                player.x = 0;
+                player.y = 300;
+                mainCam.setZoom(1.0);
+                var sortie3 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                sortieN.setDepth(50);
                 sortie3.setInteractive();
                 sortie3.on("pointerup", function(){
                     sortie3.destroy();
                     toDestroy3.forEach((item) => {item.destroy();})
-                    fondsEcran.setDepth(9000);
+                    fondsEcran.setDepth(1);
                     sortieN.setDepth(9100);
                     chevaletDNP1.setDepth(9001);
                     chevaletDNP2.setDepth(9001);
                     chevaletDNP3.setDepth(9001);
                     chevaletDNP4.setDepth(9001);
                     player.setDepth(9199);
-                    player.y = 200;
+                    player.x = 100;
+                    player.y = 600;
                     camSubject = "room";
+                    mainCam.setZoom(0.8);
                 })
             }, this); 
             //============
             //  CHEVALET 4
             //============
             // Le Métro Carolorégien
-            chevaletDNP4 = this.add.rectangle(300, 0, 50, 75, 0x926215).setInteractive().setDepth(9001);
+            chevaletDNP4 = this.physics.add.image(755,575,"chevalet_d").setInteractive().setDepth(9001);
             chevaletDNP4.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 4
@@ -320,22 +345,28 @@ var DnRoom = new Phaser.Class({
                 chevaletDNP2.setDepth(1);
                 chevaletDNP3.setDepth(1);
                 chevaletDNP4.setDepth(1);
+                fondsEcran.setDepth(51);
                 player.setDepth(1);
-                var sortie4 = this.add.rectangle(x+100,y+2000,50, 75, 0xffffff).setDepth(9101);
-                sortieN.setDepth(949);
+                player.x = 0;
+                player.y = 300;
+                mainCam.setZoom(1.0);
+                var sortie4 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                sortieN.setDepth(50);
                 sortie4.setInteractive();
                 sortie4.on("pointerup", function(){
                     sortie4.destroy();
                     toDestroy4.forEach((item) => {item.destroy();})
-                    fondsEcran.setDepth(9000);
+                    fondsEcran.setDepth(1);
                     sortieN.setDepth(9100);
                     chevaletDNP1.setDepth(9001);
                     chevaletDNP2.setDepth(9001);
                     chevaletDNP3.setDepth(9001);
                     chevaletDNP4.setDepth(9001);
                     player.setDepth(9199);
-                    player.y = 200;
+                    player.x = 100;
+                    player.y = 600;
                     camSubject = "room";
+                    mainCam.setZoom(0.8);
                 })
             }, this); 
             //============
