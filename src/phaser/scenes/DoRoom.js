@@ -29,7 +29,7 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT2_01', '/img/visit/districtO/DO-T2/DOT2_01.jpg');
                 this.load.image('DOT2_02', '/img/visit/districtO/DO-T2/DOT2_02.jpg');
                 this.load.image('DOT2_03', '/img/visit/districtO/DO-T2/DOT2_03.JPG');
-                //this.load.image('DOT2_04', '/img/visit/districtO/DO-T2/DOT2_04.JPG');
+                this.load.image('DOT2_04', '/img/visit/districtO/DO-T2/DOT2_04.JPG');
 
                 // this.load.image('DOT3_00', '/img/visit/districtO/DO-T3/DOT3_00.jpg');
                 // this.load.image('DOT3_01', '/img/visit/districtO/DO-T3/DOT3_01.JPG');
@@ -207,10 +207,10 @@ var DoRoom = new Phaser.Class({
                         //txt += "xxx";
                         toDestroy2.push(this.add.text(colTxt, py+1550, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
-                        //toDestroy2.push(this.physics.add.image(px-300, py+1700, "DOT2_04").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
-                        //toDestroy2.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy2.push(this.physics.add.image(px-320, py+1900, "DOT2_04").setDepth(9101));  // Ajout image mini
+                        txt = "Production de bières par la Manufacture Urbaine, \nimplantation du vignoble Monceau Valley, etc."; 
+                        txt += "\nAvec toutes ces initiatives, l’avenir de ce site emblématique du \nPays Noir ne peut-être que rayonnant!";
+                        toDestroy2.push(this.add.text(colTxt, py+1850, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy2);
                 arrayShadows.forEach((item) => {toDestroy2.push(item);})
@@ -224,7 +224,7 @@ var DoRoom = new Phaser.Class({
                 player.x = 0;
                 player.y = 300;
                 mainCam.setZoom(1.0);
-                var sortie2 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                var sortie2 = this.physics.add.image(x+50,y+2250,"portail_ferme").setDepth(9101);
                 sortieO.setDepth(50);
                 sortie2.setInteractive();
                 sortie2.on("pointerup", function(){
