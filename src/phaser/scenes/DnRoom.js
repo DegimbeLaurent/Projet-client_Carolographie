@@ -26,14 +26,18 @@ var DnRoom = new Phaser.Class({
                 this.load.image('DNT1_02', '/img/visit/districtN/DN-T1/DNT1_02.JPG');
                 this.load.image('DNT1_03', '/img/visit/districtN/DN-T1/DNT1_03.JPG');
                 this.load.image('DNT1_04', '/img/visit/districtN/DN-T1/DNT1_04.JPG');
+
                 this.load.image('DNT2_00', '/img/visit/districtN/DN-T2/DNT2_00.jpg');
                 this.load.image('DNT2_01', '/img/visit/districtN/DN-T2/DNT2_01.jpg');
                 this.load.image('DNT2_02', '/img/visit/districtN/DN-T2/DNT2_02.jpg');
-                //this.load.image('DNT2_03', '/img/visit/districtN/DN-T1/DNT2_03.JPG');
+                this.load.image('DNT2_03', '/img/visit/districtN/DN-T2/DNT2_03.JPG');
+                this.load.image('DNT2_04', '/img/visit/districtN/DN-T2/DNT2_04.JPG');
+
                 this.load.image('DNT3_00', '/img/visit/districtN/DN-T3/DNT3_00.jpg');
                 // this.load.image('DNT3_01', '/img/visit/districtN/DN-T3/DNT3_01.JPG');
                 // this.load.image('DNT3_02', '/img/visit/districtN/DN-T3/DNT3_02.JPG');
                 // this.load.image('DNT3_03', '/img/visit/districtN/DN-T3/DNT3_03.JPG');
+
                 this.load.image('DNT4_00', '/img/visit/districtN/DN-T4/DNT4_00.jpg');
                 // this.load.image('DNT4_01', '/img/visit/districtN/DN-T4/DNT4_01.JPG');
                 // this.load.image('DNT4_02', '/img/visit/districtN/DN-T4/DNT4_02.JPG');
@@ -123,25 +127,25 @@ var DnRoom = new Phaser.Class({
                 txt = "À deux pas de l’Aéroport de Gosselies, se trouve le Parc de la Serna, un des poumons verts de la région.";
                 toDestroy.push(this.add.text(px-400, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
-                    toDestroy.push(this.physics.add.image(px-300, py+900, "DNT1_01").setDepth(9101)); // Ajout image mini
-                    txt = "Le Parc de la Serna est un domaine de 16 hectares de bois, dans lequel \nles promeneurs peuvent se ressourcer le corps et l’esprit.\n"; 
-                    txt += "Ils peuvent y découvrir trois étangs, de nombreuses espèces animales\net des arbres séculaires. Une des particularités de ce parc, \n";
-                    txt += "c’est qu’il assume la fonction d’arboretum grâce à son circuit écologique.\nLe circuit présente des espèces d’arbres, tels que des mélèzes,\naulnes, hêtres, bouleaux ou chênes.";
+                    toDestroy.push(this.physics.add.image(px-300, py+1000, "DNT1_01").setDepth(9101)); // Ajout image mini
+                    txt = "Le Parc de la Serna est un domaine de 16 hectares de bois, dans \nlequel les promeneurs peuvent se ressourcer le corps et l’esprit.\n"; 
+                    txt += "\nIls peuvent y découvrir trois étangs, de nombreuses espèces animales\net des arbres séculaires. Une des particularités de ce parc, \n";
+                    txt += "c’est qu’il assume la fonction d’arboretum grâce à son circuit écologique.\n\nLe circuit présente des espèces d’arbres, tels que des mélèzes,\naulnes, hêtres, bouleaux ou chênes.";
                     toDestroy.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                    toDestroy.push(this.physics.add.image(px-300, py+1200, "DNT1_02").setDepth(9101));  // Ajout image mini
+                    toDestroy.push(this.physics.add.image(px-300, py+1500, "DNT1_02").setDepth(9101));  // Ajout image mini
                     txt = "À la fin du mois d’avril, les espaces du bois se couvrent de jacinthes, \ndes jolies petites fleurs violettes. \nCe spectacle éphémère donne un tout autre visage au site.";
-                    toDestroy.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                    toDestroy.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                    toDestroy.push(this.physics.add.image(px-300, py+1450, "DNT1_03").setDepth(9101));  // Ajout image mini
+                    toDestroy.push(this.physics.add.image(px-300, py+1930, "DNT1_03").setDepth(9101));  // Ajout image mini
                     txt = "Les sentiers, les abords des étangs et les espaces ludiques pour les enfants \nfont de la Serna un endroit où il est bon de se rassembler.\n";
                     txt += "Un jogging revigorant, une partie de pétanque entre amis, une balade en \nfamille, … sont toutes des activités que l’on peut y faire.";
-                    toDestroy.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                    toDestroy.push(this.add.text(colTxt, py+1760, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
-                    toDestroy.push(this.physics.add.image(px-300, py+1700, "DNT1_04").setDepth(9101));  // Ajout image mini
+                    toDestroy.push(this.physics.add.image(px-300, py+2300, "DNT1_04").setDepth(9101));  // Ajout image mini
                     txt = "De nuit, l’ambiance qui y règne est totalement différente.  La photo ci-contre \nnous fait penser à la peinture « L’Empire des lumières » du peintre \nRéné Magritte.";
                     txt += "  Pour l’anecdote, ce peintre surréaliste connu mondialement \nest un enfant du Pays de Charleroi.  Il a effectivement vécu sa jeunesse entre \nLessines, Châtelet et Charleroi.";
-                    toDestroy.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                    toDestroy.push(this.add.text(colTxt, py+2200, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy);
                 arrayShadows.forEach((item) => {toDestroy.push(item);})
@@ -155,7 +159,7 @@ var DnRoom = new Phaser.Class({
                 player.x = 0;
                 player.y = 300;
                 mainCam.setZoom(1.0);
-                var sortie1 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                var sortie1 = this.physics.add.image(x+50,y+2600,"portail_ferme").setDepth(9101);
                 sortieN.setDepth(50);
                 sortie1.setInteractive();
                 sortie1.on("pointerup", function(){
@@ -188,25 +192,28 @@ var DnRoom = new Phaser.Class({
                 txt = "Gosselies et l’aviation, une grande histoire d’amour!";
                 toDestroy2.push(this.add.text(px-200, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
-                    //toDestroy2.push(this.physics.add.image(px-300, py+900, "DNT2_01").setDepth(9101)); // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";
-                    //toDestroy2.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy2.push(this.physics.add.image(px-300, py+1000, "DNT2_01").setDepth(9101)); // Ajout image mini
+                        txt = "Cette histoire a débuté il y a plus d’un siècle, après la 1ère \nGuerre Mondiale. \n\nEn 1919, le roi Albert 1er inaugure la première école belge de \npilotage sur le Mont des Bergers à Gosselies.";
+                        txt += "  Autour de l’école, \nune entreprise est fondée par le Commandant Jacquet : la Société \nGénérale d’Aéronautique. Elle s’occupe de l’entretien des machines.\n"; 
+                        txt += "\nEn 1931, l’entreprise britannique Fairey Aviation Company vient \ns’implanter sur le site.  \nLa région carolo est en pleine croissance économique. \nLes britanniques trouvent que c’est l’endroit parfait pour construire \ndes avions.";
+                        txt += "\n\nEn 1978, cette entreprise devient la SONACA, Société Nationale \nde Construction Aéronautique.";
+                        toDestroy2.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                    //toDestroy2.push(this.physics.add.image(px-300, py+1200, "DNT2_02").setDepth(9101));  // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";                    
-                    //toDestroy2.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy2.push(this.physics.add.image(px-300, py+1550, "DNT2_02").setDepth(9101));  // Ajout image mini
+                        txt = "Aujourd’hui, l’Aéroport (BSCA) existe toujours et il est même devenu\nl’un des plus importants de Belgique.";
+                        txt +=" Vu le nombre croissant de passagers, \ndes travaux d’agrandissement de la piste ont débuté en 2019.";
+                        txt += "\n\nD’ailleurs, cet été, les Diables Rouges décolleront et atterriront à Gosselies \ndurant leur campagne européenne!"; 
+                        toDestroy2.push(this.add.text(colTxt, py+1430, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                    //toDestroy2.push(this.physics.add.image(px-300, py+1450, "DNT2_03").setDepth(9101));  // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";
-                    //toDestroy2.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy2.push(this.physics.add.image(px-300, py+2000, "DNT2_03").setDepth(9101));  // Ajout image mini
+                        txt = "Autour de l’aéroport, l’Aéropole et le Biopark se sont développés.  \nCe parc scientifique accueille 1700 entreprises dans des secteurs d’avenir.";
+                        txt += "\n\nFondé originellement par l’ULB, le Biopark est un écosystème majeur \npour les industries des sciences de la vie."; 
+                        toDestroy2.push(this.add.text(colTxt, py+1790, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
-                    //toDestroy2.push(this.physics.add.image(px-300, py+1700, "DNT2_04").setDepth(9101));  // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";
-                    //toDestroy2.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy2.push(this.physics.add.image(px-300, py+2450, "DNT2_04").setDepth(9101));  // Ajout image mini
+                        txt = "Un aéroport, des entreprises technologiques, des scientifiques expérimentés, \ndes laboratoires de pointe, … ";
+                        txt += "permettent à Gosselies de se positionner \ncomme un atout indispensable à la Belgique."; 
+                        toDestroy2.push(this.add.text(colTxt, py+2370, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy2);
                 arrayShadows.forEach((item) => {toDestroy2.push(item);})
@@ -220,7 +227,7 @@ var DnRoom = new Phaser.Class({
                 player.x = 0;
                 player.y = 300;
                 mainCam.setZoom(1.0);
-                var sortie2 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                var sortie2 = this.physics.add.image(x+50,y+2750,"portail_ferme").setDepth(9101);
                 sortieN.setDepth(50);
                 sortie2.setInteractive();
                 sortie2.on("pointerup", function(){

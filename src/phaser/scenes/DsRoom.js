@@ -122,10 +122,10 @@ var DsRoom = new Phaser.Class({
                 txt = "Légende de la photo";
                 toDestroy.push(this.add.text(px-400, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
-                        //toDestroy.push(this.physics.add.image(px-300, py+900, "DST1_01").setDepth(9101)); // Ajout image mini
+                        toDestroy.push(this.physics.add.image(px-300, py+900, "DST1_01").setDepth(9101)); // Ajout image mini
                         txt = "xxx\n"; 
                         txt += "xxx\n";
-                        //toDestroy.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
                         //toDestroy.push(this.physics.add.image(px-300, py+1200, "DST1_02").setDepth(9101));  // Ajout image mini
                         txt = "xxx\n";
