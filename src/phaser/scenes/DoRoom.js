@@ -254,7 +254,7 @@ var DoRoom = new Phaser.Class({
                 //======================================
                 toDestroy3.push(this.add.text(px-175, py-100, "District Ouest - Le Château de Monceau-sur-Sambre", {fontFamily: fontFam, fontSize: 32,color: '#000000'}).setDepth(9101));  // Ajout titre
                 toDestroy3.push(this.physics.add.image(px, py+300, "DOT3_00").setDepth(9101));   // Ajout image principale (960 px x ...)
-                txt = "Apprécié par les joggeurs, le parc Nelson Mandela de Monceau-sur-Sambre abrite une demeure seigneuriale datant du 17ème siècle.";
+                txt = "Apprécié par les joggeurs, le parc Nelson Mandela de Monceau-sur-Sambre abrite \nune demeure seigneuriale datant du 17ème siècle.";
                 toDestroy3.push(this.add.text(px-450, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
                         //toDestroy3.push(this.physics.add.image(px-300, py+900, "DOT3_01").setDepth(9101)); // Ajout image mini
