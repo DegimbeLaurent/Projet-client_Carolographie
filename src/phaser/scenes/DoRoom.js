@@ -32,9 +32,9 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT2_04', '/img/visit/districtO/DO-T2/DOT2_04.JPG');
 
                 this.load.image('DOT3_00', '/img/visit/districtO/DO-T3/DOT3_00.jpg');
-                // this.load.image('DOT3_01', '/img/visit/districtO/DO-T3/DOT3_01.JPG');
-                // this.load.image('DOT3_02', '/img/visit/districtO/DO-T3/DOT3_02.JPG');
-                // this.load.image('DOT3_03', '/img/visit/districtO/DO-T3/DOT3_03.JPG');
+                this.load.image('DOT3_01', '/img/visit/districtO/DO-T3/DOT3_01.JPG');
+                this.load.image('DOT3_02', '/img/visit/districtO/DO-T3/DOT3_02.JPG');
+                this.load.image('DOT3_03', '/img/visit/districtO/DO-T3/DOT3_03.JPG');
 
                 // this.load.image('DOT4_00', '/img/visit/districtO/DO-T4/DOT4_00.jpg');
                 // this.load.image('DOT4_01', '/img/visit/districtO/DO-T4/DOT4_01.JPG');
@@ -257,20 +257,20 @@ var DoRoom = new Phaser.Class({
                 txt = "Apprécié par les joggeurs, le parc Nelson Mandela de Monceau-sur-Sambre abrite \nune demeure seigneuriale datant du 17ème siècle.";
                 toDestroy3.push(this.add.text(px-450, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
-                        //toDestroy3.push(this.physics.add.image(px-300, py+900, "DOT3_01").setDepth(9101)); // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
-                        //toDestroy3.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy3.push(this.physics.add.image(px-320, py+900, "DOT3_01").setDepth(9101)); // Ajout image mini
+                        txt = "Néogothique, le château a appartenu à diverses familles nobles \navant de devenir propriété de la ville de Charleroi. \nIl présente un plan en U. Saccagé et reconstruit, \nil est classé patrimoine depuis 1989."; 
+                        txt += "\nL’ASBL « Les Amis du Château de Monceau-sur-Sambre » \ns’occupe de préserver ce très bel écrin de notre patrimoine local.";
+                        toDestroy3.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                        //toDestroy3.push(this.physics.add.image(px-300, py+1200, "DOT3_02").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";                    
-                        //toDestroy3.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy3.push(this.physics.add.image(px-320, py+1200, "DOT3_02").setDepth(9101));  // Ajout image mini
+                        txt = "Domaine à l’anglaise, le parc Nelson Mandela s’étend sur une \nsurface de 67 ha et doit son nom aux 67 années de lutte en \nAfrique du Sud."; 
+                        //txt += "xxx";                    
+                        toDestroy3.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                        //toDestroy3.push(this.physics.add.image(px-300, py+1450, "DOT3_03").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
-                        //toDestroy3.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy3.push(this.physics.add.image(px-320, py+1550, "DOT3_03").setDepth(9101));  // Ajout image mini
+                        txt = "Outre une piste finlandaise et un parcours santé, \ndes arbres remarquables participent à la beauté du site.                        "; 
+                        //txt += "xxx";
+                        toDestroy3.push(this.add.text(colTxt, py+1500, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
                         //toDestroy3.push(this.physics.add.image(px-300, py+1700, "DOT3_04").setDepth(9101));  // Ajout image mini
                         txt = "xxx"; 
