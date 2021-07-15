@@ -31,7 +31,7 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT2_03', '/img/visit/districtO/DO-T2/DOT2_03.JPG');
                 this.load.image('DOT2_04', '/img/visit/districtO/DO-T2/DOT2_04.JPG');
 
-                // this.load.image('DOT3_00', '/img/visit/districtO/DO-T3/DOT3_00.jpg');
+                this.load.image('DOT3_00', '/img/visit/districtO/DO-T3/DOT3_00.jpg');
                 // this.load.image('DOT3_01', '/img/visit/districtO/DO-T3/DOT3_01.JPG');
                 // this.load.image('DOT3_02', '/img/visit/districtO/DO-T3/DOT3_02.JPG');
                 // this.load.image('DOT3_03', '/img/visit/districtO/DO-T3/DOT3_03.JPG');
@@ -254,7 +254,7 @@ var DoRoom = new Phaser.Class({
                 //======================================
                 toDestroy3.push(this.add.text(px-175, py-100, "District Ouest - Le Château de Monceau-sur-Sambre", {fontFamily: fontFam, fontSize: 32,color: '#000000'}).setDepth(9101));  // Ajout titre
                 toDestroy3.push(this.physics.add.image(px, py+300, "DOT3_00").setDepth(9101));   // Ajout image principale (960 px x ...)
-                txt = "Légende de la photo";
+                txt = "Apprécié par les joggeurs, le parc Nelson Mandela de Monceau-sur-Sambre abrite une demeure seigneuriale datant du 17ème siècle.";
                 toDestroy3.push(this.add.text(px-450, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
                         //toDestroy3.push(this.physics.add.image(px-300, py+900, "DOT3_01").setDepth(9101)); // Ajout image mini
