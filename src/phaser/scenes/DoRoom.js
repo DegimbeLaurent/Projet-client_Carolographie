@@ -191,15 +191,15 @@ var DoRoom = new Phaser.Class({
                 txt += "\nGrâce à l’arrivée de nouvelles techniques, le charbonnage s’industrialise. \nEn 1936, un Triage Lavoir Central est installé et le charbonnage devient l’un des plus performants d’Europe." ;
                 toDestroy2.push(this.add.text(px-450, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
-                        toDestroy2.push(this.physics.add.image(px-150, py+1110, "DOT2_01").setDepth(9101)); // Ajout image mini
+                        toDestroy2.push(this.physics.add.image(px-320, py+900, "DOT2_01").setDepth(9101)); // Ajout image mini
                         //txt = "xxx"; 
                         //txt += "xxx";
-                        toDestroy2.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        //toDestroy2.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                        toDestroy2.push(this.physics.add.image(px+250, py+1050, "DOT2_02").setDepth(9101));  // Ajout image mini
-                        txt = "Après la fermeture du puits, en 1974, une entreprise souhaite y extraire les charbons restants …"; 
-                        txt += "xxx";                    
-                        toDestroy2.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy2.push(this.physics.add.image(px-400, py+1250, "DOT2_02").setDepth(9101));  // Ajout image mini
+                        txt = "Après la fermeture du puits, en 1974, une entreprise souhaite \ny extraire les charbons restants …"; 
+                        txt += "mais elle fait face à un comité \nde riverains attachés au site. \nCréée de haute lutte, son histoire entre définitivement \ndans les livres en 1995 quand la région wallonne décide \nde classer le Martinet";                    
+                        toDestroy2.push(this.add.text(colTxt, py+950, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
                         //toDestroy2.push(this.physics.add.image(px-300, py+1450, "DOT2_03").setDepth(9101));  // Ajout image mini
                         txt = "xxx"; 
