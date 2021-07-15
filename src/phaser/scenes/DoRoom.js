@@ -28,7 +28,7 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT2_00', '/img/visit/districtO/DO-T2/DOT2_00.jpg');
                 this.load.image('DOT2_01', '/img/visit/districtO/DO-T2/DOT2_01.jpg');
                 this.load.image('DOT2_02', '/img/visit/districtO/DO-T2/DOT2_02.jpg');
-                // this.load.image('DOT2_03', '/img/visit/districtO/DO-T1/DOT2_03.JPG');
+                this.load.image('DOT2_03', '/img/visit/districtO/DO-T1/DOT2_03.JPG');
 
                 // this.load.image('DOT3_00', '/img/visit/districtO/DO-T3/DOT3_00.jpg');
                 // this.load.image('DOT3_01', '/img/visit/districtO/DO-T3/DOT3_01.JPG');
@@ -201,7 +201,7 @@ var DoRoom = new Phaser.Class({
                         txt += "mais elle fait face à un comité \nde riverains attachés au site. \nCréée de haute lutte, son histoire entre définitivement \ndans les livres en 1995 quand la région wallonne décide \nde classer le Martinet";                    
                         toDestroy2.push(this.add.text(colTxt, py+950, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                        //toDestroy2.push(this.physics.add.image(px-300, py+1450, "DOT2_03").setDepth(9101));  // Ajout image mini
+                        toDestroy2.push(this.physics.add.image(px-300, py+1450, "DOT2_03").setDepth(9101));  // Ajout image mini
                         txt = "xxx"; 
                         txt += "xxx";
                         //toDestroy2.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
