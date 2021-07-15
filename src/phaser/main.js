@@ -16,7 +16,7 @@ var config = {
         }
     },
     pixelArt: true,
-    backgroundColor: '#000000',
+    backgroundColor: '#6E5940',
     parent: 'visite',
     key: 'LoadScene',
     scene: [ LoadScene, DnRoom, DcRoom, DeRoom ]

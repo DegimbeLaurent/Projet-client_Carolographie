@@ -16,6 +16,8 @@ var LoadScene = new Phaser.Class({
         this.load.image('pierre_gravee', '/img/pierre_gravee.png');
         this.load.image('portail_ferme', '/img/portail_ferme.png');
         this.load.image('portail_ouvert', '/img/portail_ouvert.png');
+        this.load.image('portail_socle', '/img/sol_portail.png');
+        this.load.image('btn_quitter', '/img/quitter.jpg');
         //this.load.bitmapFont('myfont', '/assets/fonts/Berry-Rotunda.png','/assets/fonts/BerryRotunda.xml');
         // PICTURES
             // DISTRICT NORD
@@ -38,7 +40,7 @@ var LoadScene = new Phaser.Class({
     },
     create: function(config){
         console.log("on passe ici...");
-        game.backgroundColor='#000000';
+        game.backgroundColor='#6E5940';
         //console.table(config);
         //==========================================
         //  TEST POLICE
@@ -81,14 +83,14 @@ var LoadScene = new Phaser.Class({
             //==========================================
             //  AJOUT DU JOUEUR
             //==========================================
-            player = this.physics.add.image(500,500,'sprite').setDepth(25);
+            player = this.physics.add.image(1250,950,'sprite').setDepth(25);
             player.name = "myPlayer";
             player.setCollideWorldBounds(true);
             playerVelocity = 2;
             cursors = this.input.keyboard.createCursorKeys();
             //==========================================    
         var layer30 = map.createLayer('buisson', [tileset10]).setDepth(30);
-        var layer40 = map.createLayer('tp', [tileset10]).setDepth(40);
+        //var layer40 = map.createLayer('tp', [tileset10]).setDepth(40);
         var layer50 = map.createLayer('ruine stage 2', [tileset10]).setDepth(50);
         var layer60 = map.createLayer('ruine top', [tileset10]).setDepth(60);
         var layer70 = map.createLayer('ruine bottom', [tileset10]).setDepth(70);
@@ -104,13 +106,6 @@ var LoadScene = new Phaser.Class({
         var layer170 = map.createLayer('chappelle', [tileset10]).setDepth(170);
         var layer180 = map.createLayer('chappelle center', [tileset10]).setDepth(180);
         var layer190 = map.createLayer('chappelle top', [tileset10]).setDepth(190);
-        //var layer30 = map.createLayer('ruines', [tileset10],0,-128).setDepth(30);
-        //var layer40 = map.createLayer('bushes', [tileset10],0,-128).setDepth(40);
-        //var layer50 = map.createLayer('arbres', [tileset10],0, -512).setDepth(50);
-        //var layer60 = map.createLayer('walls', [tileset10],0, -472).setDepth(60);
-        //var layer70 = map.createLayer('walls_invisible', [tileset10],0, -472).setDepth(70);
-        //var layer80 = map.createLayer('roofs', [tileset10],0, -372).setDepth(80);
-        //var layer90 = map.createLayer('roofs_invisible', [tileset10],0,-372).setDepth(90);
         
         //==========================================
         //  GESTION DE LA CAMERA
@@ -141,9 +136,17 @@ var LoadScene = new Phaser.Class({
         this.minimap.scrollY = 900;
         //this.minimap.visible = false;
         //==========================================
+        //  AJOUT BOUTON QUITTER
+        //==========================================
+        var btnQuitter = this.add.sprite(1350, 900,"btn_quitter").setInteractive().setDepth(999);
+        btnQuitter.fixedToCamera = true;
+        btnQuitter.on("pointerup", function(){
+
+        })
+        //==========================================
         //  AJOUT DES PORTAILS
         //==========================================
-        var fondsNoir = this.add.rectangle(0, 0, 12600 , 6500, 0x000000).setDepth(1);   
+        var fondsNoir = this.add.rectangle(0, 0, 12600 , 6500, 0x6E5940).setDepth(1);   
         //=================
         //  PORTAIL NORD
         //=================
@@ -160,6 +163,7 @@ var LoadScene = new Phaser.Class({
         //this.graphics.strokeRect(100,200,200,400);
         //var portailN = this.add.rectangle(0, 0, 50, 75, 0x92623A).setDepth(999).setInteractive();
         var portailN = this.physics.add.image(130,730,"portail_ferme").setInteractive().setDepth(999);
+        var portailN_socle = this.physics.add.image(130,730,"portail_socle").setInteractive().setDepth(24);
         portailN.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
             Client.socket.emit("enterRoom");
@@ -168,6 +172,7 @@ var LoadScene = new Phaser.Class({
             });
         })    
         var portailC = this.physics.add.image(540,1790,"portail_ferme").setInteractive().setDepth(999);
+        var portailC_socle = this.physics.add.image(540,1790,"portail_socle").setInteractive().setDepth(24);
         portailC.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
             Client.socket.emit("enterRoom");
@@ -176,6 +181,7 @@ var LoadScene = new Phaser.Class({
             });
         }) 
         var portailO = this.physics.add.image(-2040,1550,"portail_ferme").setInteractive().setDepth(999);
+        var portailO_socle = this.physics.add.image(-2040,1550,"portail_socle").setInteractive().setDepth(24);
         portailO.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
             Client.socket.emit("enterRoom");
@@ -184,6 +190,7 @@ var LoadScene = new Phaser.Class({
             });
         }) 
         var portailE = this.physics.add.image(140,2650,"portail_ferme").setInteractive().setDepth(999);
+        var portailE_socle = this.physics.add.image(140,2650,"portail_socle").setInteractive().setDepth(24);
         portailE.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
             Client.socket.emit("enterRoom");
@@ -192,6 +199,7 @@ var LoadScene = new Phaser.Class({
             });
         })         
         var portailS = this.physics.add.image(-1150,3290,"portail_ferme").setInteractive().setDepth(999);
+        var portailS_socle = this.physics.add.image(-1150,3290,"portail_socle").setInteractive().setDepth(24);
         portailS.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
             Client.socket.emit("enterRoom");
