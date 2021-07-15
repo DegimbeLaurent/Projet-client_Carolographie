@@ -34,9 +34,11 @@ var DnRoom = new Phaser.Class({
                 this.load.image('DNT2_04', '/img/visit/districtN/DN-T2/DNT2_04.JPG');
 
                 this.load.image('DNT3_00', '/img/visit/districtN/DN-T3/DNT3_00.jpg');
-                // this.load.image('DNT3_01', '/img/visit/districtN/DN-T3/DNT3_01.JPG');
-                // this.load.image('DNT3_02', '/img/visit/districtN/DN-T3/DNT3_02.JPG');
-                // this.load.image('DNT3_03', '/img/visit/districtN/DN-T3/DNT3_03.JPG');
+                this.load.image('DNT3_01', '/img/visit/districtN/DN-T3/DNT3_01.jpg');
+                this.load.image('DNT3_02', '/img/visit/districtN/DN-T3/DNT3_02.jpg');
+                this.load.image('DNT3_03', '/img/visit/districtN/DN-T3/DNT3_03.jpg');
+                this.load.image('DNT3_04', '/img/visit/districtN/DN-T3/DNT3_04.jpg');
+                this.load.image('DNT3_05', '/img/visit/districtN/DN-T3/DNT3_05.jpg');
 
                 this.load.image('DNT4_00', '/img/visit/districtN/DN-T4/DNT4_00.jpg');
                 // this.load.image('DNT4_01', '/img/visit/districtN/DN-T4/DNT4_01.JPG');
@@ -260,25 +262,26 @@ var DnRoom = new Phaser.Class({
                 txt = "« Rien ne se perd, tout se transforme »   C’est certainement l’une des devises des membres de l’ASBL Jumet.bio !";
                 toDestroy3.push(this.add.text(px-450, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
-                    //toDestroy3.push(this.physics.add.image(px-300, py+900, "DNT3_01").setDepth(9101)); // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";
-                    //toDestroy3.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy3.push(this.physics.add.image(px-300, py+900, "DNT3_01").setDepth(9101)); // Ajout image mini
+                        txt = "Mandatée par les sœurs Notre-Dame de Jumet pour convertir \nune partie de leur couvent en une véritable ferme urbaine,";
+                        txt += "la \nfondation « Générations Bio » a réfléchi pendant deux ans \npour lancer son projet de permaculture au cours de l’année 2020."; 
+                        txt += "\n\nEn août de la même année, le projet a vu le jour sous la forme \nd’une ASBL citoyenne.";
+                        toDestroy3.push(this.add.text(colTxt, py+780, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                    //toDestroy3.push(this.physics.add.image(px-300, py+1200, "DNT3_02").setDepth(9101));  // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";                    
-                    //toDestroy3.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy3.push(this.physics.add.image(px-300, py+1400, "DNT3_02").setDepth(9101));  // Ajout image mini
+                        txt = "Générateur d’emplois et encourageant la transmission de \nsavoirs entre les générations, Jumet.bio offre la possibilité \nde cultiver ";
+                        txt += "des légumes rares et oubliés, d’élever des animaux ou \nencore de transformer les produits en confitures, jus ou soupes."; 
+                        toDestroy3.push(this.add.text(colTxt, py+1150, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                    //toDestroy3.push(this.physics.add.image(px-300, py+1450, "DNT3_03").setDepth(9101));  // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";
-                    //toDestroy3.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy3.push(this.physics.add.image(px-300, py+1900, "DNT3_03").setDepth(9101));  // Ajout image mini
+                        txt = "Ce projet est une ferme urbaine du futur. \nElle se base sur le principe de la permaculture pour cultiver \nécologiquement et solidairement."; 
+                        toDestroy3.push(this.add.text(colTxt, py+1800, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
-                    //toDestroy3.push(this.physics.add.image(px-300, py+1700, "DNT3_04").setDepth(9101));  // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";
-                    //toDestroy3.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy3.push(this.physics.add.image(px-300, py+2250, "DNT3_04").setDepth(9101));  // Ajout image mini
+                        txt = "De plus, l’initiative s’inscrit dans un projet plus large :\nla Ceinture Alimentaire de Charleroi Métropole.\n";
+                        txt += "\nLa Ceinture réunit une quarantaine d’acteurs.  Ces acteurs \ncoopèrent pour atteindre un objectif : permettre ";
+                        txt += "à \ntous les carolos de bénéficier d’une alimentation locale \net biologique de qualité. "; 
+                        toDestroy3.push(this.add.text(colTxt, py+2130, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy3);
                 arrayShadows.forEach((item) => {toDestroy3.push(item);})
@@ -292,7 +295,7 @@ var DnRoom = new Phaser.Class({
                 player.x = 0;
                 player.y = 300;
                 mainCam.setZoom(1.0);
-                var sortie3 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                var sortie3 = this.physics.add.image(x+50,y+2600,"portail_ferme").setDepth(9101);
                 sortieN.setDepth(50);
                 sortie3.setInteractive();
                 sortie3.on("pointerup", function(){
