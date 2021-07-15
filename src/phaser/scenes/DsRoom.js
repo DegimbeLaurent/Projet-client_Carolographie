@@ -19,26 +19,26 @@ var DsRoom = new Phaser.Class({
         this.load.image('portail_ouvert', '/img/portail_ouvert.png');
         // PICTURES
             // DISTRICT SUD
-                // this.load.image('DST1_00', '/img/visit/districtS/DS-T1/DST1_00.jpg');
-                // this.load.image('DST1_01', '/img/visit/districtS/DS-T1/DST1_01.JPG');
-                // this.load.image('DST1_02', '/img/visit/districtS/DS-T1/DST1_02.JPG');
+                this.load.image('DST1_00', '/img/visit/districtS/DS-T1/DST1_00.jpg');
+                this.load.image('DST1_01', '/img/visit/districtS/DS-T1/DST1_01.JPG');
+                this.load.image('DST1_02', '/img/visit/districtS/DS-T1/DST1_02.JPG');
                 // this.load.image('DST1_03', '/img/visit/districtS/DS-T1/DST1_03.JPG');
                 // this.load.image('DST1_04', '/img/visit/districtS/DS-T1/DST1_04.JPG');
 
-                // this.load.image('DST2_00', '/img/visit/districtS/DS-T2/DST2_00.jpg');
-                // this.load.image('DST2_01', '/img/visit/districtS/DS-T2/DST2_01.jpg');
-                // this.load.image('DST2_02', '/img/visit/districtS/DS-T2/DST2_02.jpg');
-                // this.load.image('DST2_03', '/img/visit/districtS/DS-T1/DST2_03.JPG');
+                this.load.image('DST2_00', '/img/visit/districtS/DS-T2/DST2_00.jpg');
+                this.load.image('DST2_01', '/img/visit/districtS/DS-T2/DST2_01.jpg');
+                this.load.image('DST2_02', '/img/visit/districtS/DS-T2/DST2_02.jpg');
+                this.load.image('DST2_03', '/img/visit/districtS/DS-T1/DST2_03.JPG');
 
-                // this.load.image('DST3_00', '/img/visit/districtS/DS-T3/DST3_00.jpg');
-                // this.load.image('DST3_01', '/img/visit/districtS/DS-T3/DST3_01.JPG');
-                // this.load.image('DST3_02', '/img/visit/districtS/DS-T3/DST3_02.JPG');
-                // this.load.image('DST3_03', '/img/visit/districtS/DS-T3/DST3_03.JPG');
+                this.load.image('DST3_00', '/img/visit/districtS/DS-T3/DST3_00.jpg');
+                this.load.image('DST3_01', '/img/visit/districtS/DS-T3/DST3_01.JPG');
+                this.load.image('DST3_02', '/img/visit/districtS/DS-T3/DST3_02.JPG');
+                this.load.image('DST3_03', '/img/visit/districtS/DS-T3/DST3_03.JPG');
 
-                // this.load.image('DST4_00', '/img/visit/districtS/DS-T4/DST4_00.jpg');
-                // this.load.image('DST4_01', '/img/visit/districtS/DS-T4/DST4_01.JPG');
-                // this.load.image('DST4_02', '/img/visit/districtS/DS-T4/DST4_02.JPG');
-                // this.load.image('DST4_03', '/img/visit/districtS/DS-T4/DST4_03.JPG');
+                this.load.image('DST4_00', '/img/visit/districtS/DS-T4/DST4_00.jpg');
+                this.load.image('DST4_01', '/img/visit/districtS/DS-T4/DST4_01.JPG');
+                this.load.image('DST4_02', '/img/visit/districtS/DS-T4/DST4_02.JPG');
+                this.load.image('DST4_03', '/img/visit/districtS/DS-T4/DST4_03.JPG');
     },
     create: function(config){
         game.backgroundColor='#000000';
@@ -119,26 +119,29 @@ var DsRoom = new Phaser.Class({
                 //======================================
                 toDestroy.push(this.add.text(px-275, py-100, "District Sud - Le Musée de la Photographie à Mont-sur-Marchienne", {fontFamily: fontFam, fontSize: 32,color: '#000000'}).setDepth(9101));  // Ajout titre
                 toDestroy.push(this.physics.add.image(px, py+300, "DST1_00").setDepth(9101));   // Ajout image principale (960 px x ...)
-                txt = "Légende de la photo";
+                txt = "Le Bois du Prince et le centre de délassement de Marcinelle, le dépaysement garanti à quelques minutes en voiture du Charleroi.";
                 toDestroy.push(this.add.text(px-400, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
                         //toDestroy.push(this.physics.add.image(px-300, py+900, "DST1_01").setDepth(9101)); // Ajout image mini
-                        txt = "xxx\n"; 
-                        txt += "xxx\n";
+                        txt = "Un peu au nord du hameau Bultia, ce site est une vaste étendue verte. Son caractère bucolique remonte à plusieurs décennies. Dans les années 50, l’échevin de Marcinelle Lucien Harmegnies souhaite préserver ces espaces de l’urbanisation.\n"; 
+                        txt += "La décision d’aménager un espace de loisirs est prise.\n";
                         //toDestroy.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
                         //toDestroy.push(this.physics.add.image(px-300, py+1200, "DST1_02").setDepth(9101));  // Ajout image mini
-                        txt = "xxx\n";
+                        txt = "Des architectes locaux participent à l’élaboration du projet. D’ailleurs, le quartier du Chêniat à Loverval regorge de villas art déco imaginées par Jacques Depelsenaire, Marcel Leborgne, …\n";
+                        txt += "À la suite des discussions, un complexe de récréation sportive et culturel est imaginé.\n";
+                        txt += "Il est composé de terrains de tennis, d’un minigolf et d’un espace aquatique.\n";
+                        txt += "Par ailleurs, le site regorge de lieux dits comme le site des Templiers, la carrière de Borgnery ou la Grotte des Sarrasins.\n";
                         //toDestroy.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
                         //toDestroy.push(this.physics.add.image(px-300, py+1450, "DST1_03").setDepth(9101));  // Ajout image mini
-                        txt = "xxx\n";
-                        txt += "xxx\n";
+                        txt = "Ces derniers temps, nous avons adoré nous balader dans les zones humides. Autour du ruisseau du Fond des Haies, ces zones, situées à l’interface entre milieux terrestres et aquatiques, présentent une biodiversité incroyable.\n";
+                        txt += "Pour le plaisir des promeneurs, l’ASBL Charleroi Nature y a installé des pancartes explicatives, des passerelles, … et les espaces sont bien entretenus.\n";
                         //toDestroy.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
                         //toDestroy.push(this.physics.add.image(px-300, py+1700, "DST1_04").setDepth(9101));  // Ajout image mini
-                        txt = "xxx\n";
-                        txt += "xxx";
+                        // txt = "xxx\n";
+                        // txt += "xxx";
                         //toDestroy.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy);
@@ -183,27 +186,27 @@ var DsRoom = new Phaser.Class({
                 //======================================
                 toDestroy2.push(this.add.text(px-325, py-100, "District Sud - Le Bois du Cazier à Marcinelle", {fontFamily: fontFam, fontSize: 32,color: '#000000'}).setDepth(9101));  // Ajout titre
                 toDestroy2.push(this.physics.add.image(px, py+300, "DST2_00").setDepth(9101));   // Ajout image principale (960 px x ...)
-                txt = "Légende de la photo";
+                txt = "Composite, espaces créatifs partagés, est une communauté de créateurs localisée dans une ancienne menuiserie à Marcinelle.";
                 toDestroy2.push(this.add.text(px-200, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
                         //toDestroy2.push(this.physics.add.image(px-300, py+900, "DST2_01").setDepth(9101)); // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        txt = "Réseau solidaire, Composite réunit des créateurs de divers horizons.\n"; 
+                        txt += "En plus de proposer des espaces de travail à des indépendants, Composite est une véritable \ncommunauté dans laquelle chacun est invité à se nourrir des expériences et savoir-faire de chacun et de partager les siens.";
                         //toDestroy2.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
                         //toDestroy2.push(this.physics.add.image(px-300, py+1200, "DST2_02").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";                    
+                        txt = "Dans ce secteur créatif alternatif de Charleroi, une trentaine de personnes se côtoient. \nDu peintre à la bijoutière, en passant par le menuisier, le ferronnier, la couturière ou l’architecte paysagiste, \nles créateurs vivent leur passion dans des ateliers partagés de près de 1.000 m²."; 
+                        // txt += "xxx";                    
                         //toDestroy2.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
                         //toDestroy2.push(this.physics.add.image(px-300, py+1450, "DST2_03").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        txt = "Comme vous pouvez le voir sur les photos, nous avons eu la chance de rencontrer des acteurs du projet. \nNous avons notamment été touchés par la patience du travail de Marianne dans sa Roulotte … "; 
+                        // txt += "xxx";
                         //toDestroy2.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
                         //toDestroy2.push(this.physics.add.image(px-300, py+1700, "DST2_04").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        txt = "et par la bonne humeur et le sérieux qui résident dans les bureaux des architectes paysagistes de Landsign."; 
+                        // txt += "xxx";
                         //toDestroy2.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy2);
@@ -248,27 +251,31 @@ var DsRoom = new Phaser.Class({
                 //======================================
                 toDestroy3.push(this.add.text(px-175, py-100, "District Sud - Le Centre de délassement de Marcinelle", {fontFamily: fontFam, fontSize: 32,color: '#000000'}).setDepth(9101));  // Ajout titre
                 toDestroy3.push(this.physics.add.image(px, py+300, "DST3_00").setDepth(9101));   // Ajout image principale (960 px x ...)
-                txt = "Légende de la photo";
+                txt = "« J’aime ces travailleurs animant nos rivages, \net le chant des mineurs égayant nos villages après leurs durs labeurs »";
                 toDestroy3.push(this.add.text(px-450, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
                         //toDestroy3.push(this.physics.add.image(px-300, py+900, "DST3_01").setDepth(9101)); // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        txt = "Il est difficile d’exprimer le sentiment que l’on ressent en se baladant sur ce site emblématique du Pays Noir.\n"; 
+                        txt += "De la grille à l’entrée jusqu’aux chevalements, on pense aux centaines de milliers de personnes \nqui ont tout quitté du jour au lendemain pour travailler dans les charbonnages belges … \n";
+                        txt += "Le 8 août 1956,\n";
+                        txt += "262 personnes, descendues dans les profondeurs de la mine, ne reverront jamais la lumière du jour. \nLa photo à gauche est une photo capturée par Camille Detraux, le jour de la catastrophe. \n";
+                        txt += "Suite à cet événement, l’Italie décide de suspendre les accords charbon avec la Belgique.\n";
                         //toDestroy3.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
                         //toDestroy3.push(this.physics.add.image(px-300, py+1200, "DST3_02").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";                    
+                        txt = "Par la suite, de plus en plus de sites miniers ferment leurs portes.\n"; 
+                        txt += "Le Bois du Cazier arrête de fonctionner en 1967 et tombe dans l’abandon. \n";   
+                        txt += "Gravé dans la mémoire collective des carolos, un projet de revalorisation voit le jour dans les années 90. \nDes travaux sont entrepris et l’ouverture du musée a lieu en 2002.\n";                 
                         //toDestroy3.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
                         //toDestroy3.push(this.physics.add.image(px-300, py+1450, "DST3_03").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        txt = "Inscrit au Patrimoine mondial de l’UNESCO, le site est devenu un site de mémoire sur lequel on retrouve 5 espaces distincts : \nles terrils, l’espace 8 août 1956 en souvenir de la catastrophe, le musée de l’industrie, le musée du verre et les ateliers.\n"; 
+                        txt += "xxx\n";
                         //toDestroy3.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
                         //toDestroy3.push(this.physics.add.image(px-300, py+1700, "DST3_04").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        txt = "Et c’est surtout un lieu à découvrir pour en apprendre plus sur l’histoire du Pays Noir et de ses habitants.\n"; 
+                        txt += "À travers cet article, nous souhaitons saluer tous nos proches dont les grands-parents ont travaillé dans les charbonnages et les industries carolos. \nSans eux, nos vies seraient bien différentes.\n";
                         //toDestroy3.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy3);
@@ -313,27 +320,28 @@ var DsRoom = new Phaser.Class({
                 //======================================
                 toDestroy4.push(this.add.text(px-200, py-100, "District Sud - Les Espaces Composite à Marcinelle", {fontFamily: fontFam, fontSize: 32,color: '#000000'}).setDepth(9101));  // Ajout titre
                 toDestroy4.push(this.physics.add.image(px, py+300, "DST4_00").setDepth(9101));   // Ajout image principale (960 px x ...)
-                txt = "Légende de la photo";
+                txt = "Le plus grand Musée d’Europe dédié à la Photographie se trouve dans l’ancien Carmel de Mont-sur-Marchienne.";
                 toDestroy4.push(this.add.text(px-300, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
                         //toDestroy4.push(this.physics.add.image(px-300, py+900, "DST4_01").setDepth(9101)); // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        txt = "L’histoire du Carmel remonte au 19ème siècle quand le Carmel de Tournai souhaite ériger un monastère dans la région.\n"; 
+                        txt += "C’est à Charleroi que la communauté de sœurs s’implante d’abord.\n";
+                        txt += "Par la suite, un espace vert sur lequel se trouve le château d’un industriel, attire l’attention des Carmélites.\n"; 
                         //toDestroy4.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
                         //toDestroy4.push(this.physics.add.image(px-300, py+1200, "DST4_02").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";                    
+                        txt = "Elles achètent la propriété, y construisent un Carmel néogothique en briques pour emménager en 1888. \nAprès avoir vécu là pendant presque un siècle, les religieuses vendent le monastère.\n"; 
+                        txt += "À la suite de la vente, la commune de Mont-sur-Marchienne devient propriétaire.\n";                    
                         //toDestroy4.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
                         //toDestroy4.push(this.physics.add.image(px-300, py+1450, "DST4_03").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        txt = "Dans les années 70, une ASBL prend de plus en plus d’importance à Charleroi … \nc’est l’ASBL Photographie ouverte qui avait regroupé une collection de photos et de matériels photographiques. \nOn y voit l’opportunité de créer un musée consacré à la photographie sur le site de l’ancien Carmel.\n"; 
+                        txt += "Inauguré en 1987, le musée est devenu le plus grand musée d’Europe dédié à la photographie.\n";
                         //toDestroy4.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
                         //toDestroy4.push(this.physics.add.image(px-300, py+1700, "DST4_04").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        txt = "Possédant une collection de plus de 80 000 photos, 1,5 millions de négatifs et 4000 appareils photographiques, il propose de découvrir une dizaine d’expositions permanentes et d’autres temporaires.\n"; 
+                        txt += "C’est une vraie mine d’or pour les amateurs et les photographes en quête d’inspiration!";
                         //toDestroy4.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy4);
