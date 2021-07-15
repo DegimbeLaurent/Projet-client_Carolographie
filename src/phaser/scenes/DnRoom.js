@@ -38,12 +38,12 @@ var DnRoom = new Phaser.Class({
                 this.load.image('DNT3_02', '/img/visit/districtN/DN-T3/DNT3_02.jpg');
                 this.load.image('DNT3_03', '/img/visit/districtN/DN-T3/DNT3_03.jpg');
                 this.load.image('DNT3_04', '/img/visit/districtN/DN-T3/DNT3_04.jpg');
-                this.load.image('DNT3_05', '/img/visit/districtN/DN-T3/DNT3_05.jpg');
 
                 this.load.image('DNT4_00', '/img/visit/districtN/DN-T4/DNT4_00.jpg');
-                // this.load.image('DNT4_01', '/img/visit/districtN/DN-T4/DNT4_01.JPG');
-                // this.load.image('DNT4_02', '/img/visit/districtN/DN-T4/DNT4_02.JPG');
-                // this.load.image('DNT4_03', '/img/visit/districtN/DN-T4/DNT4_03.JPG');
+                this.load.image('DNT4_01', '/img/visit/districtN/DN-T4/DNT4_01.jpg');
+                this.load.image('DNT4_02', '/img/visit/districtN/DN-T4/DNT4_02.jpg');
+                this.load.image('DNT4_03', '/img/visit/districtN/DN-T4/DNT4_03.jpg');
+                this.load.image('DNT4_04', '/img/visit/districtN/DN-T4/DNT4_04.jpg');
     },
     create: function(config){
         game.backgroundColor='#000000';
@@ -328,25 +328,28 @@ var DnRoom = new Phaser.Class({
                 txt = "« Dans les années 70, le Métro Léger de Charleroi – MLC a vu le jour.";
                 toDestroy4.push(this.add.text(px-300, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
-                    //toDestroy4.push(this.physics.add.image(px-300, py+900, "DNT4_01").setDepth(9101)); // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";
-                    //toDestroy4.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy4.push(this.physics.add.image(px-300, py+900, "DNT4_01").setDepth(9101)); // Ajout image mini
+                        txt = "Ce réseau de transport en commun aux voitures jaunes dessert \ntrois communes : Charleroi, Fontaine-l’Evêque et Anderlues";
+                        txt += " \net compte 48 stations pour 4 lignes. \n\nEn 2013, la boucle entre le centre-ville et Gosselies a été inaugurée.  ";
+                        txt += "\n\nPassant par Gosselies, Jumet, Lodelinsart et Dampremy, elle \nrelie le District Nord au District Centre. ";
+                        txt += "\nAu cours des travaux, la nouvelle chaussée de Bruxelles, d’où la photo \nexposée est prise, a été refaite de fond en comble.";
+                        toDestroy4.push(this.add.text(colTxt, py+780, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                    //toDestroy4.push(this.physics.add.image(px-300, py+1200, "DNT4_02").setDepth(9101));  // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";                    
-                    //toDestroy4.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy4.push(this.physics.add.image(px-300, py+1330, "DNT4_02").setDepth(9101));  // Ajout image mini
+                        txt = "Une toute nouvelle station a vu le jour à Jumet Madeleine permettant \nde fermer la boucle traversant Gosselies avant la "; 
+                        txt += "descente vers le centre-\nville. "; 
+                        txt += "\n\nDes projets d’agrandissement du réseau actuel sont encore discutés. \nDans le cadre du développement de la mobilité douce,";
+                        txt += " un projet d’antenne \nvers le nouveau GHdC, sur le site des Viviers à Gilly, est mis sur la table. ";
+                        txt += "\nCette ligne pourrait être prolongée jusqu’au centre-ville de Châtelet. ";                    
+                        toDestroy4.push(this.add.text(colTxt, py+1220, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                    //toDestroy4.push(this.physics.add.image(px-300, py+1450, "DNT4_03").setDepth(9101));  // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";
-                    //toDestroy4.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy4.push(this.physics.add.image(px-300, py+1850, "DNT4_03").setDepth(9101));  // Ajout image mini
+                        txt = "Notre équipe a été plus que séduite par le point de vue qu’offre la \nchaussée de Bruxelles avec ses airs de San Fransisco."; 
+                        toDestroy4.push(this.add.text(colTxt, py+1600, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
-                    //toDestroy4.push(this.physics.add.image(px-300, py+1700, "DNT4_04").setDepth(9101));  // Ajout image mini
-                    txt = "xxx"; 
-                    txt += "xxx";
-                    //toDestroy4.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy4.push(this.physics.add.image(px-300, py+2350, "DNT4_04").setDepth(9101));  // Ajout image mini
+                        txt = "Appréciez donc la découverte des environs de San Charlisco \nen Carolofornie!"; 
+                        toDestroy4.push(this.add.text(colTxt, py+2240, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy4);
                 arrayShadows.forEach((item) => {toDestroy4.push(item);})
@@ -360,7 +363,7 @@ var DnRoom = new Phaser.Class({
                 player.x = 0;
                 player.y = 300;
                 mainCam.setZoom(1.0);
-                var sortie4 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                var sortie4 = this.physics.add.image(x+50,y+2700,"portail_ferme").setDepth(9101);
                 sortieN.setDepth(50);
                 sortie4.setInteractive();
                 sortie4.on("pointerup", function(){
