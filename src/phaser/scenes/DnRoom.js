@@ -19,6 +19,11 @@ var DnRoom = new Phaser.Class({
         this.load.image('chevalet_d', '/img/chevalet_d.png');
         this.load.image('portail_ferme', '/img/portail_ferme.png');
         this.load.image('portail_ouvert', '/img/portail_ouvert.png');
+        this.load.image('player-bas', '/img/front-front.png');
+        this.load.spritesheet('playersheet', '/img/simple-grey-shirt.png', {
+            frameWidth: 85,
+            frameHeight: 169
+        });
         // PICTURES
             // DISTRICT NORD
                 this.load.image('DNT1_00', '/img/visit/districtN/DN-T1/DNT1_00.jpg');
@@ -68,15 +73,24 @@ var DnRoom = new Phaser.Class({
         //==========================================
         //  AJOUT DU JOUEUR
         //==========================================
-        player = this.physics.add.image(100,900,'sprite').setDepth(50).setScale(2);
-        player.name = "myPlayer";
-        player.setCollideWorldBounds(true);
+        this.player = this.physics.add.sprite(100,900,'playersheet').setDepth(25).setScale(0.7);
+        this.anims.create({key:'left',frames: this.anims.generateFrameNumbers('playersheet', {start: 30,end: 35}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'right',frames: this.anims.generateFrameNumbers('playersheet', {start: 6,end: 11}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'up',frames: this.anims.generateFrameNumbers('playersheet', {start: 18,end: 23}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'down',frames: this.anims.generateFrameNumbers('playersheet', {start: 36,end: 41}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'diagLUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 24,end: 29}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'diagLDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 42,end: 47}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'diagRUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 12,end: 17}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});            
+        this.anims.create({key: 'turn',frames: [{key: 'playersheet',frame: 45}],frameRate: 20})
+        this.player.name = "myPlayer";
+        //player.setCollideWorldBounds(true);
         playerVelocity = 2;
         cursors = this.input.keyboard.createCursorKeys();
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
-        var mainCam = this.cameras.main.startFollow(player, true, 0.1, 0.1);
+        var mainCam = this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
         var coeffZoom = 0.8;
         mainCam.setZoom(coeffZoom);
         controlConfig = {
@@ -97,7 +111,10 @@ var DnRoom = new Phaser.Class({
             //  INIT
             //============         
             let x = 0; let y = 0; var px = 0; var py = 0; let txt = "";
-            player.setDepth(9099);
+            //this.player.setDepth(9099);
+            resetPlayer = false;
+            centerPlayer = false;
+            lecture = false;
             //var pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
             var fondsEcran = this.add.rectangle(0, 0, 12600 , 6500, 0xf4edde).setDepth(1); 
             var fontFam = "Montserrat";
@@ -111,6 +128,7 @@ var DnRoom = new Phaser.Class({
             camSubject = "room";
             //var sortieN = this.add.rectangle(x+350,y+100,50, 75, 0xffffff).setDepth(9100).setInteractive();
             var sortieN = this.physics.add.image(100,975,"portail_ouvert").setInteractive().setDepth(9100);
+            posSortie = 1500;
             var chevaletDNP1;
             var chevaletDNP2;
             var chevaletDNP3;
@@ -149,6 +167,8 @@ var DnRoom = new Phaser.Class({
                     txt += "  Pour l’anecdote, ce peintre surréaliste connu mondialement \nest un enfant du Pays de Charleroi.  Il a effectivement vécu sa jeunesse entre \nLessines, Châtelet et Charleroi.";
                     toDestroy.push(this.add.text(colTxt, py+2200, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
+                centerPlayer = true;
+                lecture = true;
                 var arrayShadows = this.addShadows(toDestroy);
                 arrayShadows.forEach((item) => {toDestroy.push(item);})
                 camSubject = "chevalet";
@@ -157,11 +177,12 @@ var DnRoom = new Phaser.Class({
                 chevaletDNP3.setDepth(1);
                 chevaletDNP4.setDepth(1);
                 fondsEcran.setDepth(51);
-                player.setDepth(1);
-                player.x = 0;
-                player.y = 300;
+                // player.setDepth(1);
+                // player.x = 0;
+                // player.y = 300;
                 mainCam.setZoom(1.0);
                 var sortie1 = this.physics.add.image(x+50,y+2600,"portail_ferme").setDepth(9101);
+                posSortie = sortie1.y;
                 sortieN.setDepth(50);
                 sortie1.setInteractive();
                 sortie1.on("pointerup", function(){
@@ -173,11 +194,14 @@ var DnRoom = new Phaser.Class({
                     chevaletDNP2.setDepth(9001);
                     chevaletDNP3.setDepth(9001);
                     chevaletDNP4.setDepth(9001);
-                    player.setDepth(9199);
-                    player.x = 100;
-                    player.y = 600;
+                    // player.setDepth(9199);
+                    // player.x = 100;
+                    // player.y = 600;
                     camSubject = "room";
                     mainCam.setZoom(0.8);
+                    resetPlayer = true;
+                    centerPlayer = false;
+                    lecture = false;
                 })
             }, this);             
             //============
@@ -217,6 +241,8 @@ var DnRoom = new Phaser.Class({
                         txt += "permettent à Gosselies de se positionner \ncomme un atout indispensable à la Belgique."; 
                         toDestroy2.push(this.add.text(colTxt, py+2370, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
+                centerPlayer = true;
+                lecture = true;
                 var arrayShadows = this.addShadows(toDestroy2);
                 arrayShadows.forEach((item) => {toDestroy2.push(item);})
                 camSubject = "chevalet";
@@ -225,11 +251,12 @@ var DnRoom = new Phaser.Class({
                 chevaletDNP3.setDepth(1);
                 chevaletDNP4.setDepth(1);
                 fondsEcran.setDepth(51);
-                player.setDepth(1);
-                player.x = 0;
-                player.y = 300;
+                // player.setDepth(1);
+                // player.x = 0;
+                // player.y = 300;
                 mainCam.setZoom(1.0);
                 var sortie2 = this.physics.add.image(x+50,y+2750,"portail_ferme").setDepth(9101);
+                posSortie = sortie2.y;
                 sortieN.setDepth(50);
                 sortie2.setInteractive();
                 sortie2.on("pointerup", function(){
@@ -241,11 +268,13 @@ var DnRoom = new Phaser.Class({
                     chevaletDNP2.setDepth(9001);
                     chevaletDNP3.setDepth(9001);
                     chevaletDNP4.setDepth(9001);
-                    player.setDepth(9199);
-                    player.x = 100;
-                    player.y = 600;
+                    // player.setDepth(9199);
+                    // player.x = 100;
+                    // player.y = 600;
                     camSubject = "room";
                     mainCam.setZoom(0.8);
+                    resetPlayer = true;
+                    lecture = false;
                 })
             }, this); 
             //============
@@ -283,6 +312,8 @@ var DnRoom = new Phaser.Class({
                         txt += "à \ntous les carolos de bénéficier d’une alimentation locale \net biologique de qualité. "; 
                         toDestroy3.push(this.add.text(colTxt, py+2130, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
+                centerPlayer = true;
+                lecture = true;
                 var arrayShadows = this.addShadows(toDestroy3);
                 arrayShadows.forEach((item) => {toDestroy3.push(item);})
                 camSubject = "chevalet";
@@ -291,11 +322,12 @@ var DnRoom = new Phaser.Class({
                 chevaletDNP3.setDepth(1);
                 chevaletDNP4.setDepth(1);
                 fondsEcran.setDepth(51);
-                player.setDepth(1);
-                player.x = 0;
-                player.y = 300;
+                // player.setDepth(1);
+                // player.x = 0;
+                // player.y = 300;
                 mainCam.setZoom(1.0);
                 var sortie3 = this.physics.add.image(x+50,y+2600,"portail_ferme").setDepth(9101);
+                posSortie = sortie3.y;
                 sortieN.setDepth(50);
                 sortie3.setInteractive();
                 sortie3.on("pointerup", function(){
@@ -307,11 +339,13 @@ var DnRoom = new Phaser.Class({
                     chevaletDNP2.setDepth(9001);
                     chevaletDNP3.setDepth(9001);
                     chevaletDNP4.setDepth(9001);
-                    player.setDepth(9199);
-                    player.x = 100;
-                    player.y = 600;
+                    // player.setDepth(9199);
+                    // player.x = 100;
+                    // player.y = 600;
                     camSubject = "room";
                     mainCam.setZoom(0.8);
+                    resetPlayer = true;
+                    lecture = false;
                 })
             }, this); 
             //============
@@ -351,6 +385,8 @@ var DnRoom = new Phaser.Class({
                         txt = "Appréciez donc la découverte des environs de San Charlisco \nen Carolofornie!"; 
                         toDestroy4.push(this.add.text(colTxt, py+2240, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
+                centerPlayer = true;
+                lecture = true;
                 var arrayShadows = this.addShadows(toDestroy4);
                 arrayShadows.forEach((item) => {toDestroy4.push(item);})
                 camSubject = "chevalet";
@@ -359,11 +395,12 @@ var DnRoom = new Phaser.Class({
                 chevaletDNP3.setDepth(1);
                 chevaletDNP4.setDepth(1);
                 fondsEcran.setDepth(51);
-                player.setDepth(1);
-                player.x = 0;
-                player.y = 300;
+                // player.setDepth(1);
+                // player.x = 0;
+                // player.y = 300;
                 mainCam.setZoom(1.0);
                 var sortie4 = this.physics.add.image(x+50,y+2700,"portail_ferme").setDepth(9101);
+                posSortie = sortie4.y;
                 sortieN.setDepth(50);
                 sortie4.setInteractive();
                 sortie4.on("pointerup", function(){
@@ -375,11 +412,13 @@ var DnRoom = new Phaser.Class({
                     chevaletDNP2.setDepth(9001);
                     chevaletDNP3.setDepth(9001);
                     chevaletDNP4.setDepth(9001);
-                    player.setDepth(9199);
-                    player.x = 100;
-                    player.y = 600;
+                    // player.setDepth(9199);
+                    // player.x = 100;
+                    // player.y = 600;
                     camSubject = "room";
                     mainCam.setZoom(0.8);
+                    resetPlayer = true;
+                    lecture = false;
                 })
             }, this); 
             //============
@@ -396,22 +435,86 @@ var DnRoom = new Phaser.Class({
             }, this);
         },
         update: function(time, delta){
-            controls.update(delta);
-            player.setVelocity(0);
-            let plId = parseInt(localStorage.getItem("playerId"));
-            if (cursors.left.isDown){
-                player.x -= Math.round(playerVelocity*2);
-                Client.socket.emit('click', { id: plId, x: player.x, y: player.y });
-            }else if (cursors.right.isDown){
-                player.x += Math.round(playerVelocity*2);
-                Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
+            if(resetPlayer == true){
+                this.player.x = 100;
+                this.player.y = 900;
+                resetPlayer = false;
             }
-            if (cursors.up.isDown){
-                player.y -= Math.round(playerVelocity*3);
-                Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
-            }else if (cursors.down.isDown){
-                player.y += Math.round(playerVelocity*3);
-                Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
+            if(centerPlayer == true){
+                this.player.x = 100;
+                this.player.y = 300;
+                centerPlayer = false;
+            }
+            controls.update(delta);
+            this.player.setVelocity(0);
+            let plId = parseInt(localStorage.getItem("playerId"));
+            if(lecture){
+                if (cursors.up.isDown){
+                    this.player.y -= Math.round(playerVelocity*3);
+                    Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y });
+                }else if (cursors.down.isDown && posSortie >= this.player.y){
+                    console.log(posSortie + " - " + this.player.y);
+                    this.player.y += Math.round(playerVelocity*3);
+                    Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                }                
+            }else{
+                if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
+                    if (cursors.left.isDown){
+                        if(cursors.up.isDown){
+                            if(!cursors.right.isDown && !cursors.down.isDown){
+                                this.player.anims.play('diagLUp', true);
+                                this.player.x -= Math.round(playerVelocity*2);
+                            }
+                        }else if(cursors.down.isDown){
+                            if(!cursors.right.isDown){
+                                this.player.anims.play('diagLDown', true);
+                                this.player.y += Math.round(playerVelocity*2);
+                            }
+                        }else{
+                            this.player.anims.play('left', true);
+                            this.player.x -= Math.round(playerVelocity*2);
+                            this.player.y += Math.round(playerVelocity);
+                        }
+                        Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                    }
+                    if (cursors.right.isDown){
+                        if(cursors.up.isDown){   
+                            if(!cursors.left.isDown && !cursors.down.isDown){                 
+                                this.player.anims.play('diagRUp', true);
+                                this.player.y -= Math.round(playerVelocity);
+                            }
+                        }else if(cursors.down.isDown){
+                            if(!cursors.left.isDown){
+                                this.player.anims.play('diagRDown', true);
+                                this.player.x += Math.round(playerVelocity*2);
+                            }
+                        }else{
+                            this.player.anims.play('right', true);
+                            this.player.x += Math.round(playerVelocity*2);
+                            this.player.y -= Math.round(playerVelocity);
+                        }
+                        Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                    }
+                    // Mouvements verticaux joueur
+                    if (cursors.up.isDown){
+                        if(!cursors.left.isDown && !cursors.right.isDown){
+                            this.player.anims.play('up', true);
+                            this.player.x -= Math.round(playerVelocity*2);
+                            this.player.y -= Math.round(playerVelocity);
+                            Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                        }
+                    }
+                    if (cursors.down.isDown){
+                        if(!cursors.left.isDown && !cursors.right.isDown){
+                            this.player.anims.play('down', true);
+                            this.player.x += Math.round(playerVelocity*2);
+                            this.player.y += Math.round(playerVelocity);
+                            Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                        }
+                    }            
+                }else{
+                    this.player.anims.play('turn');
+                }
             }
             var mousePointer = this.input.activePointer;
             game.players = this.removeDisconnectedPlayers(this, game.players);

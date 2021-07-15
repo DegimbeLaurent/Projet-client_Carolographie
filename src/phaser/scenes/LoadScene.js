@@ -96,7 +96,6 @@ var LoadScene = new Phaser.Class({
             //==========================================
             //  AJOUT DU JOUEUR
             //==========================================
-            //player = this.physics.add.image(1250,950,'player-bas').setDepth(25).setScale(0.7);
             this.player = this.physics.add.sprite(1250,950,'playersheet').setDepth(25).setScale(0.7);
             this.anims.create({key:'left',frames: this.anims.generateFrameNumbers('playersheet', {start: 30,end: 35}),frameRate: 10,repeat: -1});
             this.anims.create({key:'right',frames: this.anims.generateFrameNumbers('playersheet', {start: 6,end: 11}),frameRate: 10,repeat: -1});
@@ -105,10 +104,8 @@ var LoadScene = new Phaser.Class({
             this.anims.create({key:'diagLUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 24,end: 29}),frameRate: 10,repeat: -1});
             this.anims.create({key:'diagLDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 42,end: 47}),frameRate: 10,repeat: -1});
             this.anims.create({key:'diagRUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 12,end: 17}),frameRate: 10,repeat: -1});
-            this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});
-            
+            this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});            
             this.anims.create({key: 'turn',frames: [{key: 'playersheet',frame: 45}],frameRate: 20})
-            //player.setFrame(1);
             this.player.name = "myPlayer";
             //player.setCollideWorldBounds(true);
             playerVelocity = 2;
