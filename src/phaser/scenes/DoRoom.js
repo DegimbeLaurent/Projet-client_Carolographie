@@ -202,10 +202,10 @@ var DoRoom = new Phaser.Class({
                         //txt += "";                    
                        toDestroy2.push(this.add.text(colTxt, py+1100, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                        toDestroy2.push(this.physics.add.image(px-300, py+1450, "DOT2_03").setDepth(9101));  // Ajout image mini
-                        //txt = "xxx"; 
+                        toDestroy2.push(this.physics.add.image(px-320, py+1600, "DOT2_03").setDepth(9101));  // Ajout image mini
+                        txt = "Ce site à l’histoire riche continue de vivre.Des projets s’y sont implantés."; 
                         //txt += "xxx";
-                        //toDestroy2.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy2.push(this.add.text(colTxt, py+1550, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
                         //toDestroy2.push(this.physics.add.image(px-300, py+1700, "DOT2_04").setDepth(9101));  // Ajout image mini
                         txt = "xxx"; 
