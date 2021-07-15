@@ -123,21 +123,21 @@ var DoRoom = new Phaser.Class({
                 toDestroy.push(this.add.text(px-400, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
                         //txt = "Le canal a été imaginé au 19ème siècle pour relier le bassin industriel carolo à Bruxelles, la capitale du pays.\n";
-                        toDestroy.push(this.physics.add.image(px-300, py+900, "DOT1_01").setDepth(9101)); // Ajout image mini
+                        toDestroy.push(this.physics.add.image(px-390, py+900, "DOT1_01").setDepth(9101)); // Ajout image mini
                         txt = "Le canal a été imaginé au 19ème siècle pour relier \nle bassin industriel carolo à Bruxelles, la capitale du pays.\n"; 
                         txt += "À l’époque, le Pays Noir est l’un des moteurs \n économiques de la Belgique.\n";
                         txt += "Il s’avère alors essentiel d’acheminer le charbon \net les produits fabriqués par les industries dans toute la Belgique.\n";
                         txt += " Des écluses, qui existent encore (à Viesville, Gosselies, …),\n sont aménagées le long du cours d’eau.\n";
                         toDestroy.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                        toDestroy.push(this.physics.add.image(px-300, py+1375, "DOT1_02").setDepth(9101));  // Ajout image mini
+                        toDestroy.push(this.physics.add.image(px-320, py+1250, "DOT1_02").setDepth(9101));  // Ajout image mini
                         txt = "Comme vous pouvez le voir sur la photo ci-dessus, le canal\n est toujours utilisé pour le transport de marchandises.\n";
-                        toDestroy.push(this.add.text(colTxt, py+1635, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy.push(this.add.text(colTxt, py+1250, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                        toDestroy.push(this.physics.add.image(px+-300, py+1390, "DOT1_03").setDepth(9101));  // Ajout image mini
-                        txt = "Et le chemin de halage est devenu une « autoroute » pour les cyclistes qui souhaitent se balader ou rejoindre rapidement Marchienne-au-Pont et Charleroi. \n";
-                        txt += "xxx\n";
-                        toDestroy.push(this.add.text(colTxt, py+2000, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy.push(this.physics.add.image(px+-320, py+1550, "DOT1_03").setDepth(9101));  // Ajout image mini
+                        txt = "Et le chemin de halage est devenu une « autoroute » pour les cyclistes \nqui souhaitent se balader ou rejoindre rapidement \nMarchienne-au-Pont et Charleroi. \n";
+                       // txt += "xxx\n";
+                        toDestroy.push(this.add.text(colTxt, py+1450, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
                         //toDestroy.push(this.physics.add.image(px-300, py+1700, "DOT1_04").setDepth(9101));  // Ajout image mini
                         txt = "xxx\n";
