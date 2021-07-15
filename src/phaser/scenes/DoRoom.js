@@ -28,7 +28,7 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT2_00', '/img/visit/districtO/DO-T2/DOT2_00.jpg');
                 this.load.image('DOT2_01', '/img/visit/districtO/DO-T2/DOT2_01.jpg');
                 this.load.image('DOT2_02', '/img/visit/districtO/DO-T2/DOT2_02.jpg');
-                this.load.image('DOT2_03', '/img/visit/districtO/DO-T2/DOT2_03.JPG');
+                //this.load.image('DOT2_03', '/img/visit/districtO/DO-T2/DOT2_03.JPG');
 
                 // this.load.image('DOT3_00', '/img/visit/districtO/DO-T3/DOT3_00.jpg');
                 // this.load.image('DOT3_01', '/img/visit/districtO/DO-T3/DOT3_01.JPG');
@@ -192,18 +192,18 @@ var DoRoom = new Phaser.Class({
                 toDestroy2.push(this.add.text(px-450, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
                         toDestroy2.push(this.physics.add.image(px-320, py+900, "DOT2_01").setDepth(9101)); // Ajout image mini
-                        //txt = "xxx"; 
-                        //txt += "xxx";
-                        //toDestroy2.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        txt = "Après la fermeture du puits, en 1974, une entreprise souhaite \ny extraire les charbons restants …"; 
+                        txt += "mais elle fait face à un comité \nde riverains attachés au site. \nCréée de haute lutte, son histoire entre définitivement \ndans les livres en 1995 quand la région wallonne décide \nde classer le Martinet"; 
+                        toDestroy2.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
                         toDestroy2.push(this.physics.add.image(px-400, py+1250, "DOT2_02").setDepth(9101));  // Ajout image mini
-                        txt = "Après la fermeture du puits, en 1974, une entreprise souhaite \ny extraire les charbons restants …"; 
-                        txt += "mais elle fait face à un comité \nde riverains attachés au site. \nCréée de haute lutte, son histoire entre définitivement \ndans les livres en 1995 quand la région wallonne décide \nde classer le Martinet";                    
-                        toDestroy2.push(this.add.text(colTxt, py+950, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        txt = "Aujourd’hui, les installations restantes, qui se composent \nde la salle des pendus, du hangar à locomotives, \nde la salle des machines et du bâtiment des ingénieurs, \nont été rénovées. \nDes sentiers permettent de partir à la découverte \ndes deux terrils et le site est traversé par le sentier \nde Grande Randonnée GR412. "; 
+                        //txt += "";                    
+                       toDestroy2.push(this.add.text(colTxt, py+1100, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                        toDestroy2.push(this.physics.add.image(px-300, py+1450, "DOT2_03").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
+                        //toDestroy2.push(this.physics.add.image(px-300, py+1450, "DOT2_03").setDepth(9101));  // Ajout image mini
+                        //txt = "xxx"; 
+                        //txt += "xxx";
                         //toDestroy2.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
                         //toDestroy2.push(this.physics.add.image(px-300, py+1700, "DOT2_04").setDepth(9101));  // Ajout image mini
