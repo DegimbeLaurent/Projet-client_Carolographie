@@ -26,7 +26,7 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT1_04', '/img/visit/districtO/DO-T1/DOT1_04.JPG');
 
                 this.load.image('DOT2_00', '/img/visit/districtO/DO-T2/DOT2_00.jpg');
-                // this.load.image('DOT2_01', '/img/visit/districtO/DO-T2/DOT2_01.jpg');
+                this.load.image('DOT2_01', '/img/visit/districtO/DO-T2/DOT2_01.jpg');
                 // this.load.image('DOT2_02', '/img/visit/districtO/DO-T2/DOT2_02.jpg');
                 // this.load.image('DOT2_03', '/img/visit/districtO/DO-T1/DOT2_03.JPG');
 
@@ -186,18 +186,20 @@ var DoRoom = new Phaser.Class({
                 //======================================
                 toDestroy2.push(this.add.text(px-325, py-100, "District Ouest - Le Site du Martinet à Roux", {fontFamily: fontFam, fontSize: 32,color: '#000000'}).setDepth(9101));  // Ajout titre
                 toDestroy2.push(this.physics.add.image(px, py+300, "DOT2_00").setDepth(9101));   // Ajout image principale (960 px x ...)
-                txt = "Légende de la photo";
-                toDestroy2.push(this.add.text(px-200, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
+                txt = "L’ancien site minier du Martinet à Roux représente toute l’histoire minière de la région.";
+                txt += "\nSur le lieu-dit du Martinet, les premières traces officielles d’exploitation du charbon datent de 1722.";
+                txt += "\nGrâce à l’arrivée de nouvelles techniques, le charbonnage s’industrialise. \nEn 1936, un Triage Lavoir Central est installé et le charbonnage devient l’un des plus performants d’Europe." ;
+                toDestroy2.push(this.add.text(px-450, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
-                        //toDestroy2.push(this.physics.add.image(px-300, py+900, "DOT2_01").setDepth(9101)); // Ajout image mini
+                        toDestroy2.push(this.physics.add.image(px-300, py+900, "DOT2_01").setDepth(9101)); // Ajout image mini
                         txt = "xxx"; 
                         txt += "xxx";
-                        //toDestroy2.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy2.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                        //toDestroy2.push(this.physics.add.image(px-300, py+1200, "DOT2_02").setDepth(9101));  // Ajout image mini
+                        toDestroy2.push(this.physics.add.image(px-300, py+1200, "DOT2_02").setDepth(9101));  // Ajout image mini
                         txt = "xxx"; 
                         txt += "xxx";                    
-                        //toDestroy2.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy2.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
                         //toDestroy2.push(this.physics.add.image(px-300, py+1450, "DOT2_03").setDepth(9101));  // Ajout image mini
                         txt = "xxx"; 
