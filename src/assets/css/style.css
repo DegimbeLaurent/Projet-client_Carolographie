@@ -263,7 +263,8 @@ select[multiple] {
 }
 
 textarea {
-  min-height: 6.5rem;
+  min-height: 12rem;
+  margin: 25px 0;
 }
 
 label,
@@ -683,15 +684,19 @@ img {
 }
 
 header {
-  height: 90px;
+  height: 100px;
 }
 
 header .nav-logo {
-  height: 90px;
+  height: 120px;
 }
 
 header .nav {
   padding-top: 20px;
+}
+
+header .icon {
+  padding-top: 25px;
 }
 
 main .image {
@@ -700,7 +705,7 @@ main .image {
 }
 
 main .getCode {
-  background-image: url("/Assets/img/carteFerarrisSoleilmont.PNG");
+  background-image: url("../img/carteFerarrisSoleilmont.PNG");
   background-repeat: no-repeat;
 }
 
@@ -718,10 +723,11 @@ main fieldset {
   margin: 15px auto;
   max-width: 350px;
   border-radius: 5px;
+  height: 345.8px;
 }
 
 main fieldset h3 {
-  margin: 25px 0 100px 0;
+  margin: 25px 0 95px 0;
 }
 
 main fieldset label {
@@ -730,6 +736,10 @@ main fieldset label {
 
 main fieldset input {
   background-color: #e1e1e1;
+}
+
+main .fieldsetPre h3 {
+  margin: 25px 0 59.5px 0;
 }
 
 main .leftAlign {
@@ -749,6 +759,7 @@ main button a:hover {
 }
 
 footer {
+  margin-top: 45px;
   height: 45px;
   text-align: center;
 }
