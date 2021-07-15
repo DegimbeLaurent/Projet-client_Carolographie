@@ -25,7 +25,7 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT1_03', '/img/visit/districtO/DO-T1/DOT1_03.JPG');
                 this.load.image('DOT1_04', '/img/visit/districtO/DO-T1/DOT1_04.JPG');
 
-                // this.load.image('DOT2_00', '/img/visit/districtO/DO-T2/DOT2_00.jpg');
+                this.load.image('DOT2_00', '/img/visit/districtO/DO-T2/DOT2_00.jpg');
                 // this.load.image('DOT2_01', '/img/visit/districtO/DO-T2/DOT2_01.jpg');
                 // this.load.image('DOT2_02', '/img/visit/districtO/DO-T2/DOT2_02.jpg');
                 // this.load.image('DOT2_03', '/img/visit/districtO/DO-T1/DOT2_03.JPG');
@@ -135,14 +135,14 @@ var DoRoom = new Phaser.Class({
                         toDestroy.push(this.add.text(colTxt, py+1250, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
                         toDestroy.push(this.physics.add.image(px+-320, py+1550, "DOT1_03").setDepth(9101));  // Ajout image mini
-                        txt = "Et le chemin de halage est devenu une « autoroute » pour les cyclistes \nqui souhaitent se balader ou rejoindre rapidement \nMarchienne-au-Pont et Charleroi. \n";
+                        txt = "Et le chemin de halage est devenu une « autoroute » \npour les cyclistes qui souhaitent se balader ou \nrejoindre rapidement \nMarchienne-au-Pont et Charleroi. \n";
                        // txt += "xxx\n";
                         toDestroy.push(this.add.text(colTxt, py+1450, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
-                        //toDestroy.push(this.physics.add.image(px-300, py+1700, "DOT1_04").setDepth(9101));  // Ajout image mini
-                        txt = "xxx\n";
-                        txt += "xxx";
-                        //toDestroy.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy.push(this.physics.add.image(px-320, py+1850, "DOT1_04").setDepth(9101));  // Ajout image mini
+                        txt = "La passerelle photographiée permet de traverser le canal à Roux. \nLa ville est coupée en deux par le canal.\n";
+                        txt += "Se trouvant sur le tracé du RAVeL (Réseau Autonome des Voies Lentes), \nelle est fréquentée par les cyclistes et les marcheurs. \nDu côté de Jumet, elle donne accès au Bois de Heigne.";
+                        toDestroy.push(this.add.text(colTxt, py+1750, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy);
                 arrayShadows.forEach((item) => {toDestroy.push(item);})
@@ -156,7 +156,7 @@ var DoRoom = new Phaser.Class({
                 player.x = 0;
                 player.y = 300;
                 mainCam.setZoom(1.0);
-                var sortie1 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                var sortie1 = this.physics.add.image(x+50,y+2400,"portail_ferme").setDepth(9101);
                 sortieO.setDepth(50);
                 sortie1.setInteractive();
                 sortie1.on("pointerup", function(){
