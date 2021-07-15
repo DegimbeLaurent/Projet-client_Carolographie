@@ -23,7 +23,7 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT1_01', '/img/visit/districtO/DO-T1/DOT1_01.JPG');
                 this.load.image('DOT1_02', '/img/visit/districtO/DO-T1/DOT1_02.JPG');
                 this.load.image('DOT1_03', '/img/visit/districtO/DO-T1/DOT1_03.JPG');
-                // this.load.image('DOT1_04', '/img/visit/districtO/DO-T1/DOT1_04.JPG');
+                this.load.image('DOT1_04', '/img/visit/districtO/DO-T1/DOT1_04.JPG');
 
                 // this.load.image('DOT2_00', '/img/visit/districtO/DO-T2/DOT2_00.jpg');
                 // this.load.image('DOT2_01', '/img/visit/districtO/DO-T2/DOT2_01.jpg');
