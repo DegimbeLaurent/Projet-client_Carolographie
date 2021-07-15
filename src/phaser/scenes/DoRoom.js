@@ -35,6 +35,7 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT3_01', '/img/visit/districtO/DO-T3/DOT3_01.JPG');
                 this.load.image('DOT3_02', '/img/visit/districtO/DO-T3/DOT3_02.JPG');
                 this.load.image('DOT3_03', '/img/visit/districtO/DO-T3/DOT3_03.JPG');
+                this.load.image('DOT3_04', '/img/visit/districtO/DO-T3/DOT3_04.JPG');
 
                 // this.load.image('DOT4_00', '/img/visit/districtO/DO-T4/DOT4_00.jpg');
                 // this.load.image('DOT4_01', '/img/visit/districtO/DO-T4/DOT4_01.JPG');
@@ -272,10 +273,11 @@ var DoRoom = new Phaser.Class({
                         //txt += "xxx";
                         toDestroy3.push(this.add.text(colTxt, py+1500, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
-                        //toDestroy3.push(this.physics.add.image(px-300, py+1700, "DOT3_04").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
-                        //toDestroy3.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy3.push(this.physics.add.image(px-320, py+1850, "DOT3_04").setDepth(9101));  // Ajout image mini
+                        txt = "Le parc accueille même un arboretum. \nVous y découvrirez des essences d’arbres d’intérêt : un chêne \nd’Amérique, un cornouiller mâle ou encore des tulipiers de Virginie. "; 
+                        txt += "\nDe nombreux animaux ont également élu domicile dans le Parc.";
+                        txt += "\n\nSur la photo exposée, vous pouvez découvrir l’ambiance qui y \nrègne de nuit. \nLe château et le parcours étant éclairés, \nc’est l’endroit parfait pour une balade nocturne avant d’aller dormir.";
+                        toDestroy3.push(this.add.text(colTxt, py+1750, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy3);
                 arrayShadows.forEach((item) => {toDestroy3.push(item);})
@@ -289,7 +291,7 @@ var DoRoom = new Phaser.Class({
                 player.x = 0;
                 player.y = 300;
                 mainCam.setZoom(1.0);
-                var sortie3 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                var sortie3 = this.physics.add.image(x+50,y+2250,"portail_ferme").setDepth(9101);
                 sortieO.setDepth(50);
                 sortie3.setInteractive();
                 sortie3.on("pointerup", function(){
