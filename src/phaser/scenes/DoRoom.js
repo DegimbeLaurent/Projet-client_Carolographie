@@ -130,11 +130,11 @@ var DoRoom = new Phaser.Class({
                         txt += " Des écluses, qui existent encore (à Viesville, Gosselies, …),\n sont aménagées le long du cours d’eau.\n";
                         toDestroy.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                        toDestroy.push(this.physics.add.image(px+0, py+1375, "DOT1_02").setDepth(9101));  // Ajout image mini
+                        toDestroy.push(this.physics.add.image(px-300, py+1375, "DOT1_02").setDepth(9101));  // Ajout image mini
                         txt = "Comme vous pouvez le voir sur la photo ci-dessus, le canal\n est toujours utilisé pour le transport de marchandises.\n";
                         toDestroy.push(this.add.text(colTxt, py+1635, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                        toDestroy.push(this.physics.add.image(px+0, py+1850, "DOT1_03").setDepth(9101));  // Ajout image mini
+                        toDestroy.push(this.physics.add.image(px+-300, py+1390, "DOT1_03").setDepth(9101));  // Ajout image mini
                         txt = "Et le chemin de halage est devenu une « autoroute » pour les cyclistes qui souhaitent se balader ou rejoindre rapidement Marchienne-au-Pont et Charleroi. \n";
                         txt += "xxx\n";
                         toDestroy.push(this.add.text(colTxt, py+2000, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
