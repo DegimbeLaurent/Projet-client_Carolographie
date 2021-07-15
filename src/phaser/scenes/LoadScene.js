@@ -19,6 +19,19 @@ var LoadScene = new Phaser.Class({
         this.load.image('portail_socle', '/img/sol_portail.png');
         this.load.image('btn_quitter', '/img/quitter.jpg');
         //this.load.bitmapFont('myfont', '/assets/fonts/Berry-Rotunda.png','/assets/fonts/BerryRotunda.xml');
+        // PLAYER
+            this.load.image('player-diagonale-gauche-haut', '/img/diagonal-back-left.png');
+            this.load.image('player-diagonale-gauche-bas', '/img/diagonal-front-left.png');
+            this.load.image('player-diagonale-droite-haut', '/img/diagonal-back-right.png');
+            this.load.image('player-diagonale-droite-bas', '/img/diagonal-front-right.png');
+            this.load.image('player-gauche', '/img/front-left.png');
+            this.load.image('player-droite', '/img/front-right.png');
+            this.load.image('player-haut', '/img/front-back.png');
+            this.load.image('player-bas', '/img/front-front.png');
+            this.load.spritesheet('playersheet', '/img/simple-grey-shirt.png', {
+                frameWidth: 85,
+                frameHeight: 169
+            });
         // PICTURES
             // DISTRICT NORD
                 this.load.image('DNT1_00', '/img/visit/districtN/DN-T1/DNT1_00.jpg');
@@ -83,9 +96,21 @@ var LoadScene = new Phaser.Class({
             //==========================================
             //  AJOUT DU JOUEUR
             //==========================================
-            player = this.physics.add.image(1250,950,'sprite').setDepth(25);
-            player.name = "myPlayer";
-            player.setCollideWorldBounds(true);
+            //player = this.physics.add.image(1250,950,'player-bas').setDepth(25).setScale(0.7);
+            this.player = this.physics.add.sprite(1250,950,'playersheet').setDepth(25).setScale(0.7);
+            this.anims.create({key:'left',frames: this.anims.generateFrameNumbers('playersheet', {start: 30,end: 35}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'right',frames: this.anims.generateFrameNumbers('playersheet', {start: 6,end: 11}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'up',frames: this.anims.generateFrameNumbers('playersheet', {start: 18,end: 23}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'down',frames: this.anims.generateFrameNumbers('playersheet', {start: 36,end: 41}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'diagLUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 24,end: 29}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'diagLDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 42,end: 47}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'diagRUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 12,end: 17}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});
+            
+            this.anims.create({key: 'turn',frames: [{key: 'playersheet',frame: 45}],frameRate: 20})
+            //player.setFrame(1);
+            this.player.name = "myPlayer";
+            //player.setCollideWorldBounds(true);
             playerVelocity = 2;
             cursors = this.input.keyboard.createCursorKeys();
             //==========================================    
@@ -110,7 +135,7 @@ var LoadScene = new Phaser.Class({
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
-        this.cameras.main.startFollow(player, true, 0.1, 0.1);
+        this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
         var coeffZoom = 1.2;
         this.cameras.main.setZoom(coeffZoom);
         controlConfig = {
@@ -130,7 +155,7 @@ var LoadScene = new Phaser.Class({
         //==========================================  
         let lgMax = Math.round(DEFAULT_WIDTH / 4);
         let htMax = Math.round(DEFAULT_HEIGHT / 4);
-        this.minimap = this.cameras.add(DEFAULT_WIDTH - lgMax, DEFAULT_HEIGHT - htMax, lgMax, htMax).setZoom(0.1).setName('mini').startFollow(player, true, 0.1, 0.1);
+        this.minimap = this.cameras.add(DEFAULT_WIDTH - lgMax, DEFAULT_HEIGHT - htMax, lgMax, htMax).setZoom(0.1).setName('mini').startFollow(this.player, true, 0.1, 0.1);
         this.minimap.setBackgroundColor(0x002244);
         this.minimap.scrollX = 1600;
         this.minimap.scrollY = 900;
@@ -210,33 +235,70 @@ var LoadScene = new Phaser.Class({
     },
     update: function(time, delta){
         controls.update(delta);
-        player.setVelocity(0);
+        this.player.setVelocity(0);
         let plId = parseInt(localStorage.getItem("playerId"));
         // Mouvements latéraux joueur
-        if (cursors.left.isDown){
-            player.x -= Math.round(playerVelocity*2);
-            player.y += Math.round(playerVelocity);
-            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
-            //console.log(player.x);
-        }else if (cursors.right.isDown){
-            player.x += Math.round(playerVelocity*2);
-            player.y -= Math.round(playerVelocity);
-            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
-        }
-        // Mouvements verticaux joueur
-        if (cursors.up.isDown){
-            player.x -= Math.round(playerVelocity*2);
-            player.y -= Math.round(playerVelocity);
-            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
-        }else if (cursors.down.isDown){
-            player.x += Math.round(playerVelocity*2);
-            player.y += Math.round(playerVelocity);
-            Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
+        if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
+            if (cursors.left.isDown){
+                if(cursors.up.isDown){
+                    if(!cursors.right.isDown && !cursors.down.isDown){
+                        this.player.anims.play('diagLUp', true);
+                        this.player.x -= Math.round(playerVelocity*2);
+                    }
+                }else if(cursors.down.isDown){
+                    if(!cursors.right.isDown){
+                        this.player.anims.play('diagLDown', true);
+                        this.player.y += Math.round(playerVelocity*2);
+                    }
+                }else{
+                    this.player.anims.play('left', true);
+                    this.player.x -= Math.round(playerVelocity*2);
+                    this.player.y += Math.round(playerVelocity);
+                }
+                Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+            }
+            if (cursors.right.isDown){
+                if(cursors.up.isDown){   
+                    if(!cursors.left.isDown && !cursors.down.isDown){                 
+                        this.player.anims.play('diagRUp', true);
+                        this.player.y -= Math.round(playerVelocity);
+                    }
+                }else if(cursors.down.isDown){
+                    if(!cursors.left.isDown){
+                        this.player.anims.play('diagRDown', true);
+                        this.player.x += Math.round(playerVelocity*2);
+                    }
+                }else{
+                    this.player.anims.play('right', true);
+                    this.player.x += Math.round(playerVelocity*2);
+                    this.player.y -= Math.round(playerVelocity);
+                }
+                Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+            }
+            // Mouvements verticaux joueur
+            if (cursors.up.isDown){
+                if(!cursors.left.isDown && !cursors.right.isDown){
+                    this.player.anims.play('up', true);
+                    this.player.x -= Math.round(playerVelocity*2);
+                    this.player.y -= Math.round(playerVelocity);
+                    Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                }
+            }
+            if (cursors.down.isDown){
+                if(!cursors.left.isDown && !cursors.right.isDown){
+                    this.player.anims.play('down', true);
+                    this.player.x += Math.round(playerVelocity*2);
+                    this.player.y += Math.round(playerVelocity);
+                    Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                }
+            }            
+        }else{
+            this.player.anims.play('turn');
         }
 
         var mousePointer = this.input.activePointer;
         game.players = this.removeDisconnectedPlayers(this, game.players);
-        this.updateConnectedPlayers(this, game.players, game.playersBU, player);
+        this.updateConnectedPlayers(this, game.players, game.playersBU, this.player);
         this.movePlayers(this, game.players, plId);
         this.stopPlayers(this, game.players);
     },

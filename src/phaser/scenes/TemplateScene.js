@@ -286,7 +286,7 @@ var TemplateScene = new Phaser.Class({
                 }
             }
             playerMap[player.nickname].x = playerMap[player.id].x + this.centerName(player.nickname);
-            playerMap[player.nickname].y = playerMap[player.id].y - 50;
+            playerMap[player.nickname].y = playerMap[player.id].y - 80;
         });
     },getIdPlayers:function(idPlayer){
         let max = game.players.length;
