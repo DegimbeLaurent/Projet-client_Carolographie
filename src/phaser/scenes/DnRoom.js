@@ -49,9 +49,28 @@ var DnRoom = new Phaser.Class({
                 this.load.image('DNT4_02', '/img/visit/districtN/DN-T4/DNT4_02.jpg');
                 this.load.image('DNT4_03', '/img/visit/districtN/DN-T4/DNT4_03.jpg');
                 this.load.image('DNT4_04', '/img/visit/districtN/DN-T4/DNT4_04.jpg');
+        // SONS & BRUITAGES
+        this.load.audio('course', '/assets/sounds/course.mp3');
+        this.load.audio('campagne', '/assets/sounds/ambiance_campagne.mp3');
+        this.load.audio('feu', '/assets/sounds/feu.mp3');
+        this.load.audio('portail', '/assets/sounds/portail.mp3');
     },
     create: function(config){
         game.backgroundColor='#000000';
+        //==========================================
+        //  AJOUT DES SONS
+        //==========================================
+        bruit_course = this.sound.add("course", { loop: true });
+        bruit_course.allowMultiple = false;
+        bruit_ambiance = this.sound.add("campagne", { loop: true });
+        bruit_ambiance.allowMultiple = false;
+        // bruit_ambiance.play();
+        bruit_feu = this.sound.add("feu", { loop: true });
+        bruit_feu.allowMultiple = false;
+        bruit_feu.play();
+        bruit_portail = this.sound.add("portail", { loop: false });
+        bruit_portail.allowMultiple = false;
+        bruit_portail.play();
         //==========================================
         //  GESTION CLIENT - SERVER
         //==========================================
@@ -167,6 +186,8 @@ var DnRoom = new Phaser.Class({
                     txt += "  Pour l’anecdote, ce peintre surréaliste connu mondialement \nest un enfant du Pays de Charleroi.  Il a effectivement vécu sa jeunesse entre \nLessines, Châtelet et Charleroi.";
                     toDestroy.push(this.add.text(colTxt, py+2200, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
+                bruit_feu.stop();
+                bruit_ambiance.play();
                 centerPlayer = true;
                 lecture = true;
                 var arrayShadows = this.addShadows(toDestroy);
@@ -186,6 +207,8 @@ var DnRoom = new Phaser.Class({
                 sortieN.setDepth(50);
                 sortie1.setInteractive();
                 sortie1.on("pointerup", function(){
+                    bruit_ambiance.stop();
+                    bruit_feu.play();
                     sortie1.destroy();
                     toDestroy.forEach((item) => {item.destroy();})
                     fondsEcran.setDepth(1);
@@ -456,7 +479,8 @@ var DnRoom = new Phaser.Class({
                     console.log(posSortie + " - " + this.player.y);
                     this.player.y += Math.round(playerVelocity*3);
                     Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
-                }                
+                }      
+                bruit_course.stop();          
             }else{
                 if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
                     if (cursors.left.isDown){
@@ -514,6 +538,7 @@ var DnRoom = new Phaser.Class({
                     }            
                 }else{
                     this.player.anims.play('turn');
+                    bruit_course.play(); 
                 }
             }
             var mousePointer = this.input.activePointer;

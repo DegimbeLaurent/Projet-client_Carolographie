@@ -28,7 +28,7 @@ var LoadScene = new Phaser.Class({
             this.load.image('player-droite', '/img/front-right.png');
             this.load.image('player-haut', '/img/front-back.png');
             this.load.image('player-bas', '/img/front-front.png');
-            this.load.spritesheet('playersheet', '/img/simple-grey-shirt.png', {
+            this.load.spritesheet('playersheet', '/img/grey-shirt-with-snake.png', {
                 frameWidth: 85,
                 frameHeight: 169
             });
@@ -50,6 +50,15 @@ var LoadScene = new Phaser.Class({
                 this.load.image('DNT4_01', '/img/visit/districtN/DN-T1/DNT4_01.JPG');
                 this.load.image('DNT4_02', '/img/visit/districtN/DN-T1/DNT4_02.JPG');
                 this.load.image('DNT4_03', '/img/visit/districtN/DN-T1/DNT4_03.JPG'); */
+
+        // BARRES COLLISIONS
+            this.load.image('barre-256-10', '/img/collisions/barre-256-10.png');
+
+        // SONS & BRUITAGES
+        this.load.audio('course', '/assets/sounds/course.mp3');
+        this.load.audio('campagne', '/assets/sounds/ambiance_campagne.mp3');
+        this.load.audio('feu', '/assets/sounds/feu.mp3');
+        this.load.audio('portail', '/assets/sounds/portail.mp3');
     },
     create: function(config){
         console.log("on passe ici...");
@@ -89,7 +98,7 @@ var LoadScene = new Phaser.Class({
         //==========================================
         this.cameras.main.setBounds(-8000, -200, 12600 , 6500);
         this.physics.world.setBounds(-8000,-200, 12600, 6500);
-        var map = this.add.tilemap('map_visite');
+        map = this.add.tilemap('map_visite');
         var tileset10 = map.addTilesetImage('set_tuile', 'set_tuile');
         var layer10 = map.createLayer('ground', [tileset10]).setDepth(10);
         var layer20 = map.createLayer('flower', [tileset10]).setDepth(20);        
@@ -107,7 +116,7 @@ var LoadScene = new Phaser.Class({
             this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});            
             this.anims.create({key: 'turn',frames: [{key: 'playersheet',frame: 45}],frameRate: 20})
             this.player.name = "myPlayer";
-            //player.setCollideWorldBounds(true);
+            this.player.setCollideWorldBounds(true);
             playerVelocity = 2;
             cursors = this.input.keyboard.createCursorKeys();
             //==========================================    
@@ -125,10 +134,12 @@ var LoadScene = new Phaser.Class({
         var layer140 = map.createLayer('roof 1', [tileset10]).setDepth(140);
         var layer150 = map.createLayer('tronc', [tileset10]).setDepth(150);
         var layer160 = map.createLayer('arbre', [tileset10]).setDepth(160);
+        //const layer160 = map.createStaticLayer('arbre', [tileset10]).setDepth(160);
         var layer170 = map.createLayer('chappelle', [tileset10]).setDepth(170);
         var layer180 = map.createLayer('chappelle center', [tileset10]).setDepth(180);
         var layer190 = map.createLayer('chappelle top', [tileset10]).setDepth(190);
         
+//layer160.setCollisionByProperty({collides:true});
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
@@ -161,35 +172,32 @@ var LoadScene = new Phaser.Class({
         //  AJOUT BOUTON QUITTER
         //==========================================
         var btnQuitter = this.add.sprite(1350, 900,"btn_quitter").setInteractive().setDepth(999);
-        btnQuitter.fixedToCamera = true;
         btnQuitter.on("pointerup", function(){
-
+            location.href = '/website/remerciements.html';
         })
+        //==========================================
+        //  AJOUT DES SONS
+        //==========================================
+        bruit_course = this.sound.add("course", { loop: true });
+        bruit_course.allowMultiple = false;
+        bruit_ambiance = this.sound.add("campagne", { loop: true });
+        bruit_ambiance.allowMultiple = false;
+        bruit_ambiance.play();
+        bruit_feu = this.sound.add("feu", { loop: true });
+        bruit_feu.allowMultiple = false;
+        bruit_portail = this.sound.add("portail", { loop: false });
+        bruit_portail.allowMultiple = false;
         //==========================================
         //  AJOUT DES PORTAILS
         //==========================================
-        var fondsNoir = this.add.rectangle(0, 0, 12600 , 6500, 0x6E5940).setDepth(1);   
-        //=================
-        //  PORTAIL NORD
-        //=================
-        // console.log("Scene A");
-        // var buttonTest = this.add.rectangle(100,100, 30, 30, 0xaabb22).setDepth(9101).setInteractive();
-        // buttonTest.on("pointerup", function(){
-        //     window.open("http://www.google.com", "_blank");
-        //     console.log("on clique sur le bouton!...");
-        // });
-        // var testText = this.add.text(100,200,"Aujourd’hui, des stigmates de l’incendie y sont encore visibles, \ncomme en témoignent les photos. On vous invite à regarder notamment les photos du bois brûlé de l’escalier signe du l’endroit où la propagation des flammes a pu être interrompue. ").setDepth(9101);
-        // testText.lines = 5;
-        // testText.width = 250;
-        // testText.setTextBounds(100,200,200,400);
-        //this.graphics.strokeRect(100,200,200,400);
-        //var portailN = this.add.rectangle(0, 0, 50, 75, 0x92623A).setDepth(999).setInteractive();
+        var fondsNoir = this.add.rectangle(0, 0, 12600 , 6500, 0x6E5940).setDepth(1);           
         var portailN = this.physics.add.image(130,730,"portail_ferme").setInteractive().setDepth(999);
         var portailN_socle = this.physics.add.image(130,730,"portail_socle").setInteractive().setDepth(24);
         portailN.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
             Client.socket.emit("enterRoom");
             Client.socket.on("okEnterRoom", function(){
+                bruit_portail.play();
                 location.href = '/website/portail-n.html';
             });
         })    
@@ -229,8 +237,21 @@ var LoadScene = new Phaser.Class({
                 location.href = '/website/portail-s.html';
             });
         }) 
-    },
-    update: function(time, delta){
+        //==========================================
+        //  AJOUT DES COLLISIONS
+        //==========================================
+        var blocsCollisions = [];
+        bloc1 = this.physics.add.image(1250,850,"barre-256-10").setDepth(999).setBounce(1,1);
+        bloc1.body.setBounce(1,1).setCollideWorldBounds(true);
+        mcrate = this.physics.add.sprite(1250,700,'sprite').setDepth(999);
+        mcrate.body.setVelocity(100, 200).setBounce(1, 1).setCollideWorldBounds(true);
+},
+update: function(time, delta){
+        this.physics.world.collide(mcrate, bloc1);
+        this.physics.world.collide(this.player, mcrate);
+        this.physics.world.collide(this.player, bloc1);
+        this.physics.world.collide(bloc1, this.player);
+        //===
         controls.update(delta);
         this.player.setVelocity(0);
         let plId = parseInt(localStorage.getItem("playerId"));
@@ -250,7 +271,7 @@ var LoadScene = new Phaser.Class({
                 }else{
                     this.player.anims.play('left', true);
                     this.player.x -= Math.round(playerVelocity*2);
-                    this.player.y += Math.round(playerVelocity);
+                    this.player.y += Math.round(playerVelocity);                   
                 }
                 Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
             }
@@ -288,9 +309,11 @@ var LoadScene = new Phaser.Class({
                     this.player.y += Math.round(playerVelocity);
                     Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
                 }
-            }            
+            }   
+            //bruit_course.stop();
         }else{
             this.player.anims.play('turn');
+            bruit_course.play();         
         }
 
         var mousePointer = this.input.activePointer;
