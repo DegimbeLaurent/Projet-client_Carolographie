@@ -37,9 +37,9 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT3_03', '/img/visit/districtO/DO-T3/DOT3_03.JPG');
                 this.load.image('DOT3_04', '/img/visit/districtO/DO-T3/DOT3_04.JPG');
 
-                // this.load.image('DOT4_00', '/img/visit/districtO/DO-T4/DOT4_00.jpg');
-                // this.load.image('DOT4_01', '/img/visit/districtO/DO-T4/DOT4_01.JPG');
-                // this.load.image('DOT4_02', '/img/visit/districtO/DO-T4/DOT4_02.JPG');
+                this.load.image('DOT4_00', '/img/visit/districtO/DO-T4/DOT4_00.jpg');
+                this.load.image('DOT4_01', '/img/visit/districtO/DO-T4/DOT4_01.JPG');
+                this.load.image('DOT4_02', '/img/visit/districtO/DO-T4/DOT4_02.JPG');
                 // this.load.image('DOT4_03', '/img/visit/districtO/DO-T4/DOT4_03.JPG');
     },
     create: function(config){
@@ -321,18 +321,18 @@ var DoRoom = new Phaser.Class({
                 //======================================
                 toDestroy4.push(this.add.text(px-200, py-100, "District Ouest - Coopéco à Marchienne-au-Pont", {fontFamily: fontFam, fontSize: 32,color: '#000000'}).setDepth(9101));  // Ajout titre
                 toDestroy4.push(this.physics.add.image(px, py+300, "DOT4_00").setDepth(9101));   // Ajout image principale (960 px x ...)
-                txt = "Légende de la photo";
+                txt = "Situé à Marchienne-au-Pont, Coopéco est le supermarché collectif et participatif de Charleroi.";
                 toDestroy4.push(this.add.text(px-300, py+650, txt, {fontFamily: fontFam,fontSize: fontSZLgd,color: colorTxt,fontStyle:'italic'}).setDepth(9101));  // Ajout légende
                     // Mini 1
-                        //toDestroy4.push(this.physics.add.image(px-300, py+900, "DOT4_01").setDepth(9101)); // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
-                        //toDestroy4.push(this.add.text(colTxt, py+770, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy4.push(this.physics.add.image(px-320, py+900, "DOT4_01").setDepth(9101)); // Ajout image mini
+                        txt = "Créée en 2016, c’est une coopérative qui regroupe aujourd’hui \nplus de 350 bénévoles. \nImaginé pour et par des citoyens, Coopéco est une alternative \nà la grande distribution. \nElle permet à ses adhérents de manger sainement de façon abordable. "; 
+                        //txt += "xxx";
+                        toDestroy4.push(this.add.text(colTxt, py+815, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
-                        //toDestroy4.push(this.physics.add.image(px-300, py+1200, "DOT4_02").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";                    
-                        //toDestroy4.push(this.add.text(colTxt, py+1120, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy4.push(this.physics.add.image(px-320, py+1200, "DOT4_02").setDepth(9101));  // Ajout image mini
+                        txt = "Comment cela fonctionne-t-il concrètement ? \n\nChaque coopérateur est invité à mettre à profit ses compétences pour la coopérative."; 
+                        txt += "\nLes tâches sont nombreuses : recherche de financement, communication, \ngestion des achats, recherche des producteurs… \nEn s’investissant à raison d’un minimum de trois heures par mois, \nl’adhérent a ensuite accès au magasin. ";                    
+                        toDestroy4.push(this.add.text(colTxt, py+1080, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
                         //toDestroy4.push(this.physics.add.image(px-300, py+1450, "DOT4_03").setDepth(9101));  // Ajout image mini
                         txt = "xxx"; 
