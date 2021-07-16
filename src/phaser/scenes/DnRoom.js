@@ -30,13 +30,13 @@ var DnRoom = new Phaser.Class({
                 this.load.image('DNT1_01', '/img/visit/districtN/DN-T1/DNT1_01.JPG');
                 this.load.image('DNT1_02', '/img/visit/districtN/DN-T1/DNT1_02.JPG');
                 this.load.image('DNT1_03', '/img/visit/districtN/DN-T1/DNT1_03.JPG');
-                this.load.image('DNT1_04', '/img/visit/districtN/DN-T1/DNT1_04.JPG');
+                this.load.image('DNT1_04', '/img/visit/districtN/DN-T1/DNT1_04.jpg');
 
                 this.load.image('DNT2_00', '/img/visit/districtN/DN-T2/DNT2_00.jpg');
                 this.load.image('DNT2_01', '/img/visit/districtN/DN-T2/DNT2_01.jpg');
                 this.load.image('DNT2_02', '/img/visit/districtN/DN-T2/DNT2_02.jpg');
-                this.load.image('DNT2_03', '/img/visit/districtN/DN-T2/DNT2_03.JPG');
-                this.load.image('DNT2_04', '/img/visit/districtN/DN-T2/DNT2_04.JPG');
+                this.load.image('DNT2_03', '/img/visit/districtN/DN-T2/DNT2_03.jpg');
+                this.load.image('DNT2_04', '/img/visit/districtN/DN-T2/DNT2_04.jpg');
 
                 this.load.image('DNT3_00', '/img/visit/districtN/DN-T3/DNT3_00.jpg');
                 this.load.image('DNT3_01', '/img/visit/districtN/DN-T3/DNT3_01.jpg');

@@ -24,25 +24,25 @@ var DoRoom = new Phaser.Class({
         // PICTURES
             // DISTRICT OUEST
                 this.load.image('DOT1_00', '/img/visit/districtO/DO-T1/DOT1_00.png');
-                this.load.image('DOT1_01', '/img/visit/districtO/DO-T1/DOT1_01.JPG');
-                this.load.image('DOT1_02', '/img/visit/districtO/DO-T1/DOT1_02.JPG');
-                this.load.image('DOT1_03', '/img/visit/districtO/DO-T1/DOT1_03.JPG');
-                this.load.image('DOT1_04', '/img/visit/districtO/DO-T1/DOT1_04.JPG');
+                this.load.image('DOT1_01', '/img/visit/districtO/DO-T1/DOT1_01.jpg');
+                this.load.image('DOT1_02', '/img/visit/districtO/DO-T1/DOT1_02.jpg');
+                this.load.image('DOT1_03', '/img/visit/districtO/DO-T1/DOT1_03.jpg');
+                this.load.image('DOT1_04', '/img/visit/districtO/DO-T1/DOT1_04.jpg');
 
                 this.load.image('DOT2_00', '/img/visit/districtO/DO-T2/DOT2_00.jpg');
                 this.load.image('DOT2_01', '/img/visit/districtO/DO-T2/DOT2_01.jpg');
                 this.load.image('DOT2_02', '/img/visit/districtO/DO-T2/DOT2_02.jpg');
-                this.load.image('DOT2_03', '/img/visit/districtO/DO-T2/DOT2_03.JPG');
-                this.load.image('DOT2_04', '/img/visit/districtO/DO-T2/DOT2_04.JPG');
+                this.load.image('DOT2_03', '/img/visit/districtO/DO-T2/DOT2_03.jpg');
+                this.load.image('DOT2_04', '/img/visit/districtO/DO-T2/DOT2_04.jpg');
 
                 this.load.image('DOT3_00', '/img/visit/districtO/DO-T3/DOT3_00.jpg');
-                this.load.image('DOT3_01', '/img/visit/districtO/DO-T3/DOT3_01.JPG');
-                this.load.image('DOT3_02', '/img/visit/districtO/DO-T3/DOT3_02.JPG');
-                this.load.image('DOT3_03', '/img/visit/districtO/DO-T3/DOT3_03.JPG');
-                this.load.image('DOT3_04', '/img/visit/districtO/DO-T3/DOT3_04.JPG');
+                this.load.image('DOT3_01', '/img/visit/districtO/DO-T3/DOT3_01.jpg');
+                this.load.image('DOT3_02', '/img/visit/districtO/DO-T3/DOT3_02.jpg');
+                this.load.image('DOT3_03', '/img/visit/districtO/DO-T3/DOT3_03.jpg');
+                this.load.image('DOT3_04', '/img/visit/districtO/DO-T3/DOT3_04.jpg');
 
                 this.load.image('DOT4_00', '/img/visit/districtO/DO-T4/DOT4_00.jpg');
-                this.load.image('DOT4_01', '/img/visit/districtO/DO-T4/DOT4_01.JPG');
+                this.load.image('DOT4_01', '/img/visit/districtO/DO-T4/DOT4_01.jpg');
                 this.load.image('DOT4_02', '/img/visit/districtO/DO-T4/DOT4_02.JPG');
                 this.load.image('DOT4_03', '/img/visit/districtO/DO-T4/DOT4_03.JPG');
                 this.load.image('DOT4_04', '/img/visit/districtO/DO-T4/DOT4_04.JPG');
