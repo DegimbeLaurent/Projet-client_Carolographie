@@ -19,12 +19,15 @@
 
 
 header {
-    height: 90px;
+    height: 100px;
     .nav-logo {
-        height: 90px;
+        height: 120px;
     }
     .nav {
         padding-top: 20px;
+    }
+    .icon {
+        padding-top: 25px;
     }
 }
 main {
@@ -33,7 +36,7 @@ main {
         border-radius: 5px;
     }
     .getCode {
-    background-image: url("/Assets/img/carteFerarrisSoleilmont.PNG");
+    background-image: url("../img/carteFerarrisSoleilmont.PNG");
     background-repeat: no-repeat;
     }
     .feedBack {
@@ -48,14 +51,20 @@ main {
         margin: 15px auto;
         max-width: 350px;
         border-radius: 5px;
+        height: 345.8px;
         h3 {
-            margin: 25px 0 100px 0;
+            margin: 25px 0 95px 0;
         }
         label {
             text-align: left;
         }
         input {
             background-color: $color-quinary;
+        }
+    }
+    .fieldsetPre {
+        h3{
+            margin: 25px 0 59.5px 0;
         }
     }
     .leftAlign {
@@ -74,6 +83,7 @@ main {
     }
 }
 footer {
+    margin-top: 45px;
     height: 45px;
     text-align: center;
 }
