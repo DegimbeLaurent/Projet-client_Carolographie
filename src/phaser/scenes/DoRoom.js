@@ -40,7 +40,8 @@ var DoRoom = new Phaser.Class({
                 this.load.image('DOT4_00', '/img/visit/districtO/DO-T4/DOT4_00.jpg');
                 this.load.image('DOT4_01', '/img/visit/districtO/DO-T4/DOT4_01.JPG');
                 this.load.image('DOT4_02', '/img/visit/districtO/DO-T4/DOT4_02.JPG');
-                // this.load.image('DOT4_03', '/img/visit/districtO/DO-T4/DOT4_03.JPG');
+                this.load.image('DOT4_03', '/img/visit/districtO/DO-T4/DOT4_03.JPG');
+                this.load.image('DOT4_04', '/img/visit/districtO/DO-T4/DOT4_04.JPG');
     },
     create: function(config){
         game.backgroundColor='#000000';
@@ -330,19 +331,19 @@ var DoRoom = new Phaser.Class({
                         toDestroy4.push(this.add.text(colTxt, py+815, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 2
                         toDestroy4.push(this.physics.add.image(px-320, py+1200, "DOT4_02").setDepth(9101));  // Ajout image mini
-                        txt = "Comment cela fonctionne-t-il concrètement ? \n\nChaque coopérateur est invité à mettre à profit ses compétences pour la coopérative."; 
-                        txt += "\nLes tâches sont nombreuses : recherche de financement, communication, \ngestion des achats, recherche des producteurs… \nEn s’investissant à raison d’un minimum de trois heures par mois, \nl’adhérent a ensuite accès au magasin. ";                    
-                        toDestroy4.push(this.add.text(colTxt, py+1080, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        txt = "Comment cela fonctionne-t-il concrètement ? \n\nChaque coopérateur est invité à mettre \nà profit ses compétences pour la coopérative."; 
+                        txt += "\nLes tâches sont nombreuses : recherche de financement, \ncommunication, gestion des achats, recherche des producteurs… \nEn s’investissant à raison d’un minimum de trois heures par mois, \nl’adhérent a ensuite accès au magasin. ";                    
+                        toDestroy4.push(this.add.text(colTxt, py+1055, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 3
-                        //toDestroy4.push(this.physics.add.image(px-300, py+1450, "DOT4_03").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
-                        //toDestroy4.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy4.push(this.physics.add.image(px-340, py+1550, "DOT4_03").setDepth(9101));  // Ajout image mini
+                        txt = "Ce supermarché s’inscrit dans une démarche \nenvironnementale globale."; 
+                        txt += "\nLes produits locaux, de saison, bio et de circuit-court sont vendus. \nLes invendus sont transformés en confiture ou en soupe.";
+                        toDestroy4.push(this.add.text(colTxt, py+1450, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                     // Mini 4
-                        //toDestroy4.push(this.physics.add.image(px-300, py+1700, "DOT4_04").setDepth(9101));  // Ajout image mini
-                        txt = "xxx"; 
-                        txt += "xxx";
-                        //toDestroy4.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
+                        toDestroy4.push(this.physics.add.image(px-340, py+1900, "DOT4_04").setDepth(9101));  // Ajout image mini
+                        txt = "L’aspect social est également primordial chez Coopéco."; 
+                        txt += "\nRecréer du lien entre les personnes et organiser \ndes activités avec les habitants et les associations \nfont partie intégrante du projet.";
+                        toDestroy4.push(this.add.text(colTxt, py+1830, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
                 var arrayShadows = this.addShadows(toDestroy4);
                 arrayShadows.forEach((item) => {toDestroy4.push(item);})
@@ -356,7 +357,7 @@ var DoRoom = new Phaser.Class({
                 player.x = 0;
                 player.y = 300;
                 mainCam.setZoom(1.0);
-                var sortie4 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                var sortie4 = this.physics.add.image(x+50,y+2250,"portail_ferme").setDepth(9101);
                 sortieO.setDepth(50);
                 sortie4.setInteractive();
                 sortie4.on("pointerup", function(){
