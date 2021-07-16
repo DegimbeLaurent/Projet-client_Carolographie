@@ -116,24 +116,28 @@ var LoadScene = new Phaser.Class({
             this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});            
             this.anims.create({key: 'turn',frames: [{key: 'playersheet',frame: 45}],frameRate: 20})
             this.player.name = "myPlayer";
-            this.player.setCollideWorldBounds(true);
-            playerVelocity = 2;
+            // this.player.setCollideWorldBounds(true);
+            playerVelocity = 2;            
+            //crate = this.physics.add.sprite(1250,700,'sprite').setDepth(999);
+            this.player.body.setVelocity(1,2).setBounce(1, 1).setCollideWorldBounds(true);
             cursors = this.input.keyboard.createCursorKeys();
             //==========================================    
-        var layer30 = map.createLayer('buisson', [tileset10]).setDepth(30);
-        //var layer40 = map.createLayer('tp', [tileset10]).setDepth(40);
-        var layer50 = map.createLayer('ruine stage 2', [tileset10]).setDepth(50);
-        var layer60 = map.createLayer('ruine top', [tileset10]).setDepth(60);
-        var layer70 = map.createLayer('ruine bottom', [tileset10]).setDepth(70);
-        var layer80 = map.createLayer('ruine stage', [tileset10]).setDepth(80);
-        var layer90 = map.createLayer('building bottom', [tileset10]).setDepth(90);
-        var layer100 = map.createLayer('building top ', [tileset10]).setDepth(100);
-        var layer110 = map.createLayer('building transparanse', [tileset10]).setDepth(110);
-        var layer120 = map.createLayer('correction', [tileset10]).setDepth(120);
-        var layer130 = map.createLayer('roof 2', [tileset10]).setDepth(130);
-        var layer140 = map.createLayer('roof 1', [tileset10]).setDepth(140);
-        var layer150 = map.createLayer('tronc', [tileset10]).setDepth(150);
-        var layer160 = map.createLayer('arbre', [tileset10]).setDepth(160);
+            var layer30 = map.createLayer('buisson', [tileset10]).setDepth(30);
+            //var layer40 = map.createLayer('tp', [tileset10]).setDepth(40);
+            var layer50 = map.createLayer('ruine stage 2', [tileset10]).setDepth(50);
+            var layer60 = map.createLayer('ruine top', [tileset10]).setDepth(60);
+            var layer70 = map.createLayer('ruine bottom', [tileset10]).setDepth(70);
+            var layer80 = map.createLayer('ruine stage', [tileset10]).setDepth(80);
+            var layer90 = map.createLayer('building bottom', [tileset10]).setDepth(90);
+            var layer100 = map.createLayer('building top ', [tileset10]).setDepth(100);
+            var layer110 = map.createLayer('building transparanse', [tileset10]).setDepth(110);
+            var layer120 = map.createLayer('correction', [tileset10]).setDepth(120);
+            var layer130 = map.createLayer('roof 2', [tileset10]).setDepth(130);
+            var layer140 = map.createLayer('roof 1', [tileset10]).setDepth(140);
+            var layer150 = map.createLayer('tronc', [tileset10]).setDepth(150);
+            var layer160 = map.createLayer('arbre', [tileset10]).setDepth(160);
+            layer160.setCollisionByProperty({collides: true});
+            this.physics.add.collider(this.player, layer160);
         //const layer160 = map.createStaticLayer('arbre', [tileset10]).setDepth(160);
         var layer170 = map.createLayer('chappelle', [tileset10]).setDepth(170);
         var layer180 = map.createLayer('chappelle center', [tileset10]).setDepth(180);
@@ -197,7 +201,7 @@ var LoadScene = new Phaser.Class({
             localStorage.setItem("insideRoom", true);
             Client.socket.emit("enterRoom");
             Client.socket.on("okEnterRoom", function(){
-                bruit_portail.play();
+                //bruit_portail.play();
                 location.href = '/website/portail-n.html';
             });
         })    
@@ -241,81 +245,98 @@ var LoadScene = new Phaser.Class({
         //  AJOUT DES COLLISIONS
         //==========================================
         var blocsCollisions = [];
-        bloc1 = this.physics.add.image(1250,850,"barre-256-10").setDepth(999).setBounce(1,1);
-        bloc1.body.setBounce(1,1).setCollideWorldBounds(true);
+        stopCourse = false;
+
+        this.bloc1 = this.physics.add.sprite(1250,850,"barre-256-10").setDepth(999).setBounce(1,1);
+        this.bloc1.body.setBounce(1,1).setCollideWorldBounds(true);
+        this.bloc1.setImmovable(true);
+
         mcrate = this.physics.add.sprite(1250,700,'sprite').setDepth(999);
         mcrate.body.setVelocity(100, 200).setBounce(1, 1).setCollideWorldBounds(true);
+        this.physics.add.collider(this.player, this.bloc1,function(){stopCourse = true;console.log("touché barre horizontale...["+stopCourse+"]");},null,this);
+        this.physics.add.collider(this.bloc1, this.player);
 },
 update: function(time, delta){
-        this.physics.world.collide(mcrate, bloc1);
-        this.physics.world.collide(this.player, mcrate);
-        this.physics.world.collide(this.player, bloc1);
-        this.physics.world.collide(bloc1, this.player);
+        // if(stopCourse){this.player.anims.play('turn');console.log("stoppé net!");}
+        this.physics.world.collide(mcrate, this.bloc1);
+        // this.physics.world.collide(this.player, mcrate);
+        this.physics.world.collide(this.player, this.bloc1);
+        // this.physics.world.collide(this.bloc1, this.player);
         //===
         controls.update(delta);
-        this.player.setVelocity(0);
         let plId = parseInt(localStorage.getItem("playerId"));
-        // Mouvements latéraux joueur
+        const speed = 800;
+        const prevVelocity = this.player.body.velocity.clone();
+        //this.player.body.setVelocity(0);
+        
         if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
             if (cursors.left.isDown){
                 if(cursors.up.isDown){
-                    if(!cursors.right.isDown && !cursors.down.isDown){
-                        this.player.anims.play('diagLUp', true);
-                        this.player.x -= Math.round(playerVelocity*2);
-                    }
+                    //if(!cursors.right.isDown && !cursors.down.isDown){this.player.body.setVelocityX(-speed);}
+                    if(!cursors.right.isDown && !cursors.down.isDown){this.player.body.setVelocityX(-speed);}
                 }else if(cursors.down.isDown){
-                    if(!cursors.right.isDown){
-                        this.player.anims.play('diagLDown', true);
-                        this.player.y += Math.round(playerVelocity*2);
-                    }
+                    if(!cursors.right.isDown){this.player.body.setVelocityY(speed);}
                 }else{
-                    this.player.anims.play('left', true);
-                    this.player.x -= Math.round(playerVelocity*2);
-                    this.player.y += Math.round(playerVelocity);                   
+                    this.player.body.setVelocityX(-speed);                 
+                    this.player.body.setVelocityY(speed);
                 }
                 Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
             }
             if (cursors.right.isDown){
                 if(cursors.up.isDown){   
-                    if(!cursors.left.isDown && !cursors.down.isDown){                 
-                        this.player.anims.play('diagRUp', true);
-                        this.player.y -= Math.round(playerVelocity);
-                    }
+                    if(!cursors.left.isDown && !cursors.down.isDown){this.player.body.setVelocityY(-speed);}
                 }else if(cursors.down.isDown){
-                    if(!cursors.left.isDown){
-                        this.player.anims.play('diagRDown', true);
-                        this.player.x += Math.round(playerVelocity*2);
-                    }
+                    if(!cursors.left.isDown){this.player.body.setVelocityX(speed);}
                 }else{
-                    this.player.anims.play('right', true);
-                    this.player.x += Math.round(playerVelocity*2);
-                    this.player.y -= Math.round(playerVelocity);
+                    this.player.body.setVelocityX(speed);
+                    this.player.body.setVelocityY(-speed);
                 }
                 Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
             }
-            // Mouvements verticaux joueur
             if (cursors.up.isDown){
                 if(!cursors.left.isDown && !cursors.right.isDown){
-                    this.player.anims.play('up', true);
-                    this.player.x -= Math.round(playerVelocity*2);
-                    this.player.y -= Math.round(playerVelocity);
+                    this.player.body.setVelocityX(-speed);
+                    this.player.body.setVelocityY(-speed);
                     Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
                 }
             }
             if (cursors.down.isDown){
                 if(!cursors.left.isDown && !cursors.right.isDown){
-                    this.player.anims.play('down', true);
-                    this.player.x += Math.round(playerVelocity*2);
-                    this.player.y += Math.round(playerVelocity);
+                    this.player.body.setVelocityX(speed);
+                    this.player.body.setVelocityY(speed);
                     Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
                 }
             }   
-            //bruit_course.stop();
-        }else{
-            this.player.anims.play('turn');
-            bruit_course.play();         
         }
-
+        this.player.body.velocity.normalize().scale(speed);
+        if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
+            if (cursors.left.isDown){
+                if(cursors.up.isDown){
+                    if(!cursors.right.isDown && !cursors.down.isDown){this.player.anims.play('diagLUp', true);}
+                }else if(cursors.down.isDown){
+                    if(!cursors.right.isDown){this.player.anims.play('diagLDown', true);}
+                }else{this.player.anims.play('left', true);}
+            }
+            if (cursors.right.isDown){
+                if(cursors.up.isDown){   
+                    if(!cursors.left.isDown && !cursors.down.isDown){this.player.anims.play('diagRUp', true);}
+                }else if(cursors.down.isDown){
+                    if(!cursors.left.isDown){this.player.anims.play('diagRDown', true);}
+                }else{this.player.anims.play('right', true);}
+            }
+            if (cursors.up.isDown){
+                if(!cursors.left.isDown && !cursors.right.isDown){this.player.anims.play('up', true);}
+            }
+            if (cursors.down.isDown){
+                if(!cursors.left.isDown && !cursors.right.isDown){this.player.anims.play('down', true);}
+            }   
+        }else{
+            this.player.setVelocityX(0);
+            this.player.setVelocityY(0);
+            this.player.anims.stop();
+            bruit_course.play();  
+            //if(prevVelocity.x < 0){this.player.anims.play('turn');}       
+        }
         var mousePointer = this.input.activePointer;
         game.players = this.removeDisconnectedPlayers(this, game.players);
         this.updateConnectedPlayers(this, game.players, game.playersBU, this.player);
@@ -326,3 +347,75 @@ update: function(time, delta){
         this.scene.start(nameScene, gameData);
     }
 });
+        // if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
+        //     if (cursors.left.isDown){
+        //         if(cursors.up.isDown){
+        //             if(!cursors.right.isDown && !cursors.down.isDown){
+        //                 //this.player.anims.play('diagLUp', true);
+        //                 //this.player.x -= Math.round(playerVelocity*2);
+        //                 this.player.body.setVelocityX(-speed);
+        //             }
+        //         }else if(cursors.down.isDown){
+        //             if(!cursors.right.isDown){
+        //                 this.player.anims.play('diagLDown', true);
+        //                 //this.player.y += Math.round(playerVelocity*2);
+        //                 this.player.body.setVelocityY(speed);
+        //             }
+        //         }else{
+        //             this.player.anims.play('left', true);
+        //             //this.player.x -= Math.round(playerVelocity*2);
+        //             this.player.body.setVelocityX(-speed);
+        //             //this.player.y += Math.round(playerVelocity);                   
+        //             this.player.body.setVelocityY(speed);
+        //         }
+        //         Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+        //     }
+        //     if (cursors.right.isDown){
+        //         if(cursors.up.isDown){   
+        //             if(!cursors.left.isDown && !cursors.down.isDown){                 
+        //                 this.player.anims.play('diagRUp', true);
+        //                 //this.player.y -= Math.round(playerVelocity);
+        //                 this.player.body.setVelocityY(-speed);
+        //             }
+        //         }else if(cursors.down.isDown){
+        //             if(!cursors.left.isDown){
+        //                 this.player.anims.play('diagRDown', true);
+        //                 //this.player.x += Math.round(playerVelocity*2);
+        //                 this.player.body.setVelocityX(speed);
+        //             }
+        //         }else{
+        //             this.player.anims.play('right', true);
+        //             //this.player.x += Math.round(playerVelocity*2);
+        //             this.player.body.setVelocityX(speed);
+        //             //this.player.y -= Math.round(playerVelocity);
+        //             this.player.body.setVelocityY(-speed);
+        //         }
+        //         Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+        //     }
+        //     // Mouvements verticaux joueur
+        //     if (cursors.up.isDown){
+        //         if(!cursors.left.isDown && !cursors.right.isDown){
+        //             this.player.anims.play('up', true);
+        //             //this.player.x -= Math.round(playerVelocity*2);
+        //             this.player.body.setVelocityX(-speed);
+        //             //this.player.y -= Math.round(playerVelocity);
+        //             this.player.body.setVelocityY(-speed);
+        //             Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+        //         }
+        //     }
+        //     if (cursors.down.isDown){
+        //         if(!cursors.left.isDown && !cursors.right.isDown){
+        //             this.player.anims.play('down', true);
+        //             //this.player.x += Math.round(playerVelocity*2);
+        //             this.player.body.setVelocityX(speed);
+        //             //this.player.y += Math.round(playerVelocity);
+        //             this.player.body.setVelocityY(speed);
+        //             Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+        //         }
+        //     }   
+        //     //bruit_course.stop();
+        // }else{
+        //     //this.player.anims.play('turn');
+        //     this.player.anims.stop();
+        //     bruit_course.play();         
+        // }
