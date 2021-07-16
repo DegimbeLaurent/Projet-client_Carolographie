@@ -17,6 +17,10 @@ var DsRoom = new Phaser.Class({
         this.load.image('chevalet_d', '/img/chevalet_d.png');
         this.load.image('portail_ferme', '/img/portail_ferme.png');
         this.load.image('portail_ouvert', '/img/portail_ouvert.png');
+        this.load.spritesheet('playersheet', '/img/simple-grey-shirt.png', {
+            frameWidth: 85,
+            frameHeight: 169
+        });
         // PICTURES
             // DISTRICT SUD
                 this.load.image('DST1_00', '/img/visit/districtS/DS-T1/DST1_00.png');
@@ -39,9 +43,28 @@ var DsRoom = new Phaser.Class({
                 this.load.image('DST4_01', '/img/visit/districtS/DS-T4/DST4_01.png');
                 this.load.image('DST4_02', '/img/visit/districtS/DS-T4/DST4_02.png');
                 this.load.image('DST4_03', '/img/visit/districtS/DS-T4/DST4_03.png');
+        // SONS & BRUITAGES
+        this.load.audio('course', '/assets/sounds/course.mp3');
+        this.load.audio('campagne', '/assets/sounds/ambiance_campagne.mp3');
+        this.load.audio('feu', '/assets/sounds/feu.mp3');
+        this.load.audio('portail', '/assets/sounds/portail.mp3');
     },
     create: function(config){
         game.backgroundColor='#000000';
+        //==========================================
+        //  AJOUT DES SONS
+        //==========================================
+        bruit_course = this.sound.add("course", { loop: true });
+        bruit_course.allowMultiple = false;
+        bruit_ambiance = this.sound.add("campagne", { loop: true });
+        bruit_ambiance.allowMultiple = false;
+        // bruit_ambiance.play();
+        bruit_feu = this.sound.add("feu", { loop: true });
+        bruit_feu.allowMultiple = false;
+        bruit_feu.play();
+        bruit_portail = this.sound.add("portail", { loop: false });
+        bruit_portail.allowMultiple = false;
+        bruit_portail.play();
         //==========================================
         //  GESTION CLIENT - SERVER
         //==========================================
@@ -57,21 +80,39 @@ var DsRoom = new Phaser.Class({
         var map = this.add.tilemap('map_room');
         var tileset10 = map.addTilesetImage('set_district', 'set_district');
         var layer10 = map.createLayer('ground', [tileset10]).setDepth(10);
-        var layer20 = map.createLayer('ground2', [tileset10]).setDepth(20);        
+        var layer20 = map.createLayer('ground2', [tileset10]).setDepth(20);  
+        
+        var layer23 = map.createLayer('tapis', [tileset10]).setDepth(23);  
+        var layer26 = map.createLayer('tapis2', [tileset10]).setDepth(26);  
+
         var layer30 = map.createLayer('wall', [tileset10]).setDepth(30);        
         var layer40 = map.createLayer('wall2', [tileset10]).setDepth(40);        
+
+        var layer50 = map.createLayer('chaise2', [tileset10]).setDepth(41);        
+        var layer60 = map.createLayer('meuble', [tileset10]).setDepth(43);        
+        var layer70 = map.createLayer('chaise', [tileset10]).setDepth(44);        
+        var layer80 = map.createLayer('lampe', [tileset10]).setDepth(45);        
         //==========================================
         //  AJOUT DU JOUEUR
         //==========================================
-        player = this.physics.add.image(100,900,'sprite').setDepth(50).setScale(2);
-        player.name = "myPlayer";
-        player.setCollideWorldBounds(true);
+        this.player = this.physics.add.sprite(100,900,'playersheet').setDepth(49).setScale(0.7);
+        this.anims.create({key:'left',frames: this.anims.generateFrameNumbers('playersheet', {start: 30,end: 35}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'right',frames: this.anims.generateFrameNumbers('playersheet', {start: 6,end: 11}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'up',frames: this.anims.generateFrameNumbers('playersheet', {start: 18,end: 23}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'down',frames: this.anims.generateFrameNumbers('playersheet', {start: 36,end: 41}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'diagLUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 24,end: 29}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'diagLDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 42,end: 47}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'diagRUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 12,end: 17}),frameRate: 10,repeat: -1});
+        this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});            
+        this.anims.create({key: 'turn',frames: [{key: 'playersheet',frame: 45}],frameRate: 20})
+        this.player.name = "myPlayer";
+        //player.setCollideWorldBounds(true);
         playerVelocity = 2;
         cursors = this.input.keyboard.createCursorKeys();
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
-        var mainCam = this.cameras.main.startFollow(player, true, 0.1, 0.1);
+        var mainCam = this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
         var coeffZoom = 0.8;
         mainCam.setZoom(coeffZoom);
         controlConfig = {
@@ -92,7 +133,10 @@ var DsRoom = new Phaser.Class({
             //  INIT
             //============         
             let x = 0; let y = 0; var px = 0; var py = 0; let txt = "";
-            player.setDepth(9099);
+            //this.player.setDepth(9099);
+            resetPlayer = false;
+            centerPlayer = false;
+            lecture = false;
             var fondsEcran = this.add.rectangle(0, 0, 12600 , 6500, 0xf4edde).setDepth(1); 
             var fontFam = "Montserrat";
             var fontSZ = 24;
@@ -104,6 +148,7 @@ var DsRoom = new Phaser.Class({
             var toDestroy = []; var toDestroy2 = []; var toDestroy3 = []; var toDestroy4 = [];
             camSubject = "room";
             var sortieS = this.physics.add.image(100,975,"portail_ouvert").setInteractive().setDepth(9100);
+            posSortie = 1500;
             var chevaletDSP1;
             var chevaletDSP2;
             var chevaletDSP3;
@@ -112,7 +157,7 @@ var DsRoom = new Phaser.Class({
             //  CHEVALET 1
             //============
             // Le Musée de la Photographie à Mont-sur-Marchienne
-            chevaletDSP1 = this.physics.add.image(-525,575,"chevalet_g").setInteractive().setDepth(9001);
+            chevaletDSP1 = this.physics.add.image(-520,700,"chevalet_g").setInteractive().setDepth(9001);
             chevaletDSP1.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 1
@@ -144,6 +189,10 @@ var DsRoom = new Phaser.Class({
                         // txt += "xxx";
                         //toDestroy.push(this.add.text(colTxt, py+1630, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
+                bruit_feu.stop();
+                bruit_ambiance.play();
+                centerPlayer = true;
+                lecture = true;
                 var arrayShadows = this.addShadows(toDestroy);
                 arrayShadows.forEach((item) => {toDestroy.push(item);})
                 camSubject = "chevalet";
@@ -152,14 +201,17 @@ var DsRoom = new Phaser.Class({
                 chevaletDSP3.setDepth(1);
                 chevaletDSP4.setDepth(1);
                 fondsEcran.setDepth(51);
-                player.setDepth(1);
-                player.x = 0;
-                player.y = 300;
+                // player.setDepth(1);
+                // player.x = 0;
+                // player.y = 300;
                 mainCam.setZoom(1.0);
                 var sortie1 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                posSortie = sortie1.y;
                 sortieS.setDepth(50);
                 sortie1.setInteractive();
                 sortie1.on("pointerup", function(){
+                    bruit_ambiance.stop();
+                    bruit_feu.play();
                     sortie1.destroy();
                     toDestroy.forEach((item) => {item.destroy();})
                     fondsEcran.setDepth(1);
@@ -168,18 +220,21 @@ var DsRoom = new Phaser.Class({
                     chevaletDSP2.setDepth(9001);
                     chevaletDSP3.setDepth(9001);
                     chevaletDSP4.setDepth(9001);
-                    player.setDepth(9199);
-                    player.x = 100;
-                    player.y = 600;
+                    // player.setDepth(9199);
+                    // player.x = 100;
+                    // player.y = 600;
                     camSubject = "room";
                     mainCam.setZoom(0.8);
+                    resetPlayer = true;
+                    centerPlayer = false;
+                    lecture = false;
                 })
             }, this);             
             //============
             //  CHEVALET 2
             //============
             // Le Bois du Cazier à Marcinelle
-            chevaletDSP2 = this.physics.add.image(-140,380,"chevalet_g").setInteractive().setDepth(9001);
+            chevaletDSP2 = this.physics.add.image(-140,510,"chevalet_g").setInteractive().setDepth(9001);
             chevaletDSP2.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 2
@@ -209,6 +264,8 @@ var DsRoom = new Phaser.Class({
                         // txt += "xxx";
                         toDestroy2.push(this.add.text(colTxt, py+1350, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
+                centerPlayer = true;
+                lecture = true;
                 var arrayShadows = this.addShadows(toDestroy2);
                 arrayShadows.forEach((item) => {toDestroy2.push(item);})
                 camSubject = "chevalet";
@@ -217,11 +274,12 @@ var DsRoom = new Phaser.Class({
                 chevaletDSP3.setDepth(1);
                 chevaletDSP4.setDepth(1);
                 fondsEcran.setDepth(51);
-                player.setDepth(1);
-                player.x = 0;
-                player.y = 300;
+                // player.setDepth(1);
+                // player.x = 0;
+                // player.y = 300;
                 mainCam.setZoom(1.0);
                 var sortie2 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                posSortie = sortie2.y;
                 sortieS.setDepth(50);
                 sortie2.setInteractive();
                 sortie2.on("pointerup", function(){
@@ -233,18 +291,20 @@ var DsRoom = new Phaser.Class({
                     chevaletDSP2.setDepth(9001);
                     chevaletDSP3.setDepth(9001);
                     chevaletDSP4.setDepth(9001);
-                    player.setDepth(9199);
-                    player.x = 100;
-                    player.y = 600;
+                    // player.setDepth(9199);
+                    // player.x = 100;
+                    // player.y = 600;
                     camSubject = "room";
                     mainCam.setZoom(0.8);
+                    resetPlayer = true;
+                    lecture = false;
                 })
             }, this); 
             //============
             //  CHEVALET 3
             //============
             // Le Centre de délassement de Marcinelle
-            chevaletDSP3 = this.physics.add.image(375,380,"chevalet_d").setInteractive().setDepth(9001);
+            chevaletDSP3 = this.physics.add.image(375,510,"chevalet_d").setInteractive().setDepth(9001);
             chevaletDSP3.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 3
@@ -278,6 +338,8 @@ var DsRoom = new Phaser.Class({
                         txt = "\nÀ travers cet article, nous souhaitons saluer tous nos proches \ndont les grands-parents ont travaillé \ndans les charbonnages et les industries carolos. \nSans eux, nos vies seraient bien différentes.\n";
                         toDestroy3.push(this.add.text(colTxt, py+1655, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
+                centerPlayer = true;
+                lecture = true;
                 var arrayShadows = this.addShadows(toDestroy3);
                 arrayShadows.forEach((item) => {toDestroy3.push(item);})
                 camSubject = "chevalet";
@@ -286,11 +348,12 @@ var DsRoom = new Phaser.Class({
                 chevaletDSP3.setDepth(1);
                 chevaletDSP4.setDepth(1);
                 fondsEcran.setDepth(51);
-                player.setDepth(1);
-                player.x = 0;
-                player.y = 300;
+                // player.setDepth(1);
+                // player.x = 0;
+                // player.y = 300;
                 mainCam.setZoom(1.0);
                 var sortie3 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                posSortie = sortie3.y;
                 sortieS.setDepth(50);
                 sortie3.setInteractive();
                 sortie3.on("pointerup", function(){
@@ -302,18 +365,20 @@ var DsRoom = new Phaser.Class({
                     chevaletDSP2.setDepth(9001);
                     chevaletDSP3.setDepth(9001);
                     chevaletDSP4.setDepth(9001);
-                    player.setDepth(9199);
-                    player.x = 100;
-                    player.y = 600;
+                    // player.setDepth(9199);
+                    // player.x = 100;
+                    // player.y = 600;
                     camSubject = "room";
                     mainCam.setZoom(0.8);
+                    resetPlayer = true;
+                    lecture = false;
                 })
             }, this); 
             //============
             //  CHEVALET 4
             //============
             // Les Espaces Composite à Marcinelle
-            chevaletDSP4 = this.physics.add.image(755,575,"chevalet_d").setInteractive().setDepth(9001);
+            chevaletDSP4 = this.physics.add.image(755,700,"chevalet_d").setInteractive().setDepth(9001);
             chevaletDSP4.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 4
@@ -344,6 +409,8 @@ var DsRoom = new Phaser.Class({
                         txt += "C’est une vraie mine d’or pour les amateurs et \nles photographes en quête d’inspiration!";
                         toDestroy4.push(this.add.text(colTxt, py+1660, txt, {fontFamily: fontFam,fontSize: fontSZ,color: colorTxt, align: alignTxt, lineSpacing: lnSp}).setDepth(9101));  // Ajout texte
                 //======================================
+                centerPlayer = true;
+                lecture = true;
                 var arrayShadows = this.addShadows(toDestroy4);
                 arrayShadows.forEach((item) => {toDestroy4.push(item);})
                 camSubject = "chevalet";
@@ -352,11 +419,12 @@ var DsRoom = new Phaser.Class({
                 chevaletDSP3.setDepth(1);
                 chevaletDSP4.setDepth(1);
                 fondsEcran.setDepth(51);
-                player.setDepth(1);
-                player.x = 0;
-                player.y = 300;
+                // player.setDepth(1);
+                // player.x = 0;
+                // player.y = 300;
                 mainCam.setZoom(1.0);
                 var sortie4 = this.physics.add.image(x+50,y+2000,"portail_ferme").setDepth(9101);
+                posSortie = sortie4.y;
                 sortieS.setDepth(50);
                 sortie4.setInteractive();
                 sortie4.on("pointerup", function(){
@@ -368,11 +436,13 @@ var DsRoom = new Phaser.Class({
                     chevaletDSP2.setDepth(9001);
                     chevaletDSP3.setDepth(9001);
                     chevaletDSP4.setDepth(9001);
-                    player.setDepth(9199);
-                    player.x = 100;
-                    player.y = 600;
+                    // player.setDepth(9199);
+                    // player.x = 100;
+                    // player.y = 600;
                     camSubject = "room";
                     mainCam.setZoom(0.8);
+                    resetPlayer = true;
+                    lecture = false;
                 })
             }, this); 
             //============
@@ -389,22 +459,88 @@ var DsRoom = new Phaser.Class({
             }, this);
         },
         update: function(time, delta){
-            controls.update(delta);
-            player.setVelocity(0);
-            let plId = parseInt(localStorage.getItem("playerId"));
-            if (cursors.left.isDown){
-                player.x -= Math.round(playerVelocity*2);
-                Client.socket.emit('click', { id: plId, x: player.x, y: player.y });
-            }else if (cursors.right.isDown){
-                player.x += Math.round(playerVelocity*2);
-                Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
+            if(resetPlayer == true){
+                this.player.x = 100;
+                this.player.y = 900;
+                resetPlayer = false;
             }
-            if (cursors.up.isDown){
-                player.y -= Math.round(playerVelocity*3);
-                Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
-            }else if (cursors.down.isDown){
-                player.y += Math.round(playerVelocity*3);
-                Client.socket.emit('click', { id: plId, x: player.x, y: player.y })
+            if(centerPlayer == true){
+                this.player.x = 100;
+                this.player.y = 300;
+                centerPlayer = false;
+            }
+            controls.update(delta);
+            this.player.setVelocity(0);
+            let plId = parseInt(localStorage.getItem("playerId"));
+            if(lecture){
+                if (cursors.up.isDown){
+                    this.player.y -= Math.round(playerVelocity*3);
+                    Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y });
+                }else if (cursors.down.isDown && posSortie >= this.player.y){
+                    console.log(posSortie + " - " + this.player.y);
+                    this.player.y += Math.round(playerVelocity*3);
+                    Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                }      
+                bruit_course.stop();          
+            }else{
+                if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
+                    if (cursors.left.isDown){
+                        if(cursors.up.isDown){
+                            if(!cursors.right.isDown && !cursors.down.isDown){
+                                this.player.anims.play('diagLUp', true);
+                                this.player.x -= Math.round(playerVelocity*2);
+                            }
+                        }else if(cursors.down.isDown){
+                            if(!cursors.right.isDown){
+                                this.player.anims.play('diagLDown', true);
+                                this.player.y += Math.round(playerVelocity*2);
+                            }
+                        }else{
+                            this.player.anims.play('left', true);
+                            this.player.x -= Math.round(playerVelocity*2);
+                            this.player.y += Math.round(playerVelocity);
+                        }
+                        Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                    }
+                    if (cursors.right.isDown){
+                        if(cursors.up.isDown){   
+                            if(!cursors.left.isDown && !cursors.down.isDown){                 
+                                this.player.anims.play('diagRUp', true);
+                                this.player.y -= Math.round(playerVelocity);
+                            }
+                        }else if(cursors.down.isDown){
+                            if(!cursors.left.isDown){
+                                this.player.anims.play('diagRDown', true);
+                                this.player.x += Math.round(playerVelocity*2);
+                            }
+                        }else{
+                            this.player.anims.play('right', true);
+                            this.player.x += Math.round(playerVelocity*2);
+                            this.player.y -= Math.round(playerVelocity);
+                        }
+                        Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                    }
+                    // Mouvements verticaux joueur
+                    if (cursors.up.isDown){
+                        if(!cursors.left.isDown && !cursors.right.isDown){
+                            this.player.anims.play('up', true);
+                            this.player.x -= Math.round(playerVelocity*2);
+                            this.player.y -= Math.round(playerVelocity);
+                            Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                        }
+                    }
+                    if (cursors.down.isDown){
+                        if(!cursors.left.isDown && !cursors.right.isDown){
+                            this.player.anims.play('down', true);
+                            this.player.x += Math.round(playerVelocity*2);
+                            this.player.y += Math.round(playerVelocity);
+                            Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
+                        }
+                    }            
+                }else{
+                    this.player.anims.play('turn');
+                    bruit_course.play(); 
+                }
             }
             var mousePointer = this.input.activePointer;
             game.players = this.removeDisconnectedPlayers(this, game.players);

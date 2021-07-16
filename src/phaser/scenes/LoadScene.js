@@ -244,23 +244,23 @@ var LoadScene = new Phaser.Class({
         //==========================================
         //  AJOUT DES COLLISIONS
         //==========================================
-        var blocsCollisions = [];
-        stopCourse = false;
+        // var blocsCollisions = [];
+        // stopCourse = false;
 
-        this.bloc1 = this.physics.add.sprite(1250,850,"barre-256-10").setDepth(999).setBounce(1,1);
-        this.bloc1.body.setBounce(1,1).setCollideWorldBounds(true);
-        this.bloc1.setImmovable(true);
+        // this.bloc1 = this.physics.add.sprite(1250,850,"barre-256-10").setDepth(999).setBounce(1,1);
+        // this.bloc1.body.setBounce(1,1).setCollideWorldBounds(true);
+        // this.bloc1.setImmovable(true);
 
-        mcrate = this.physics.add.sprite(1250,700,'sprite').setDepth(999);
-        mcrate.body.setVelocity(100, 200).setBounce(1, 1).setCollideWorldBounds(true);
-        this.physics.add.collider(this.player, this.bloc1,function(){stopCourse = true;console.log("touché barre horizontale...["+stopCourse+"]");},null,this);
-        this.physics.add.collider(this.bloc1, this.player);
+        // mcrate = this.physics.add.sprite(1250,700,'sprite').setDepth(999);
+        // mcrate.body.setVelocity(100, 200).setBounce(1, 1).setCollideWorldBounds(true);
+        // this.physics.add.collider(this.player, this.bloc1,function(){stopCourse = true;console.log("touché barre horizontale...["+stopCourse+"]");},null,this);
+        // this.physics.add.collider(this.bloc1, this.player);
 },
 update: function(time, delta){
         // if(stopCourse){this.player.anims.play('turn');console.log("stoppé net!");}
-        this.physics.world.collide(mcrate, this.bloc1);
+        //this.physics.world.collide(mcrate, this.bloc1);
         // this.physics.world.collide(this.player, mcrate);
-        this.physics.world.collide(this.player, this.bloc1);
+        //this.physics.world.collide(this.player, this.bloc1);
         // this.physics.world.collide(this.bloc1, this.player);
         //===
         controls.update(delta);
