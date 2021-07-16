@@ -148,7 +148,7 @@ var LoadScene = new Phaser.Class({
         //  GESTION DE LA CAMERA
         //==========================================
         this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
-        var coeffZoom = 1.2;
+        var coeffZoom = 1.0;
         this.cameras.main.setZoom(coeffZoom);
         controlConfig = {
             camera: this.cameras.main,
