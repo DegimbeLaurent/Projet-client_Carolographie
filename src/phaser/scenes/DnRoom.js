@@ -86,13 +86,25 @@ var DnRoom = new Phaser.Class({
         var map = this.add.tilemap('map_room');
         var tileset10 = map.addTilesetImage('set_district', 'set_district');
         var layer10 = map.createLayer('ground', [tileset10]).setDepth(10);
-        var layer20 = map.createLayer('ground2', [tileset10]).setDepth(20);        
+        var layer20 = map.createLayer('ground2', [tileset10]).setDepth(20);  
+        
+        var layer23 = map.createLayer('tapis', [tileset10]).setDepth(23);  
+        var layer26 = map.createLayer('tapis2', [tileset10]).setDepth(26);  
+
         var layer30 = map.createLayer('wall', [tileset10]).setDepth(30);        
         var layer40 = map.createLayer('wall2', [tileset10]).setDepth(40);        
+
+        var layer50 = map.createLayer('chaise2', [tileset10]).setDepth(41);        
+        var layer60 = map.createLayer('meuble', [tileset10]).setDepth(43);        
+        var layer70 = map.createLayer('chaise', [tileset10]).setDepth(44);        
+        var layer80 = map.createLayer('lampe', [tileset10]).setDepth(45);        
+
+
+
         //==========================================
         //  AJOUT DU JOUEUR
         //==========================================
-        this.player = this.physics.add.sprite(100,900,'playersheet').setDepth(25).setScale(0.7);
+        this.player = this.physics.add.sprite(100,900,'playersheet').setDepth(49).setScale(0.7);
         this.anims.create({key:'left',frames: this.anims.generateFrameNumbers('playersheet', {start: 30,end: 35}),frameRate: 10,repeat: -1});
         this.anims.create({key:'right',frames: this.anims.generateFrameNumbers('playersheet', {start: 6,end: 11}),frameRate: 10,repeat: -1});
         this.anims.create({key:'up',frames: this.anims.generateFrameNumbers('playersheet', {start: 18,end: 23}),frameRate: 10,repeat: -1});
@@ -156,7 +168,7 @@ var DnRoom = new Phaser.Class({
             //  CHEVALET 1
             //============
             // Le Parc de la Serna à Jumet
-            chevaletDNP1 = this.physics.add.image(-525,575,"chevalet_g").setInteractive().setDepth(9001);
+            chevaletDNP1 = this.physics.add.image(-520,700,"chevalet_g").setInteractive().setDepth(9001);
             chevaletDNP1.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 1
@@ -231,7 +243,7 @@ var DnRoom = new Phaser.Class({
             //  CHEVALET 2
             //============
             // L’Aéroport et l’Aéropole de Gosselies
-            chevaletDNP2 = this.physics.add.image(-140,380,"chevalet_g").setInteractive().setDepth(9001);
+            chevaletDNP2 = this.physics.add.image(-140,510,"chevalet_g").setInteractive().setDepth(9001);
             chevaletDNP2.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 2
@@ -304,7 +316,7 @@ var DnRoom = new Phaser.Class({
             //  CHEVALET 3
             //============
             // Jumet.bio
-            chevaletDNP3 = this.physics.add.image(375,380,"chevalet_d").setInteractive().setDepth(9001);
+            chevaletDNP3 = this.physics.add.image(375,510,"chevalet_d").setInteractive().setDepth(9001);
             chevaletDNP3.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 3
@@ -375,7 +387,7 @@ var DnRoom = new Phaser.Class({
             //  CHEVALET 4
             //============
             // Le Métro Carolorégien
-            chevaletDNP4 = this.physics.add.image(755,575,"chevalet_d").setInteractive().setDepth(9001);
+            chevaletDNP4 = this.physics.add.image(755,700,"chevalet_d").setInteractive().setDepth(9001);
             chevaletDNP4.on("pointerup", function(){
                 //======================================
                 //  PHOTOS & TEXTES - CHEVALET 4
