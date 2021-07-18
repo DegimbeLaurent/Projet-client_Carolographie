@@ -3,8 +3,7 @@
     {
      "export":
         {
-         "format":"json",
-         "target":"map_abbaye_V2.json"
+         "format":"json"
         }
     },
  "height":40,
@@ -225,12 +224,71 @@
          "width":30,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":23,
+         "name":"collisions1",
+         "objects":[
+                {
+                 "height":0,
+                 "id":4,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":4,
+                         "y":-1361.33333333333
+                        }, 
+                        {
+                         "x":5.83333333333348,
+                         "y":-2196.83333333333
+                        }, 
+                        {
+                         "x":36.8333333333335,
+                         "y":-2196.83333333333
+                        }, 
+                        {
+                         "x":36.8333333333335,
+                         "y":9.16666666666652
+                        }],
+                 "rotation":359.704072924148,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1.80014801806738,
+                 "y":2969.67478100839
+                }, 
+                {
+                 "height":19,
+                 "id":5,
+                 "name":"",
+                 "rotation":0,
+                 "text":
+                    {
+                     "text":"Bonjour Monde",
+                     "wrap":true
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":108,
+                 "x":-92.5,
+                 "y":2503.5
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":22,
- "nextobjectid":1,
+ "nextlayerid":24,
+ "nextobjectid":6,
  "orientation":"isometric",
  "renderorder":"right-down",
- "tiledversion":"1.6.0",
+ "tiledversion":"1.5.0",
  "tileheight":128,
  "tilesets":[
         {
@@ -718,6 +776,6 @@
         }],
  "tilewidth":256,
  "type":"map",
- "version":"1.6",
+ "version":1.5,
  "width":30
 }
