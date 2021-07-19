@@ -9,9 +9,7 @@ var LoadScene = new Phaser.Class({
     },
     preload: function(){
         this.load.image('set_tuile', '/assets/maps/set_tuile.png');
-        this.load.image('hitbox', '/assets/maps/hitbox.png');
         this.load.tilemapTiledJSON("map_visite", "/maps/map_abbaye_V2.json");
-        this.load.tilemapTiledJSON("map_collisions", "/maps/map_collisions.json");
         this.load.image('sprite', '/img/sprite.png');
         this.load.image('minimap', '/img/minimap.png');
         this.load.image('parchemin', '/img/parchemin.jpg');
@@ -34,27 +32,8 @@ var LoadScene = new Phaser.Class({
                 frameWidth: 85,
                 frameHeight: 169
             });
-        // PICTURES
-            // DISTRICT NORD
-                this.load.image('DNT1_00', '/img/visit/districtN/DN-T1/DNT1_00.jpg');
-                this.load.image('DNT1_01', '/img/visit/districtN/DN-T1/DNT1_01.JPG');
-                this.load.image('DNT1_02', '/img/visit/districtN/DN-T1/DNT1_02.JPG');
-                this.load.image('DNT1_03', '/img/visit/districtN/DN-T1/DNT1_03.JPG');
-                this.load.image('DNT2_00', '/img/visit/districtN/DN-T2/DNT2_00.jpg');
-                this.load.image('DNT2_01', '/img/visit/districtN/DN-T2/DNT2_01.jpg');
-                this.load.image('DNT2_02', '/img/visit/districtN/DN-T2/DNT2_02.jpg');
-                //this.load.image('DNT2_03', '/img/visit/districtN/DN-T1/DNT2_03.JPG');
-/*                 this.load.image('DNT3_00', '/img/visit/districtN/DN-T1/DNT3_00.jpg');
-                this.load.image('DNT3_01', '/img/visit/districtN/DN-T1/DNT3_01.JPG');
-                this.load.image('DNT3_02', '/img/visit/districtN/DN-T1/DNT3_02.JPG');
-                this.load.image('DNT3_03', '/img/visit/districtN/DN-T1/DNT3_03.JPG');
-                this.load.image('DNT4_00', '/img/visit/districtN/DN-T1/DNT4_00.jpg');
-                this.load.image('DNT4_01', '/img/visit/districtN/DN-T1/DNT4_01.JPG');
-                this.load.image('DNT4_02', '/img/visit/districtN/DN-T1/DNT4_02.JPG');
-                this.load.image('DNT4_03', '/img/visit/districtN/DN-T1/DNT4_03.JPG'); */
 
         // BARRES COLLISIONS
-            this.load.image('barre-256-10', '/img/collisions/barre-256-10.png');
             this.load.image('cb25-25', '/img/collisions/cb25-25.png');
             this.load.image('cb50-50', '/img/collisions/cb50-50.png');
             this.load.image('cb100-100', '/img/collisions/cb100-100.png');
@@ -70,29 +49,6 @@ var LoadScene = new Phaser.Class({
     create: function(config){
         console.log("on passe ici...");
         game.backgroundColor='#6E5940';
-        //console.table(config);
-        //==========================================
-        //  TEST POLICE
-        //==========================================
-        //this.add.text(400,400,"Test font Berry Rotunda !!!",{fontFamily: "myfont",fontSize: 12,color:0xffffff});
-        // let px = 500;
-        // let py = 500;
-        // var parchemin = this.add.image(px,py,"parchemin").setDepth(998);
-        // var pierre_gravee = this.add.image(px+380,py-50,"pierre_gravee").setDepth(999).setScale(0.5);
-        // this.add.text(px-950, py-250, "D", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
-        // this.add.text(px-900, py-235, "istrict Nord - Le Parc de la Serna à Jumet", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
-        // this.add.text(px+330, py+200, "Q", {fontFamily: "berry_rotunda",fontSize: 48,color: '#8a2828'}).setDepth(999);
-        // this.add.text(px+375, py+215, "uitter", {fontFamily: "berry_rotunda",fontSize: 32,color: '#000000'}).setDepth(999);
-        // var DNT1_00 = this.physics.add.image(px-300, py+110, "DNT1_00").setDepth(9101).setScale(0.4);
-        // var DNT1_01 = this.physics.add.image(px-850, py-40, "DNT1_01").setDepth(9101).setScale(0.7);
-        // var DNT1_02 = this.physics.add.image(px-850, py+160, "DNT1_02").setDepth(9101).setScale(0.75);
-        // var DNT1_03 = this.physics.add.image(px-850, py+360, "DNT1_03").setDepth(9101).setScale(1);
-        // let txt = "À deux pas de l’Aéroport de Gosselies, se trouve le Parc de la Serna,";
-        // this.add.text(px-650, py+380, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
-        // txt = "un des poumons verts de la région.";
-        // this.add.text(px-650, py+420, txt, {fontFamily: "berry_rotunda",fontSize: 16,color: '#000000'}).setDepth(999);
-        
-        //this.add.DynamicBitmapText(this,150,400, 'myfont', 'Test Berry Rotunda!',36);
         //==========================================
         //  GESTION CLIENT - SERVER
         //==========================================
@@ -106,9 +62,9 @@ var LoadScene = new Phaser.Class({
         this.cameras.main.setBounds(-8000, -200, 12600 , 6500);
         this.physics.world.setBounds(-8000,-200, 12600, 6500);
         map = this.add.tilemap('map_visite');
-        map_collisions = this.add.tilemap('map_collisions');
+        // map_collisions = this.add.tilemap('map_collisions');
         var tileset10 = map.addTilesetImage('set_tuile', 'set_tuile');
-        var tilesetHitbox = map_collisions.addTilesetImage('hitbox', 'hitbox');
+        // var tilesetHitbox = map_collisions.addTilesetImage('hitbox', 'hitbox');
         var layer10 = map.createLayer('ground', [tileset10]).setDepth(10);
         var layer20 = map.createLayer('flower', [tileset10]).setDepth(20);        
             //==========================================
@@ -126,9 +82,7 @@ var LoadScene = new Phaser.Class({
             this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});            
             this.anims.create({key: 'turn',frames: [{key: 'playersheet',frame: 45}],frameRate: 20})
             this.player.name = "myPlayer";
-            // this.player.setCollideWorldBounds(true);
             playerVelocity = 2;            
-            //crate = this.physics.add.sprite(1250,700,'sprite').setDepth(999);
             this.player.body.setVelocity(1,2).setBounce(1, 1).setCollideWorldBounds(true);
             cursors = this.input.keyboard.createCursorKeys();
             //==========================================    
@@ -151,132 +105,53 @@ var LoadScene = new Phaser.Class({
         var layer170 = map.createLayer('chappelle', [tileset10]).setDepth(170);
         var layer180 = map.createLayer('chappelle center', [tileset10]).setDepth(180);
         var layer190 = map.createLayer('chappelle top', [tileset10]).setDepth(190);
-        var layerCollisions = map_collisions.createLayer('collisions', tilesetHitbox).setDepth(9999);
-        this.physics.add.collider(this.player, layerCollisions, console.log("hit!"), null, this);
-        //this.physics.add.overlap(this.player, layerCollisions, console.log("hit!"),null,this);
-        layerCollisions.setCollisionBetween(1,2,true);
         //==========================================
         //  AJOUT DES COLLISIONS
         //==========================================
-        // var blocsCollisions = [];
-        // MUR EST
-            this.bloc1 = this.physics.add.sprite(1500,1000,"barre-256-10").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc1);
-            this.bloc2 = this.physics.add.sprite(2400,1250,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc2);
-            this.bloc3 = this.physics.add.sprite(2300,1400,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc3);
-            this.bloc4 = this.physics.add.sprite(2200,1480,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc4);
-            this.bloc5 = this.physics.add.sprite(2100,1540,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc5);
-            this.bloc6 = this.physics.add.sprite(2000,1580,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc6);
-            this.bloc7 = this.physics.add.sprite(1900,1620,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc7);
-            this.bloc8 = this.physics.add.sprite(1800,1660,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc8);
-            this.bloc9 = this.physics.add.sprite(1700,1700,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc9);
-            this.bloc10 = this.physics.add.sprite(1600,1740,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc10);
-            this.bloc11 = this.physics.add.sprite(1500,1780,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc11);
-            this.bloc12 = this.physics.add.sprite(1400,1820,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc12);
-            this.bloc13 = this.physics.add.sprite(1300,1860,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc13);
+        // Mur Nord
+            this.addHitboxDiag(2480,1280,-80,-40,50,27);
+        // Serre
+            this.addHitboxDiag(350,250,-40,20,25,20);
+            this.addHitboxDiag(500,350,-40,20,25,16);
+        // Murs Ouest
+            let coinsMurs = [[-550,500,250],[-2600,1660,100],[-3150,2150,100],[-3650,2700,100],[-3550,2800,100]];
+            this.addHitbox(coinsMurs);
+            this.addHitboxDiag(-710,580,-80,40,50,25);
+            this.addHitboxDiag(-2600,1760,-80,40,50,8);
+            this.addHitboxDiag(-3050,2250,-80,40,50,9);
+            this.addHitboxDiag(-3450,2850,-80,40,50,6);
+            this.addHitboxDiag(-3900,3100,80,40,50,11);
+        // Mur Est
+            this.addHitboxDiag(2400,1370,-80,40,50,15);
         // Chapelle & bâtiment Est
-            this.bloc14 = this.physics.add.sprite(650,1820,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc14);
-            this.bloc15 = this.physics.add.sprite(700,1920,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc15);
-            this.bloc16 = this.physics.add.sprite(1000,2200,"cb500-500").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc16);
-            this.bloc17 = this.physics.add.sprite(790,1870,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc17);
-            this.bloc18 = this.physics.add.sprite(540,1770,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc18);
-            this.bloc19 = this.physics.add.sprite(500,1790,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc19);
-            this.bloc20 = this.physics.add.sprite(500,2250,"cb250-250").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc20);
-            this.bloc21 = this.physics.add.sprite(300,2150,"cb250-250").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc21);
-            this.bloc22 = this.physics.add.sprite(700,2000,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc22);
-            this.bloc23 = this.physics.add.sprite(700,2350,"cb100-100").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc23);
-            this.bloc24 = this.physics.add.sprite(1250,2600,"cb500-500").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc24);
-
+            let chapelle = [[650,1820,100],[700,1920,100],[790,1870,100],[540,1770,100],[500,1790,100],[700,2000,100],[260,1600,100]];
+            this.addHitbox(chapelle);
+        // Bâtiment Est
+            let batimentEst = [[1000,2200,500],[500,2250,250],[300,2150,250],[700,2350,100],[1250,2600,500]];     
+            this.addHitbox(batimentEst);       
         // Cloître
 
-        // Grand mur à côté du saule, qui va jusqu'au bâtiment sud
-            this.bloc25 = this.physics.add.sprite(0,1710,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc25);
-            this.bloc26 = this.physics.add.sprite(-230,1850,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc26);
-            this.bloc27 = this.physics.add.sprite(-310,1890,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc27);
-            this.bloc28 = this.physics.add.sprite(-390,1930,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc28);
-            this.bloc29 = this.physics.add.sprite(-470,1970,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc29);
-            this.bloc30 = this.physics.add.sprite(-550,2010,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc30);
-            this.bloc31 = this.physics.add.sprite(-630,2050,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc31);
-            this.bloc32 = this.physics.add.sprite(-710,2090,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc32);
-            this.bloc33 = this.physics.add.sprite(-790,2130,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc33);
-            this.bloc34 = this.physics.add.sprite(-870,2190,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc34);
-            this.bloc35 = this.physics.add.sprite(-790,2240,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc35);
-            this.bloc36 = this.physics.add.sprite(-710,2300,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc36);
-            this.bloc37 = this.physics.add.sprite(-630,2340,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc37);
-            this.bloc38 = this.physics.add.sprite(-550,2360,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc38);
-            this.bloc39 = this.physics.add.sprite(-790,2380,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc39);
-            this.bloc40 = this.physics.add.sprite(-870,2420,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc40);
-            this.bloc41 = this.physics.add.sprite(-950,2460,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc41);
-            this.bloc42 = this.physics.add.sprite(-1030,2470,"cb25-25").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc42);
-            this.bloc43 = this.physics.add.sprite(-1150,2530,"cb25-25").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc43);
-            this.bloc44 = this.physics.add.sprite(-1200,2570,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc44);
-            this.bloc45 = this.physics.add.sprite(-1280,2610,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc45);
-            this.bloc46 = this.physics.add.sprite(-1360,2690,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc46);
-            this.bloc47 = this.physics.add.sprite(-1440,2690,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc47);
-            this.bloc48 = this.physics.add.sprite(-1520,2730,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc48);
-            this.bloc49 = this.physics.add.sprite(-1600,2770,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc49);
-            this.bloc50 = this.physics.add.sprite(-1280,2730,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc50);
-            this.bloc51 = this.physics.add.sprite(-1200,2770,"cb50-50").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
-            this.physics.add.collider(this.player, this.bloc51)
-
+        // Grand mur à côté du saule, qui va jusqu'au bâtiment sud (bord map)
+            this.addHitboxDiag(-230,1850,-80,40,50,8);
+            let murSaulePorte = [
+                [0,1710,50],[-870,2190,50],[-790,2240,50],[-710,2300,50],[-630,2340,50],[-550,2360,50],[-790,2380,50],[-870,2420,50],
+                [-950,2460,50],[-1030,2470,25],[-1150,2530,25],[-1200,2570,50],[-1280,2610,50],[-1360,2690,50],[-1280,2730,50],[-1200,2770,50]            
+            ];
+            this.addHitbox(murSaulePorte);
+            this.addHitboxDiag(-1440,2690,-80,40,50,21);
+        // Bâtiment sud
+            this.addHitbox([[-1840,2980,50],[-1740,3040,50]]);
+            this.addHitboxDiag(-1740,3080,-80,40,50,9);
+        // Mur Sud - Sud Est
+            this.addHitboxDiag(-2380,3480,80,40,50,16);
+            this.addHitboxDiag(-1100,4080,80,-40,50,17);
+            this.addHitboxDiag(180,3320,80,-40,50,13);
 
         this.physics.add.collider(this.player,layer30);
             layer30.setCollisionBetween(245,247,true);
             layer30.setCollisionBetween(2147483894,2147483895,true);
             this.physics.add.collider(this.player,layer70);
             layer70.setCollisionBetween(127,214,true);
-            // layer130.setCollisionBetween(40,45,true);
-            // layer70.setCollisionByProperty({collides: true});
-            // layer130.setCollisionByProperty({collides: true});
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
@@ -293,7 +168,6 @@ var LoadScene = new Phaser.Class({
             drag: 0.0005,
             maxSpeed: 0.2
         };
-        //controls = new Phaser.Cameras.Controls.SmoothedKeyControl(controlConfig);
         controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig, game);
         //==========================================
         //  CREATION DE LA MINIMAP
@@ -304,7 +178,6 @@ var LoadScene = new Phaser.Class({
         this.minimap.setBackgroundColor(0x002244);
         this.minimap.scrollX = 1600;
         this.minimap.scrollY = 900;
-        //this.minimap.visible = false;
         //==========================================
         //  AJOUT BOUTON QUITTER
         //==========================================
@@ -458,77 +331,20 @@ update: function(time, delta){
     },
     changeScene: function(nameScene, gameData){
         this.scene.start(nameScene, gameData);
+    },
+    addHitbox: function(data){
+        let type = "";
+        data.forEach((item)=>{
+            type = "cb"+item[2]+"-"+item[2];
+            return this.physics.add.collider(this.player, this.physics.add.sprite(item[0],item[1],type).setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true));
+        })
+    },
+    addHitboxDiag: function(x,y,stepX,stepY,type,qty){
+        for(let i=0; i<qty; i++){
+            this.physics.add.collider(this.player, this.physics.add.sprite(x,y,"cb"+type+"-"+type).setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true));
+            console.log([x,y,type]);
+            x += stepX;
+            y += stepY;
+        }    
     }
 });
-        // if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
-        //     if (cursors.left.isDown){
-        //         if(cursors.up.isDown){
-        //             if(!cursors.right.isDown && !cursors.down.isDown){
-        //                 //this.player.anims.play('diagLUp', true);
-        //                 //this.player.x -= Math.round(playerVelocity*2);
-        //                 this.player.body.setVelocityX(-speed);
-        //             }
-        //         }else if(cursors.down.isDown){
-        //             if(!cursors.right.isDown){
-        //                 this.player.anims.play('diagLDown', true);
-        //                 //this.player.y += Math.round(playerVelocity*2);
-        //                 this.player.body.setVelocityY(speed);
-        //             }
-        //         }else{
-        //             this.player.anims.play('left', true);
-        //             //this.player.x -= Math.round(playerVelocity*2);
-        //             this.player.body.setVelocityX(-speed);
-        //             //this.player.y += Math.round(playerVelocity);                   
-        //             this.player.body.setVelocityY(speed);
-        //         }
-        //         Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
-        //     }
-        //     if (cursors.right.isDown){
-        //         if(cursors.up.isDown){   
-        //             if(!cursors.left.isDown && !cursors.down.isDown){                 
-        //                 this.player.anims.play('diagRUp', true);
-        //                 //this.player.y -= Math.round(playerVelocity);
-        //                 this.player.body.setVelocityY(-speed);
-        //             }
-        //         }else if(cursors.down.isDown){
-        //             if(!cursors.left.isDown){
-        //                 this.player.anims.play('diagRDown', true);
-        //                 //this.player.x += Math.round(playerVelocity*2);
-        //                 this.player.body.setVelocityX(speed);
-        //             }
-        //         }else{
-        //             this.player.anims.play('right', true);
-        //             //this.player.x += Math.round(playerVelocity*2);
-        //             this.player.body.setVelocityX(speed);
-        //             //this.player.y -= Math.round(playerVelocity);
-        //             this.player.body.setVelocityY(-speed);
-        //         }
-        //         Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
-        //     }
-        //     // Mouvements verticaux joueur
-        //     if (cursors.up.isDown){
-        //         if(!cursors.left.isDown && !cursors.right.isDown){
-        //             this.player.anims.play('up', true);
-        //             //this.player.x -= Math.round(playerVelocity*2);
-        //             this.player.body.setVelocityX(-speed);
-        //             //this.player.y -= Math.round(playerVelocity);
-        //             this.player.body.setVelocityY(-speed);
-        //             Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
-        //         }
-        //     }
-        //     if (cursors.down.isDown){
-        //         if(!cursors.left.isDown && !cursors.right.isDown){
-        //             this.player.anims.play('down', true);
-        //             //this.player.x += Math.round(playerVelocity*2);
-        //             this.player.body.setVelocityX(speed);
-        //             //this.player.y += Math.round(playerVelocity);
-        //             this.player.body.setVelocityY(speed);
-        //             Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
-        //         }
-        //     }   
-        //     //bruit_course.stop();
-        // }else{
-        //     //this.player.anims.play('turn');
-        //     this.player.anims.stop();
-        //     bruit_course.play();         
-        // }
