@@ -156,12 +156,11 @@ var LoadScene = new Phaser.Class({
             this.addHitboxDiag(-2380,3480,80,40,50,16); // diagonale côté sud
             this.addHitboxDiag(-1100,4080,80,-40,50,15); // diagonale (50px) côté est
             this.addHitboxDiag(80,3500,50,-25,25,26); // diagonale (25px) côté est
-
-        this.physics.add.collider(this.player,layer30);
-            layer30.setCollisionBetween(245,247,true);
-            layer30.setCollisionBetween(2147483894,2147483895,true);
-            this.physics.add.collider(this.player,layer70);
-            layer70.setCollisionBetween(127,214,true);
+        // Arbres & pancarte
+            let arbres = [[-630,700,50],[-760,750,50],[-890,800,50],[-510,870,50],[-1530,1160,50],[-2040,1410,50],[-2810,2020,50],[-2940,2470,50],
+            [-3190,2690,50],[-1140,2110,50],[1920,1190,50],[1660,1450,50],[1410,1450,50],[1160,1740,50],[0,2550,50]];
+            this.addHitbox(arbres);
+            this.addHitbox([[1060,760,50]]); // pancarte
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
