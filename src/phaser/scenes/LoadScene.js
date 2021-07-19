@@ -111,26 +111,36 @@ var LoadScene = new Phaser.Class({
         // Mur Nord
             this.addHitboxDiag(2480,1280,-80,-40,50,27);
         // Serre
-            this.addHitboxDiag(350,250,-40,20,25,20);
-            this.addHitboxDiag(500,350,-40,20,25,16);
+            this.addHitboxDiag(350,250,-40,20,25,20); // diagonale côté mur
+            this.addHitboxDiag(500,350,-40,20,25,16); // diagonale côté fleurs
         // Murs Ouest
-            let coinsMurs = [[-550,500,250],[-2600,1660,100],[-3150,2150,100],[-3650,2700,100],[-3550,2800,100]];
+            let coinsMurs = [[-550,500,250],[-2600,1660,100],[-3150,2150,100],[-3650,2700,100],[-3550,2800,100]]; // quelques coins de murs
             this.addHitbox(coinsMurs);
-            this.addHitboxDiag(-710,580,-80,40,50,25);
-            this.addHitboxDiag(-2600,1760,-80,40,50,8);
-            this.addHitboxDiag(-3050,2250,-80,40,50,9);
-            this.addHitboxDiag(-3450,2850,-80,40,50,6);
-            this.addHitboxDiag(-3900,3100,80,40,50,11);
+            this.addHitboxDiag(-710,580,-80,40,50,25); // 1ère section de mur en partant du haut
+            this.addHitboxDiag(-2600,1760,-80,40,50,8); // 2ème section
+            this.addHitboxDiag(-3050,2250,-80,40,50,9); // 3ème section
+            this.addHitboxDiag(-3450,2850,-80,40,50,6); // 4ème section
+            this.addHitboxDiag(-3900,3100,80,40,50,11);  // portion de mur qui rejoint le bâtiment sud
         // Mur Est
-            this.addHitboxDiag(2400,1370,-80,40,50,15);
+            this.addHitboxDiag(2400,1370,-80,40,50,21);
         // Chapelle & bâtiment Est
             let chapelle = [[650,1820,100],[700,1920,100],[790,1870,100],[540,1770,100],[500,1790,100],[700,2000,100],[260,1600,100]];
             this.addHitbox(chapelle);
         // Bâtiment Est
-            let batimentEst = [[1000,2200,500],[500,2250,250],[300,2150,250],[700,2350,100],[1250,2600,500]];     
-            this.addHitbox(batimentEst);       
+            let batimentEst = [[1240,2870,50]];     
+            this.addHitbox(batimentEst);    
+            this.addHitboxDiag(205,2275,50,-25,25,9); // façade ouest
+            this.addHitboxDiag(205,2300,50,25,25,22); // façade sud
         // Cloître
-
+            let cloitre = [[100,3270,25],[890,2900,25]];
+            this.addHitbox(cloitre);
+            this.addHitboxDiag(-740,2875,50,25,25,13); // mur sud - partie 1
+            this.addHitboxDiag(0,3250,50,25,25,2); // mur sud - partie 2
+            this.addHitboxDiag(-690,2850,50,-25,25,3); // mur ouest - partie 1
+            this.addHitboxDiag(-490,2750,50,-25,25,13); // mur ouest - partie 2
+            this.addHitboxDiag(160,3270,50,-25,25,13); // mur est - partie 1
+            this.addHitboxDiag(140,2450,50,25,25,3); // mur nord - partie 1
+            this.addHitboxDiag(360,2560,50,25,25,13); // mur nord - partie 2
         // Grand mur à côté du saule, qui va jusqu'au bâtiment sud (bord map)
             this.addHitboxDiag(-230,1850,-80,40,50,8);
             let murSaulePorte = [
@@ -138,14 +148,14 @@ var LoadScene = new Phaser.Class({
                 [-950,2460,50],[-1030,2470,25],[-1150,2530,25],[-1200,2570,50],[-1280,2610,50],[-1360,2690,50],[-1280,2730,50],[-1200,2770,50]            
             ];
             this.addHitbox(murSaulePorte);
-            this.addHitboxDiag(-1440,2690,-80,40,50,21);
+            this.addHitboxDiag(-1440,2690,-80,40,50,21); // dernière portion du mur qui passe derrière le bâtiment sud
         // Bâtiment sud
-            this.addHitbox([[-1840,2980,50],[-1740,3040,50]]);
-            this.addHitboxDiag(-1740,3080,-80,40,50,9);
+            this.addHitbox([[-1840,2980,50],[-1740,3040,50]]); // facade nord
+            this.addHitboxDiag(-1740,3080,-80,40,50,9); // facade est
         // Mur Sud - Sud Est
-            this.addHitboxDiag(-2380,3480,80,40,50,16);
-            this.addHitboxDiag(-1100,4080,80,-40,50,17);
-            this.addHitboxDiag(180,3320,80,-40,50,13);
+            this.addHitboxDiag(-2380,3480,80,40,50,16); // diagonale côté sud
+            this.addHitboxDiag(-1100,4080,80,-40,50,15); // diagonale (50px) côté est
+            this.addHitboxDiag(80,3500,50,-25,25,26); // diagonale (25px) côté est
 
         this.physics.add.collider(this.player,layer30);
             layer30.setCollisionBetween(245,247,true);
