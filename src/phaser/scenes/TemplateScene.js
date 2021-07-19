@@ -107,12 +107,12 @@ var TemplateScene = new Phaser.Class({
         localStorage.setItem("insideRoom", insideRoom);
         localStorage.setItem("Players", []);
         localStorage.setItem("playerId", "");
-        console.log("initialisation...");
+        //console.log("initialisation...");
     },
     addShadows: function(dataArray){
         let arrayTemp = [];
         dataArray.forEach((item) => {
-            console.log(item.type);
+            //console.log(item.type);
             if(item.type == "Image"){
                 arrayTemp.push(this.add.rectangle(item.x - 8, item.y + 8, item.width, item.height).setFillStyle(0x000000, 0.1).setDepth(9100));
             }else if(item.type == "Text"){
@@ -308,7 +308,22 @@ var TemplateScene = new Phaser.Class({
         return Object.fromEntries(data);
     },
     clickOnMap: function(id, pointer){
-        //Client.sendClick(id, pointer.x, pointer.y);
-        //console.log("on passe par ici!");
+        Client.sendClick(id, pointer.x, pointer.y);
+        console.log("on passe par ici!");
+    },
+    addHitbox: function(data){
+        let type = "";
+        data.forEach((item)=>{
+            type = "cb"+item[2]+"-"+item[2];
+            return this.physics.add.collider(this.player, this.physics.add.sprite(item[0],item[1],type).setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true));
+        })
+    },
+    addHitboxDiag: function(x,y,stepX,stepY,type,qty){
+        for(let i=0; i<qty; i++){
+            this.physics.add.collider(this.player, this.physics.add.sprite(x,y,"cb"+type+"-"+type).setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true));
+            //console.log([x,y,type]);
+            x += stepX;
+            y += stepY;
+        }    
     }
 });
