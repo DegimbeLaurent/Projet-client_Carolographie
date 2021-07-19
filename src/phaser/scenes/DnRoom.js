@@ -124,11 +124,11 @@ var DnRoom = new Phaser.Class({
         //==========================================
         //  AJOUT DES COLLISIONS
         //==========================================
-        this.input.on('pointerup', function (pointer) {
-            if (pointer.leftButtonReleased()) {
-                console.log("["+Math.round(pointer.worldX)+"-"+Math.round(pointer.worldY)+"]");
-            }
-        }, this);
+        // this.input.on('pointerup', function (pointer) {
+        //     if (pointer.leftButtonReleased()) {
+        //         console.log("["+Math.round(pointer.worldX)+"-"+Math.round(pointer.worldY)+"]");
+        //     }
+        // }, this);
         // Murs
             this.addHitboxDiag(150,175,50,25,25,23); // Mur nord
             this.addHitboxDiag(-1000,740,50,-25,25,23); // Mur ouest
@@ -596,65 +596,6 @@ var DnRoom = new Phaser.Class({
                     bruit_course.play();  
                     //if(prevVelocity.x < 0){this.player.anims.play('turn');}       
                 }
-                // if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
-                //     if (cursors.left.isDown){
-                //         if(cursors.up.isDown){
-                //             if(!cursors.right.isDown && !cursors.down.isDown){
-                //                 this.player.anims.play('diagLUp', true);
-                //                 this.player.x -= Math.round(playerVelocity*2);
-                //             }
-                //         }else if(cursors.down.isDown){
-                //             if(!cursors.right.isDown){
-                //                 this.player.anims.play('diagLDown', true);
-                //                 this.player.y += Math.round(playerVelocity*2);
-                //             }
-                //         }else{
-                //             this.player.anims.play('left', true);
-                //             this.player.x -= Math.round(playerVelocity*2);
-                //             this.player.y += Math.round(playerVelocity);
-                //         }
-                //         Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
-                //     }
-                //     if (cursors.right.isDown){
-                //         if(cursors.up.isDown){   
-                //             if(!cursors.left.isDown && !cursors.down.isDown){                 
-                //                 this.player.anims.play('diagRUp', true);
-                //                 this.player.y -= Math.round(playerVelocity);
-                //             }
-                //         }else if(cursors.down.isDown){
-                //             if(!cursors.left.isDown){
-                //                 this.player.anims.play('diagRDown', true);
-                //                 this.player.x += Math.round(playerVelocity*2);
-                //             }
-                //         }else{
-                //             this.player.anims.play('right', true);
-                //             this.player.x += Math.round(playerVelocity*2);
-                //             this.player.y -= Math.round(playerVelocity);
-                //         }
-                //         Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
-                //     }
-                //     // Mouvements verticaux joueur
-                //     if (cursors.up.isDown){
-                //         if(!cursors.left.isDown && !cursors.right.isDown){
-                //             this.player.anims.play('up', true);
-                //             this.player.x -= Math.round(playerVelocity*2);
-                //             this.player.y -= Math.round(playerVelocity);
-                //             Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
-                //         }
-                //     }
-                //     if (cursors.down.isDown){
-                //         if(!cursors.left.isDown && !cursors.right.isDown){
-                //             this.player.anims.play('down', true);
-                //             this.player.x += Math.round(playerVelocity*2);
-                //             this.player.y += Math.round(playerVelocity);
-                //             Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
-                //         }
-                //     }            
-                // }else{
-                //     this.player.anims.play('turn');
-                //     bruit_course.play(); 
-                // }
-
             }
             var mousePointer = this.input.activePointer;
             game.players = this.removeDisconnectedPlayers(this, game.players);
