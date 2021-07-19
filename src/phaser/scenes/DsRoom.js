@@ -48,6 +48,12 @@ var DsRoom = new Phaser.Class({
         this.load.audio('campagne', '/assets/sounds/ambiance_campagne.mp3');
         this.load.audio('feu', '/assets/sounds/feu.mp3');
         this.load.audio('portail', '/assets/sounds/portail.mp3');
+        // BARRES COLLISIONS
+        this.load.image('cb25-25', '/img/collisions/cb25-25.png');
+        this.load.image('cb50-50', '/img/collisions/cb50-50.png');
+        this.load.image('cb100-100', '/img/collisions/cb100-100.png');
+        this.load.image('cb250-250', '/img/collisions/cb250-250.png');
+        this.load.image('cb500-500', '/img/collisions/cb500-500.png');
     },
     create: function(config){
         game.backgroundColor='#000000';
@@ -106,9 +112,39 @@ var DsRoom = new Phaser.Class({
         this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});            
         this.anims.create({key: 'turn',frames: [{key: 'playersheet',frame: 45}],frameRate: 20})
         this.player.name = "myPlayer";
-        //player.setCollideWorldBounds(true);
         playerVelocity = 2;
+        this.player.body.setVelocity(1,2).setBounce(1, 1).setCollideWorldBounds(true);
         cursors = this.input.keyboard.createCursorKeys();
+        //==========================================
+        //  AJOUT DES COLLISIONS
+        //==========================================
+        // this.input.on('pointerup', function (pointer) {
+        //     if (pointer.leftButtonReleased()) {
+        //         console.log("["+Math.round(pointer.worldX)+"-"+Math.round(pointer.worldY)+"]");
+        //     }
+        // }, this);
+        // Murs
+            this.addHitboxDiag(150,175,50,25,25,23); // Mur nord
+            this.addHitboxDiag(-1000,740,50,-25,25,23); // Mur ouest
+            this.addHitboxDiag(-1000,850,50,25,25,23); // Mur Sud
+            this.addHitboxDiag(150,1400,50,-25,25,23); // Mur Est
+        // Mobilier
+            let chaises = [[925,790,25],[915,840,25],[70,540,25],[185,540,25]];
+            this.addHitbox(chaises);
+            let tables = [[-820,690,25],[-760,710,25],[-720,670,25],[210,280,25],[260,310,25],[320,310,25],[-195,770,25],[-105,750,50],[-65,745,25],[450,770,25],[320,740,25],[360,740,50]];
+            this.addHitbox(tables);
+            let coffres = [[1075,660,25],[1030,660,25],[-315,410,25],[-260,400,25],[150,210,25]];
+            this.addHitbox(coffres);
+            let lampes = [[120,520,25],[120,490,25],[510,1145,25],[510,1100,25],[-255,1145,25],[-255,1100,25],[-890,820,25],[-580,600,25],[-510,560,25]];
+            this.addHitbox(lampes);
+            let chevalets = [[-490,730,25],[-525,755,25],[-115,540,25],[-145,560,25],[370,540,25],[400,560,25],[740,730,25],[785,755,25]];
+            this.addHitbox(chevalets);
+            let armoires = [[-170,340,25],[-130,310,25],[-420,460,25],[-390,450,25],[375,310,25],[415,340,25],[450,325,25]];
+            this.addHitbox(armoires);
+            let feuOuvert = [[750,540,25],[790,520,25],[700,530,25],[650,520,25],[620,510,25]];
+            this.addHitbox(feuOuvert);
+            let divers = [[1275,780,25]];
+            this.addHitbox(divers);
         //==========================================
         //  GESTION DE LA CAMERA
         //==========================================
@@ -470,14 +506,15 @@ var DsRoom = new Phaser.Class({
                 centerPlayer = false;
             }
             controls.update(delta);
-            this.player.setVelocity(0);
+            const speed = 500;
+            const prevVelocity = this.player.body.velocity.clone();
             let plId = parseInt(localStorage.getItem("playerId"));
             if(lecture){
                 if (cursors.up.isDown){
                     this.player.y -= Math.round(playerVelocity*3);
                     Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y });
                 }else if (cursors.down.isDown && posSortie >= this.player.y){
-                    console.log(posSortie + " - " + this.player.y);
+                    //console.log(posSortie + " - " + this.player.y);
                     this.player.y += Math.round(playerVelocity*3);
                     Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
                 }      
@@ -486,60 +523,70 @@ var DsRoom = new Phaser.Class({
                 if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
                     if (cursors.left.isDown){
                         if(cursors.up.isDown){
-                            if(!cursors.right.isDown && !cursors.down.isDown){
-                                this.player.anims.play('diagLUp', true);
-                                this.player.x -= Math.round(playerVelocity*2);
-                            }
+                            //if(!cursors.right.isDown && !cursors.down.isDown){this.player.body.setVelocityX(-speed);}
+                            if(!cursors.right.isDown && !cursors.down.isDown){this.player.body.setVelocityX(-speed);}
                         }else if(cursors.down.isDown){
-                            if(!cursors.right.isDown){
-                                this.player.anims.play('diagLDown', true);
-                                this.player.y += Math.round(playerVelocity*2);
-                            }
+                            if(!cursors.right.isDown){this.player.body.setVelocityY(speed);}
                         }else{
-                            this.player.anims.play('left', true);
-                            this.player.x -= Math.round(playerVelocity*2);
-                            this.player.y += Math.round(playerVelocity);
+                            this.player.body.setVelocityX(-speed);                 
+                            this.player.body.setVelocityY(speed);
                         }
                         Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
                     }
                     if (cursors.right.isDown){
                         if(cursors.up.isDown){   
-                            if(!cursors.left.isDown && !cursors.down.isDown){                 
-                                this.player.anims.play('diagRUp', true);
-                                this.player.y -= Math.round(playerVelocity);
-                            }
+                            if(!cursors.left.isDown && !cursors.down.isDown){this.player.body.setVelocityY(-speed);}
                         }else if(cursors.down.isDown){
-                            if(!cursors.left.isDown){
-                                this.player.anims.play('diagRDown', true);
-                                this.player.x += Math.round(playerVelocity*2);
-                            }
+                            if(!cursors.left.isDown){this.player.body.setVelocityX(speed);}
                         }else{
-                            this.player.anims.play('right', true);
-                            this.player.x += Math.round(playerVelocity*2);
-                            this.player.y -= Math.round(playerVelocity);
+                            this.player.body.setVelocityX(speed);
+                            this.player.body.setVelocityY(-speed);
                         }
                         Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
                     }
-                    // Mouvements verticaux joueur
                     if (cursors.up.isDown){
                         if(!cursors.left.isDown && !cursors.right.isDown){
-                            this.player.anims.play('up', true);
-                            this.player.x -= Math.round(playerVelocity*2);
-                            this.player.y -= Math.round(playerVelocity);
+                            this.player.body.setVelocityX(-speed);
+                            this.player.body.setVelocityY(-speed);
                             Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
                         }
                     }
                     if (cursors.down.isDown){
                         if(!cursors.left.isDown && !cursors.right.isDown){
-                            this.player.anims.play('down', true);
-                            this.player.x += Math.round(playerVelocity*2);
-                            this.player.y += Math.round(playerVelocity);
+                            this.player.body.setVelocityX(speed);
+                            this.player.body.setVelocityY(speed);
                             Client.socket.emit('click', { id: plId, x: this.player.x, y: this.player.y })
                         }
-                    }            
+                    }   
+                }
+                this.player.body.velocity.normalize().scale(speed);
+                if(cursors.left.isDown || cursors.right.isDown || cursors.up.isDown || cursors.down.isDown){
+                    if (cursors.left.isDown){
+                        if(cursors.up.isDown){
+                            if(!cursors.right.isDown && !cursors.down.isDown){this.player.anims.play('diagLUp', true);}
+                        }else if(cursors.down.isDown){
+                            if(!cursors.right.isDown){this.player.anims.play('diagLDown', true);}
+                        }else{this.player.anims.play('left', true);}
+                    }
+                    if (cursors.right.isDown){
+                        if(cursors.up.isDown){   
+                            if(!cursors.left.isDown && !cursors.down.isDown){this.player.anims.play('diagRUp', true);}
+                        }else if(cursors.down.isDown){
+                            if(!cursors.left.isDown){this.player.anims.play('diagRDown', true);}
+                        }else{this.player.anims.play('right', true);}
+                    }
+                    if (cursors.up.isDown){
+                        if(!cursors.left.isDown && !cursors.right.isDown){this.player.anims.play('up', true);}
+                    }
+                    if (cursors.down.isDown){
+                        if(!cursors.left.isDown && !cursors.right.isDown){this.player.anims.play('down', true);}
+                    }   
                 }else{
-                    this.player.anims.play('turn');
-                    bruit_course.play(); 
+                    this.player.setVelocityX(0);
+                    this.player.setVelocityY(0);
+                    this.player.anims.stop();
+                    bruit_course.play();  
+                    //if(prevVelocity.x < 0){this.player.anims.play('turn');}       
                 }
             }
             var mousePointer = this.input.activePointer;
