@@ -112,7 +112,7 @@ var LoadScene = new Phaser.Class({
             this.addHitboxDiag(2480,1280,-80,-40,50,27);
         // Serre
             this.addHitboxDiag(350,250,-40,20,25,20); // diagonale côté mur
-            this.addHitboxDiag(500,350,-40,20,25,16); // diagonale côté fleurs
+            this.addHitboxDiag(510,350,-40,20,25,16); // diagonale côté fleurs
         // Murs Ouest
             let coinsMurs = [[-550,500,250],[-2600,1660,100],[-3150,2150,100],[-3650,2700,100],[-3550,2800,100]]; // quelques coins de murs
             this.addHitbox(coinsMurs);
@@ -260,7 +260,7 @@ var LoadScene = new Phaser.Class({
 update: function(time, delta){
         controls.update(delta);
         let plId = parseInt(localStorage.getItem("playerId"));
-        const speed = 1800;
+        const speed = 500;
         const prevVelocity = this.player.body.velocity.clone();
         //this.player.body.setVelocity(0);
         
