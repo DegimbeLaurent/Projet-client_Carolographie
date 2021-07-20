@@ -79,8 +79,8 @@ var TemplateScene = new Phaser.Class({
                 for(i=0;i<game.players.length;i++){
                     if(game.players[i].id == id){
                         game.players[i].remove = true;  
-                        if(playerMap[game.players[i].id]){playerMap[game.players[i].id].destroy();}
-                        if(playerMap[game.players[i].nickname]){playerMap[game.players[i].nickname].destroy();}
+                        if(playerMap[game.players[i].id] != undefined){playerMap[game.players[i].id].destroy();}
+                        if(playerMap[game.players[i].nickname] != undefined){playerMap[game.players[i].nickname].destroy();}
                         delete playerMap[game.players[i].id];
                         delete playerMap[game.players[i].nickname];
                     }else{
