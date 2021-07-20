@@ -141,7 +141,7 @@ var TemplateScene = new Phaser.Class({
         if (personalData["id"] == id) {
             playerMap[id] = player;
         } else {
-            playerMap[id] = Game.physics.add.sprite(x, y, 'sprite').setDepth(25);
+            playerMap[id] = Game.physics.add.sprite(x, y, 'playersheet').setDepth(25);
         }
         playerMap[id].id = id;
         playerMap[id].nickname = nickname;
