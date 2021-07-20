@@ -247,6 +247,7 @@ var TemplateScene = new Phaser.Class({
                 let tgtSoldier = new Phaser.Math.Vector2();
                 tgtSoldier.x = player.newX;
                 tgtSoldier.y = player.newY;     
+                console.log("step1");
                 if (plId != player.id) {   
                     if(player.insideRoom == "false"){
                         if((player.x == 1)&&(player.y == 1)){
