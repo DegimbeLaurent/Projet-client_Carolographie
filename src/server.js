@@ -5,7 +5,10 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-var dotenv = require('dotenv').config();
+const dotenv = require('dotenv').config({ path: __dirname + '/.env' });
+const api_key = process.env.API_KEY;
+const api_user = process.env.API_USERNAME;
+const api_password = process.env.API_PASSWORD;
 
 //===================================
 //   Préfixes chemins accès virtuels
@@ -61,6 +64,12 @@ server.listen(process.env.PORT || 3000, function () {
 //=================================
 io.on('connection', function (socket) {
     console.log("visitor incoming...");
+  	//=================================
+  	//	Récup des variables dotenv
+  	//=================================
+  	socket.on('dotenv', function(){
+		io.to(socket.id).emit("dotenv_const", api_key, api_user, api_password);
+	})
     //=================================
     //  Création d'un joueur entrant
     //=================================
