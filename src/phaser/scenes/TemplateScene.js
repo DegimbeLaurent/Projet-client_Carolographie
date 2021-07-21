@@ -102,9 +102,11 @@ var TemplateScene = new Phaser.Class({
     initLocalStorage: function(){
         let pseudo = localStorage.getItem("pseudo");
         let insideRoom = localStorage.getItem("insideRoom");
+        let repop = localStorage.getItem("repop");
         localStorage.clear();
         localStorage.setItem("pseudo", pseudo);
         localStorage.setItem("insideRoom", insideRoom);
+        localStorage.setItem("repop",repop);
         localStorage.setItem("Players", []);
         localStorage.setItem("playerId", "");
         //console.log("initialisation...");

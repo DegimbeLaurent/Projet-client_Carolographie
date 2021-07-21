@@ -270,6 +270,7 @@ var DnRoom = new Phaser.Class({
                     resetPlayer = true;
                     centerPlayer = false;
                     lecture = false;
+                    localStorage.setItem("repop",[-525,825]);
                 })
             }, this);             
             //============
@@ -343,6 +344,7 @@ var DnRoom = new Phaser.Class({
                     mainCam.setZoom(0.8);
                     resetPlayer = true;
                     lecture = false;
+                    localStorage.setItem("repop",[-145,630]);
                 })
             }, this); 
             //============
@@ -414,6 +416,7 @@ var DnRoom = new Phaser.Class({
                     mainCam.setZoom(0.8);
                     resetPlayer = true;
                     lecture = false;
+                    localStorage.setItem("repop",[375,630]);
                 })
             }, this); 
             //============
@@ -487,6 +490,7 @@ var DnRoom = new Phaser.Class({
                     mainCam.setZoom(0.8);
                     resetPlayer = true;
                     lecture = false;
+                    localStorage.setItem("repop",[785,825]);
                 })
             }, this); 
             //============
@@ -495,6 +499,7 @@ var DnRoom = new Phaser.Class({
             sortieN.on("pointerup", function(){
                 if(camSubject == "room"){
                     localStorage.setItem("insideRoom", false);
+                    localStorage.setItem("repop",[0,900]);
                     Client.socket.emit("goOutRoom");
                     Client.socket.on("okGoOutRoom", function(){
                         location.href = '/website/visite.html';
@@ -504,8 +509,11 @@ var DnRoom = new Phaser.Class({
         },
         update: function(time, delta){
             if(resetPlayer == true){
-                this.player.x = 100;
-                this.player.y = 900;
+                let repop = localStorage.getItem("repop").split(",");
+                let repopX =parseInt(repop[0]);
+                let repopY =parseInt(repop[1]);
+                this.player.x = repopX;
+                this.player.y = repopY;
                 resetPlayer = false;
             }
             if(centerPlayer == true){

@@ -263,6 +263,7 @@ var DeRoom = new Phaser.Class({
                 resetPlayer = true;
                 centerPlayer = false;
                 lecture = false;
+                localStorage.setItem("repop",[-525,825]);
             })
         }, this);
         //============
@@ -303,10 +304,10 @@ var DeRoom = new Phaser.Class({
             var arrayShadows = this.addShadows(toDestroy2);
             arrayShadows.forEach((item) => { toDestroy2.push(item); })
             camSubject = "chevalet";
-            chevaletDNP1.setDepth(1).disableInteractive();
-            chevaletDNP2.setDepth(1).disableInteractive();
-            chevaletDNP3.setDepth(1).disableInteractive();
-            chevaletDNP4.setDepth(1).disableInteractive();
+            chevaletDEP1.setDepth(1).disableInteractive();
+            chevaletDEP2.setDepth(1).disableInteractive();
+            chevaletDEP3.setDepth(1).disableInteractive();
+            chevaletDEP4.setDepth(1).disableInteractive();
             fondsEcran.setDepth(51);
             // player.setDepth(1);
             // player.x = 0;
@@ -321,7 +322,7 @@ var DeRoom = new Phaser.Class({
                 toDestroy2.forEach((item) => { item.destroy(); })
                 fondsEcran.setDepth(1);
                 sortieE.setDepth(9100);
-                chevaletDNP1.setDepth(9001).setInteractive();
+                chevaletDEP1.setDepth(9001).setInteractive();
                 chevaletDEP2.setDepth(9001).setInteractive();
                 chevaletDEP3.setDepth(9001).setInteractive();
                 chevaletDEP4.setDepth(9001).setInteractive();
@@ -332,6 +333,7 @@ var DeRoom = new Phaser.Class({
                 mainCam.setZoom(0.8);
                 resetPlayer = true;
                 lecture = false;
+                localStorage.setItem("repop",[-145,630]);
             })
         }, this);
         //============
@@ -363,10 +365,10 @@ var DeRoom = new Phaser.Class({
             var arrayShadows = this.addShadows(toDestroy3);
             arrayShadows.forEach((item) => { toDestroy3.push(item); })
             camSubject = "chevalet";
-            chevaletDNP1.setDepth(1).disableInteractive();
-            chevaletDNP2.setDepth(1).disableInteractive();
-            chevaletDNP3.setDepth(1).disableInteractive();
-            chevaletDNP4.setDepth(1).disableInteractive();
+            chevaletDEP1.setDepth(1).disableInteractive();
+            chevaletDEP2.setDepth(1).disableInteractive();
+            chevaletDEP3.setDepth(1).disableInteractive();
+            chevaletDEP4.setDepth(1).disableInteractive();
             fondsEcran.setDepth(51);
             // player.setDepth(1);
             // player.x = 0;
@@ -381,7 +383,7 @@ var DeRoom = new Phaser.Class({
                 toDestroy3.forEach((item) => { item.destroy(); })
                 fondsEcran.setDepth(1);
                 sortieE.setDepth(9100);
-                chevaletDNP1.setDepth(9001).setInteractive();
+                chevaletDEP1.setDepth(9001).setInteractive();
                 chevaletDEP2.setDepth(9001).setInteractive();
                 chevaletDEP3.setDepth(9001).setInteractive();
                 chevaletDEP4.setDepth(9001).setInteractive();
@@ -391,7 +393,8 @@ var DeRoom = new Phaser.Class({
                 camSubject = "room";
                 mainCam.setZoom(0.8);
                 resetPlayer = true;
-                lecture = false
+                lecture = false;
+                localStorage.setItem("repop",[375,630]);
             })
         }, this);
         //============
@@ -432,10 +435,10 @@ var DeRoom = new Phaser.Class({
             var arrayShadows = this.addShadows(toDestroy4);
             arrayShadows.forEach((item) => { toDestroy4.push(item); })
             camSubject = "chevalet";
-            chevaletDNP1.setDepth(1).disableInteractive();
-            chevaletDNP2.setDepth(1).disableInteractive();
-            chevaletDNP3.setDepth(1).disableInteractive();
-            chevaletDNP4.setDepth(1).disableInteractive();
+            chevaletDEP1.setDepth(1).disableInteractive();
+            chevaletDEP2.setDepth(1).disableInteractive();
+            chevaletDEP3.setDepth(1).disableInteractive();
+            chevaletDEP4.setDepth(1).disableInteractive();
             fondsEcran.setDepth(51);
             // player.setDepth(1);
             // player.x = 0;
@@ -450,7 +453,7 @@ var DeRoom = new Phaser.Class({
                 toDestroy4.forEach((item) => { item.destroy(); })
                 fondsEcran.setDepth(1);
                 sortieE.setDepth(9100);
-                chevaletDNP1.setDepth(9001).setInteractive();
+                chevaletDEP1.setDepth(9001).setInteractive();
                 chevaletDEP2.setDepth(9001).setInteractive();
                 chevaletDEP3.setDepth(9001).setInteractive();
                 chevaletDEP4.setDepth(9001).setInteractive();
@@ -461,6 +464,7 @@ var DeRoom = new Phaser.Class({
                 mainCam.setZoom(0.8);
                 resetPlayer = true;
                 lecture = false;
+                localStorage.setItem("repop",[785,825]);
             })
         }, this);
         //============
@@ -469,6 +473,7 @@ var DeRoom = new Phaser.Class({
         sortieE.on("pointerup", function () {
             if (camSubject == "room") {
                 localStorage.setItem("insideRoom", false);
+                localStorage.setItem("repop",[0,2750]);
                 Client.socket.emit("goOutRoom");
                 Client.socket.on("okGoOutRoom", function () {
                     location.href = '/website/visite.html';
@@ -478,8 +483,11 @@ var DeRoom = new Phaser.Class({
     },
     update: function (time, delta) {
             if(resetPlayer == true){
-                this.player.x = 100;
-                this.player.y = 900;
+                let repop = localStorage.getItem("repop").split(",");
+                let repopX =parseInt(repop[0]);
+                let repopY =parseInt(repop[1]);
+                this.player.x = repopX;
+                this.player.y = repopY;
                 resetPlayer = false;
             }
             if(centerPlayer == true){

@@ -74,7 +74,10 @@ var LoadScene = new Phaser.Class({
             //==========================================
             //  AJOUT DU JOUEUR
             //==========================================
-            this.player = this.physics.add.sprite(1250,950,'playersheetMain').setDepth(25).setScale(0.7);
+            let repop = localStorage.getItem("repop").split(",");
+            let repopX =parseInt(repop[0]);
+            let repopY =parseInt(repop[1]);
+            this.player = this.physics.add.sprite(repopX,repopY,'playersheetMain').setDepth(25).setScale(0.7);
             this.anims.create({key:'left',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 30,end: 35}),frameRate: 10,repeat: -1});
             this.anims.create({key:'right',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 6,end: 11}),frameRate: 10,repeat: -1});
             //this.anims.create({key:'up',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 18,end: 23}),frameRate: 10,repeat: -1});
@@ -218,6 +221,7 @@ var LoadScene = new Phaser.Class({
         var portailN_socle = this.physics.add.image(130,730,"portail_socle").setInteractive().setDepth(24);
         portailN.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
+            localStorage.setItem("repop",[0,900]);
             Client.socket.emit("enterRoom");
             Client.socket.on("okEnterRoom", function(){
                 //bruit_portail.play();
@@ -228,6 +232,7 @@ var LoadScene = new Phaser.Class({
         var portailC_socle = this.physics.add.image(540,1790,"portail_socle").setInteractive().setDepth(24);
         portailC.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
+            localStorage.setItem("repop",[470,1910]);
             Client.socket.emit("enterRoom");
             Client.socket.on("okEnterRoom", function(){
                 location.href = '/website/portail-c.html';
@@ -237,6 +242,7 @@ var LoadScene = new Phaser.Class({
         var portailO_socle = this.physics.add.image(-2040,1550,"portail_socle").setInteractive().setDepth(24);
         portailO.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
+            localStorage.setItem("repop",[-2190,1650]);
             Client.socket.emit("enterRoom");
             Client.socket.on("okEnterRoom", function(){
                 location.href = '/website/portail-o.html';
@@ -246,6 +252,7 @@ var LoadScene = new Phaser.Class({
         var portailE_socle = this.physics.add.image(140,2650,"portail_socle").setInteractive().setDepth(24);
         portailE.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
+            localStorage.setItem("repop",[0,2750]);
             Client.socket.emit("enterRoom");
             Client.socket.on("okEnterRoom", function(){
                 location.href = '/website/portail-e.html';
@@ -255,6 +262,7 @@ var LoadScene = new Phaser.Class({
         var portailS_socle = this.physics.add.image(-1150,3290,"portail_socle").setInteractive().setDepth(24);
         portailS.on("pointerup", function(){
             localStorage.setItem("insideRoom", true);
+            localStorage.setItem("repop",[-1300,3390]);
             Client.socket.emit("enterRoom");
             Client.socket.on("okEnterRoom", function(){
                 location.href = '/website/portail-s.html';
@@ -355,7 +363,7 @@ update: function(time, delta){
     addHitboxDiag: function(x,y,stepX,stepY,type,qty){
         for(let i=0; i<qty; i++){
             this.physics.add.collider(this.player, this.physics.add.sprite(x,y,"cb"+type+"-"+type).setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true));
-            console.log([x,y,type]);
+            //console.log([x,y,type]);
             x += stepX;
             y += stepY;
         }    
