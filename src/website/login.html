@@ -24,20 +24,17 @@
         </div>
         <div class="row  getCode">
             <div class="column">
-                <form>
                     <fieldset>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email"><br><br>
-                        <label for="password">Code:</label>
-                        <input type="password"><br><br>
-                        <button>Valider</button> 
+                        <label for="pseudo">Pseudo (8 lettres max):</label>
+                        <input type="text" id="pseudo" name="pseudo" maxlength="8" required><br><br>
+                        <div id="msgPseudo" class="column" style="color:red;font-size:10px;"></div>
+                        <label for="barcode">Code-barres:</label>
+                        <input type="text" id="barcode" name="barcode" required><br><br>
+                        <div id="msgBarcode" class="column" style="color:red;font-size: 10px;"></div>
+                        <button onclick="checkTicket();">Valider</button> 
+                        <br><br>
+                        <div> </div>
                     </fieldset>
-
-                </form>
-            </div>
-            <div>
-                <input type="text" id="pseudo" value="" placeholder="Votre pseudo">
-                <button onclick="demoMap();">Démo</button>
             </div>
         </div>
     </main>
@@ -48,23 +45,76 @@
             </div>
         </div>
     </footer>
-        <script>
-            function demoMap() {
-                let pseudo = document.getElementById("pseudo").value;
-                if (pseudo == "") { pseudo = "Visiteur"; }
-                localStorage.clear();
-                localStorage.setItem("pseudo", pseudo);
-                localStorage.setItem("insideRoom", false);
-                localStorage.setItem("repop",[1250,950]);
-                localStorage.setItem("touchingPt", false);
-                // localStorage.setItem("currentScene", "A1");
-                // localStorage.setItem("entrance", "S");
-                localStorage.setItem("Players", []);
-                localStorage.setItem("playerId", "");
-                console.log(pseudo);
-                console.log(localStorage.getItem("pseudo"));
-                location.href = '/website/visite.html';
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        localStorage.clear();
+        localStorage.setItem("Auth","ko");
+        function checkTicket() {
+            document.getElementById("msgPseudo").innerText = "";
+            document.getElementById("msgBarcode").innerText = "";
+            let bienRempli = true;
+            let msgPseudo = "";
+            let msgBarcode = "";
+            let pseudo = document.getElementById("pseudo").value;
+            if (pseudo.length ==0 || pseudo.length>8) {bienRempli = false; msgPseudo = "Ce champ n'est pas correctement rempli.";}
+            let barcode = document.getElementById("barcode").value;
+            if(barcode.length == 0){bienRempli = false; msgBarcode = "Ce champ n'est pas correctement rempli."}
+            if(bienRempli){
+                const api_key = process.env.API_KEY;
+                const api_user = process.env.API_USERNAME;
+                const api_password = process.env.API_PASSWORD;
+                const Token = {
+                    method: "post",
+                    url: "https://api.weezevent.com/auth/access_token?api_key="+api_key+"&username="+api_user+"&password="+api_password,
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                };
+                axios(Token)
+                    .then(function (response) {
+                        const list = {
+                            method: "get",
+                            url:
+                                "https://api.weezevent.com/participant/list?api_key="+api_key+"&access_token="+response.data.accessToken+"&id_event[]=711568",
+                        }
+                        axios(list)
+                            .then(function (response) {                                    
+                                // 2 ème barcode valide dans la liste -> 66044078140091
+                                let result = [];
+                                let participants = response.data.participants;
+                                participants.forEach((element) => {
+                                    if (element.paid === true) {
+                                        result.push(element.barcode);
+                                    }
+                                });
+                                if (result.includes(barcode)) {
+                                    // Si le visiteur a un code-barres valide, ok pour entamer la visite  
+                                    localStorage.clear();       
+                                    localStorage.setItem("Auth","ok");                           
+                                    localStorage.setItem("pseudo", pseudo);
+                                    localStorage.setItem("insideRoom", false);
+                                    localStorage.setItem("repop",[1250,950]);
+                                    localStorage.setItem("touchingPt", false);
+                                    localStorage.setItem("Players", []);
+                                    localStorage.setItem("playerId", "");
+                                    location.href = '/website/visite.html';
+                                }else{
+                                    document.getElementById("msgBarcode").innerText = "Ce code-barres n'est pas valide!";
+                                }
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }else{
+                document.getElementById("msgPseudo").innerText = msgPseudo;
+                document.getElementById("msgBarcode").innerText = msgBarcode;
             }
-        </script>
+        }
+    </script>
 </body>
 </html>
