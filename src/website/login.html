@@ -78,8 +78,7 @@
                                 "https://api.weezevent.com/participant/list?api_key="+api_key+"&access_token="+response.data.accessToken+"&id_event[]=711568",
                         }
                         axios(list)
-                            .then(function (response) {                                    
-                                // 2 ème barcode valide dans la liste -> 66044078140091
+                            .then(function (response) {                       
                                 let result = [];
                                 let participants = response.data.participants;
                                 participants.forEach((element) => {
