@@ -103,10 +103,12 @@ var TemplateScene = new Phaser.Class({
         let pseudo = localStorage.getItem("pseudo");
         let insideRoom = localStorage.getItem("insideRoom");
         let repop = localStorage.getItem("repop");
+        let touchingPt = localStorage.getItem("touchingPt");
         localStorage.clear();
         localStorage.setItem("pseudo", pseudo);
         localStorage.setItem("insideRoom", insideRoom);
         localStorage.setItem("repop",repop);
+        localStorage.setItem("touchingPt",touchingPt);
         localStorage.setItem("Players", []);
         localStorage.setItem("playerId", "");
         //console.log("initialisation...");
@@ -329,5 +331,14 @@ var TemplateScene = new Phaser.Class({
             x += stepX;
             y += stepY;
         }    
+    },
+    checkIfOverlap(firstSprite, secondSprite){
+        let bndFirst = firstSprite.getBounds();
+        let bndSecond = secondSprite.getBounds();
+        if(Phaser.Geom.Rectangle.intersects(bndFirst,bndSecond)){
+            console.log("touché portail!");
+        }else{
+
+        }
     }
 });

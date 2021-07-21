@@ -17,6 +17,7 @@ var DoRoom = new Phaser.Class({
         this.load.image('chevalet_d', '/img/chevalet_d.png');
         this.load.image('portail_ferme', '/img/portail_ferme.png');
         this.load.image('portail_ouvert', '/img/portail_ouvert.png');
+        this.load.image('portail_socle', '/img/sol_portail.png');
         this.load.spritesheet('playersheet', '/img/simple-grey-shirt.png', {
             frameWidth: 85,
             frameHeight: 169
@@ -186,7 +187,16 @@ var DoRoom = new Phaser.Class({
             var colTxt = px-100;
             var toDestroy = []; var toDestroy2 = []; var toDestroy3 = []; var toDestroy4 = [];
             camSubject = "room";
-            var sortieO = this.physics.add.image(100,975,"portail_ouvert").setInteractive().setDepth(9100);
+            //var sortieO = this.physics.add.image(100,975,"portail_ouvert").setInteractive().setDepth(9100);
+            //===
+            var sortieO_socle = this.physics.add.image(100,975,"portail_socle").setInteractive().setDepth(24);
+            sortieO = this.physics.add.image(100,975,"portail_ferme").setInteractive().setDepth(999);
+            sortieO.name = "o";
+            this.physics.add.overlap(sortieO,this.player,this.closeToPortail,()=>{},this);
+            var activePtO = this.physics.add.sprite(100,1045,"cb25-25").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
+            activePtO.name = "o";
+            this.physics.add.collider(activePtO, this.player,this.hitPortail,()=>{},this);
+            //===
             posSortie = 1500;
             var chevaletDOP1;
             var chevaletDOP2;
@@ -239,6 +249,7 @@ var DoRoom = new Phaser.Class({
                 chevaletDOP2.setDepth(1).disableInteractive();
                 chevaletDOP3.setDepth(1).disableInteractive();
                 chevaletDOP4.setDepth(1).disableInteractive();
+                activePtO.body.enable = false;
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -259,6 +270,7 @@ var DoRoom = new Phaser.Class({
                     chevaletDOP2.setDepth(9001).setInteractive();
                     chevaletDOP3.setDepth(9001).setInteractive();
                     chevaletDOP4.setDepth(9001).setInteractive();
+                    activePtO.body.enable = true;
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -315,6 +327,7 @@ var DoRoom = new Phaser.Class({
                 chevaletDOP2.setDepth(1).disableInteractive();
                 chevaletDOP3.setDepth(1).disableInteractive();
                 chevaletDOP4.setDepth(1).disableInteractive();
+                activePtO.body.enable = false;
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -333,6 +346,7 @@ var DoRoom = new Phaser.Class({
                     chevaletDOP2.setDepth(9001).setInteractive();
                     chevaletDOP3.setDepth(9001).setInteractive();
                     chevaletDOP4.setDepth(9001).setInteractive();
+                    activePtO.body.enable = true;
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -387,6 +401,7 @@ var DoRoom = new Phaser.Class({
                 chevaletDOP2.setDepth(1).disableInteractive();
                 chevaletDOP3.setDepth(1).disableInteractive();
                 chevaletDOP4.setDepth(1).disableInteractive();
+                activePtO.body.enable = false;
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -405,6 +420,7 @@ var DoRoom = new Phaser.Class({
                     chevaletDOP2.setDepth(9001).setInteractive();
                     chevaletDOP3.setDepth(9001).setInteractive();
                     chevaletDOP4.setDepth(9001).setInteractive();
+                    activePtO.body.enable = true;
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -458,6 +474,7 @@ var DoRoom = new Phaser.Class({
                 chevaletDOP2.setDepth(1).disableInteractive();
                 chevaletDOP3.setDepth(1).disableInteractive();
                 chevaletDOP4.setDepth(1).disableInteractive();
+                activePtO.body.enable = false;
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -476,6 +493,7 @@ var DoRoom = new Phaser.Class({
                     chevaletDOP2.setDepth(9001).setInteractive();
                     chevaletDOP3.setDepth(9001).setInteractive();
                     chevaletDOP4.setDepth(9001).setInteractive();
+                    activePtO.body.enable = true;
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -501,6 +519,12 @@ var DoRoom = new Phaser.Class({
             }, this);
         },
         update: function(time, delta){
+            if(localStorage.getItem("touchingPt")){
+                if(!this.physics.overlap(this.player,sortieO)){
+                    sortieO.setTexture("portail_ferme");
+                    localStorage.setItem("touchingPt",false);
+                }
+            }
             if(resetPlayer == true){
                 let repop = localStorage.getItem("repop").split(",");
                 let repopX =parseInt(repop[0]);
@@ -604,5 +628,15 @@ var DoRoom = new Phaser.Class({
         },
         changeScene: function(nameScene, gameData){
             this.scene.start(nameScene, gameData);
+        },
+        hitPortail: function(portail){
+            localStorage.setItem("insideRoom", true);
+                localStorage.setItem("repop",[-2190,1650]);
+                Client.socket.emit("enterRoom");
+                Client.socket.on("okEnterRoom", function(){location.href = '/website/visite.html';});
+        },
+        closeToPortail: function(portail){
+            sortieO.setTexture("portail_ouvert");
+            localStorage.setItem("touchingPt",true);
         }
 });

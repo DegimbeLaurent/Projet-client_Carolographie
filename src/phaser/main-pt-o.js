@@ -24,6 +24,7 @@ var playerMap;
 var player;
 var minimap;
 var camSubject;
+var sortieO;
 game.speed = 300;
 game.players = [];
 game.playersBU = [];

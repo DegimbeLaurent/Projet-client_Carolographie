@@ -216,63 +216,72 @@ var LoadScene = new Phaser.Class({
         //==========================================
         //  AJOUT DES PORTAILS
         //==========================================
+        localStorage.setItem("touchingPt",false);
         var fondsNoir = this.add.rectangle(0, 0, 12600 , 6500, 0x6E5940).setDepth(1);           
-        var portailN = this.physics.add.image(130,730,"portail_ferme").setInteractive().setDepth(999);
-        var portailN_socle = this.physics.add.image(130,730,"portail_socle").setInteractive().setDepth(24);
-        portailN.on("pointerup", function(){
-            localStorage.setItem("insideRoom", true);
-            localStorage.setItem("repop",[0,900]);
-            Client.socket.emit("enterRoom");
-            Client.socket.on("okEnterRoom", function(){
-                //bruit_portail.play();
-                location.href = '/website/portail-n.html';
-            });
-        })    
-        var portailC = this.physics.add.image(540,1790,"portail_ferme").setInteractive().setDepth(999);
-        var portailC_socle = this.physics.add.image(540,1790,"portail_socle").setInteractive().setDepth(24);
-        portailC.on("pointerup", function(){
-            localStorage.setItem("insideRoom", true);
-            localStorage.setItem("repop",[470,1910]);
-            Client.socket.emit("enterRoom");
-            Client.socket.on("okEnterRoom", function(){
-                location.href = '/website/portail-c.html';
-            });
-        }) 
-        var portailO = this.physics.add.image(-2040,1550,"portail_ferme").setInteractive().setDepth(999);
-        var portailO_socle = this.physics.add.image(-2040,1550,"portail_socle").setInteractive().setDepth(24);
-        portailO.on("pointerup", function(){
-            localStorage.setItem("insideRoom", true);
-            localStorage.setItem("repop",[-2190,1650]);
-            Client.socket.emit("enterRoom");
-            Client.socket.on("okEnterRoom", function(){
-                location.href = '/website/portail-o.html';
-            });
-        }) 
-        var portailE = this.physics.add.image(140,2650,"portail_ferme").setInteractive().setDepth(999);
-        var portailE_socle = this.physics.add.image(140,2650,"portail_socle").setInteractive().setDepth(24);
-        portailE.on("pointerup", function(){
-            localStorage.setItem("insideRoom", true);
-            localStorage.setItem("repop",[0,2750]);
-            Client.socket.emit("enterRoom");
-            Client.socket.on("okEnterRoom", function(){
-                location.href = '/website/portail-e.html';
-            });
-        })         
-        var portailS = this.physics.add.image(-1150,3290,"portail_ferme").setInteractive().setDepth(999);
-        var portailS_socle = this.physics.add.image(-1150,3290,"portail_socle").setInteractive().setDepth(24);
-        portailS.on("pointerup", function(){
-            localStorage.setItem("insideRoom", true);
-            localStorage.setItem("repop",[-1300,3390]);
-            Client.socket.emit("enterRoom");
-            Client.socket.on("okEnterRoom", function(){
-                location.href = '/website/portail-s.html';
-            });
-        }) 
+            //================
+            // NORD
+            //================
+            var portailN_socle = this.physics.add.image(130,730,"portail_socle").setInteractive().setDepth(24);
+            portailN = this.physics.add.image(130,730,"portail_ferme").setInteractive().setDepth(999);
+            portailN.name = "n";
+            this.physics.add.overlap(portailN,this.player,this.closeToPortail,()=>{},this);
+            var activePtN = this.physics.add.sprite(130,800,"cb25-25").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
+            activePtN.name = "n";
+            this.physics.add.collider(activePtN, this.player,this.hitPortail,()=>{},this);
+            //================
+            // CENTRE
+            //================
+            var portailC_socle = this.physics.add.image(540,1790,"portail_socle").setInteractive().setDepth(24);
+            portailC = this.physics.add.image(540,1790,"portail_ferme").setInteractive().setDepth(999);
+            portailC.name = "c";
+            this.physics.add.overlap(portailC,this.player,this.closeToPortail,()=>{},this);
+            var activePtC = this.physics.add.sprite(540,1860,"cb25-25").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
+            activePtC.name = "c";
+            this.physics.add.collider(activePtC, this.player,this.hitPortail,()=>{},this);
+            //================
+            // OUEST
+            //================
+            portailO = this.physics.add.image(-2040,1550,"portail_ferme").setInteractive().setDepth(999);
+            var portailO_socle = this.physics.add.image(-2040,1550,"portail_socle").setInteractive().setDepth(24);
+            portailO.name = "o";
+            this.physics.add.overlap(portailO,this.player,this.closeToPortail,()=>{},this);
+            var activePtO = this.physics.add.sprite(-2040,1620,"cb25-25").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
+            activePtO.name = "o";
+            this.physics.add.collider(activePtO, this.player,this.hitPortail,()=>{},this);
+            //================
+            // EST
+            //================
+            portailE = this.physics.add.image(140,2650,"portail_ferme").setInteractive().setDepth(999);
+            var portailE_socle = this.physics.add.image(140,2650,"portail_socle").setInteractive().setDepth(24);
+            portailE.name = "e";
+            this.physics.add.overlap(portailE,this.player,this.closeToPortail,()=>{},this);
+            var activePtE = this.physics.add.sprite(140,2720,"cb25-25").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
+            activePtE.name = "e";
+            this.physics.add.collider(activePtE, this.player,this.hitPortail,()=>{},this);
+            //================
+            // SUD
+            //================
+            portailS = this.physics.add.image(-1150,3290,"portail_ferme").setInteractive().setDepth(999);
+            var portailS_socle = this.physics.add.image(-1150,3290,"portail_socle").setInteractive().setDepth(24);
+            portailS.name = "s";
+            this.physics.add.overlap(portailS,this.player,this.closeToPortail,()=>{},this);
+            var activePtS = this.physics.add.sprite(-1150,3360,"cb25-25").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
+            activePtS.name = "s";
+            this.physics.add.collider(activePtS, this.player,this.hitPortail,()=>{},this);
 },
 update: function(time, delta){
+        if(localStorage.getItem("touchingPt")){
+            let nbPtClosed = 0;
+            if(!this.physics.overlap(this.player,portailN)){portailN.setTexture("portail_ferme"); nbPtClosed++;}
+            if(!this.physics.overlap(this.player,portailC)){portailC.setTexture("portail_ferme"); nbPtClosed++;}
+            if(!this.physics.overlap(this.player,portailO)){portailO.setTexture("portail_ferme"); nbPtClosed++;}
+            if(!this.physics.overlap(this.player,portailE)){portailE.setTexture("portail_ferme"); nbPtClosed++;}
+            if(!this.physics.overlap(this.player,portailS)){portailS.setTexture("portail_ferme"); nbPtClosed++;}
+            if(nbPtClosed == 5){localStorage.setItem("touchingPt",false);}
+        }
         controls.update(delta);
         let plId = parseInt(localStorage.getItem("playerId"));
-        const speed = 500;
+        const speed = 600;
         const prevVelocity = this.player.body.velocity.clone();
         //this.player.body.setVelocity(0);
         
@@ -367,5 +376,42 @@ update: function(time, delta){
             x += stepX;
             y += stepY;
         }    
+    },
+    hitPortail: function(portail){
+        localStorage.setItem("insideRoom", true);
+        if(portail.name == "n"){
+            localStorage.setItem("repop",[0,900]);
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){location.href = '/website/portail-n.html';});
+        }
+        if(portail.name == "s"){
+            localStorage.setItem("repop",[-1300,3390]);
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){location.href = '/website/portail-s.html';});
+        }
+        if(portail.name == "o"){
+            localStorage.setItem("repop",[-2190,1650]);
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){location.href = '/website/portail-o.html';});
+        }
+        if(portail.name == "e"){
+            localStorage.setItem("repop",[0,2750]);
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){location.href = '/website/portail-e.html';});
+        }
+        if(portail.name == "c"){
+            localStorage.setItem("repop",[470,1910]);
+            console.log("touché portail centre!");
+            Client.socket.emit("enterRoom");
+            Client.socket.on("okEnterRoom", function(){location.href = '/website/portail-c.html';});
+        }
+    },
+    closeToPortail: function(portail){
+        if(portail.name == "n"){portailN.setTexture("portail_ouvert");}
+        if(portail.name == "s"){portailS.setTexture("portail_ouvert");}
+        if(portail.name == "o"){portailO.setTexture("portail_ouvert");}
+        if(portail.name == "e"){portailE.setTexture("portail_ouvert");}
+        if(portail.name == "c"){portailC.setTexture("portail_ouvert");}
+        localStorage.setItem("touchingPt",true);
     }
 });

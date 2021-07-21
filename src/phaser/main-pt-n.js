@@ -38,6 +38,7 @@ var bruit_ambiance;
 var bruit_feu;
 var bruit_portail;
 var stopCourse;
+var sortieN;
 game.speed = 300;
 game.players = [];
 game.playersBU = [];

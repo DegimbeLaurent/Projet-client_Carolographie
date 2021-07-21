@@ -17,6 +17,7 @@ var DcRoom = new Phaser.Class({
         this.load.image('chevalet_d', '/img/chevalet_d.png');
         this.load.image('portail_ferme', '/img/portail_ferme.png');
         this.load.image('portail_ouvert', '/img/portail_ouvert.png');
+        this.load.image('portail_socle', '/img/sol_portail.png');
         this.load.spritesheet('playersheet', '/img/simple-grey-shirt.png', {
             frameWidth: 85,
             frameHeight: 169
@@ -185,8 +186,16 @@ var DcRoom = new Phaser.Class({
             var colTxt = px-100;
             var toDestroy = []; var toDestroy2 = []; var toDestroy3 = []; var toDestroy4 = [];
             camSubject = "room";
-            //var sortieC = this.add.rectangle(x+350,y+100,50, 75, 0xffffff).setDepth(9100).setInteractive();
-            var sortieC = this.physics.add.image(100,975,"portail_ouvert").setInteractive().setDepth(9100);
+            //var sortieC = this.physics.add.image(100,975,"portail_ouvert").setInteractive().setDepth(9100);
+            //===
+            var sortieC_socle = this.physics.add.image(100,975,"portail_socle").setInteractive().setDepth(24);
+            sortieC = this.physics.add.image(100,975,"portail_ferme").setInteractive().setDepth(999);
+            sortieC.name = "c";
+            this.physics.add.overlap(sortieC,this.player,this.closeToPortail,()=>{},this);
+            var activePtC = this.physics.add.sprite(100,1045,"cb25-25").setDepth(999).setBounce(1,1).setCollideWorldBounds(true).setImmovable(true);
+            activePtC.name = "c";
+            this.physics.add.collider(activePtC, this.player,this.hitPortail,()=>{},this);
+            //===
             var chevaletDCP1;
             var chevaletDCP2;
             var chevaletDCP3;
@@ -239,6 +248,7 @@ var DcRoom = new Phaser.Class({
                 chevaletDCP2.setDepth(1).disableInteractive();
                 chevaletDCP3.setDepth(1).disableInteractive();
                 chevaletDCP4.setDepth(1).disableInteractive();
+                activePtC.body.enable = false;
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -259,6 +269,7 @@ var DcRoom = new Phaser.Class({
                     chevaletDCP2.setDepth(9001).setInteractive();
                     chevaletDCP3.setDepth(9001).setInteractive();
                     chevaletDCP4.setDepth(9001).setInteractive();
+                    activePtC.body.enable = true;
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -316,6 +327,7 @@ var DcRoom = new Phaser.Class({
                 chevaletDCP2.setDepth(1).disableInteractive();
                 chevaletDCP3.setDepth(1).disableInteractive();
                 chevaletDCP4.setDepth(1).disableInteractive();
+                activePtC.body.enable = false;
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -334,6 +346,7 @@ var DcRoom = new Phaser.Class({
                     chevaletDCP2.setDepth(9001).setInteractive();
                     chevaletDCP3.setDepth(9001).setInteractive();
                     chevaletDCP4.setDepth(9001).setInteractive();
+                    activePtC.body.enable = true;
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -389,6 +402,7 @@ var DcRoom = new Phaser.Class({
                 chevaletDCP2.setDepth(1).disableInteractive();
                 chevaletDCP3.setDepth(1).disableInteractive();
                 chevaletDCP4.setDepth(1).disableInteractive();
+                activePtC.body.enable = false;
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -407,6 +421,7 @@ var DcRoom = new Phaser.Class({
                     chevaletDCP2.setDepth(9001).setInteractive();
                     chevaletDCP3.setDepth(9001).setInteractive();
                     chevaletDCP4.setDepth(9001).setInteractive();
+                    activePtC.body.enable = true;
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -460,6 +475,7 @@ var DcRoom = new Phaser.Class({
                 chevaletDCP2.setDepth(1).disableInteractive();
                 chevaletDCP3.setDepth(1).disableInteractive();
                 chevaletDCP4.setDepth(1).disableInteractive();
+                activePtC.body.enable = false;
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -478,6 +494,7 @@ var DcRoom = new Phaser.Class({
                     chevaletDCP2.setDepth(9001).setInteractive();
                     chevaletDCP3.setDepth(9001).setInteractive();
                     chevaletDCP4.setDepth(9001).setInteractive();
+                    activePtC.body.enable = true;
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -503,6 +520,12 @@ var DcRoom = new Phaser.Class({
             }, this);
         },
         update: function(time, delta){
+            if(localStorage.getItem("touchingPt")){
+                if(!this.physics.overlap(this.player,sortieC)){
+                    sortieC.setTexture("portail_ferme");
+                    localStorage.setItem("touchingPt",false);
+                }
+            }
             if(resetPlayer == true){
                 let repop = localStorage.getItem("repop").split(",");
                 let repopX =parseInt(repop[0]);
@@ -606,5 +629,15 @@ var DcRoom = new Phaser.Class({
         },
         changeScene: function(nameScene, gameData){
             this.scene.start(nameScene, gameData);
+        },
+        hitPortail: function(portail){
+            localStorage.setItem("insideRoom", true);
+                localStorage.setItem("repop",[470,1910]);
+                Client.socket.emit("enterRoom");
+                Client.socket.on("okEnterRoom", function(){location.href = '/website/visite.html';});
+        },
+        closeToPortail: function(portail){
+            sortieC.setTexture("portail_ouvert");
+            localStorage.setItem("touchingPt",true);
         }
 });
