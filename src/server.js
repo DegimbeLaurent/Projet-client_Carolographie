@@ -99,20 +99,28 @@ io.on('connection', function (socket) {
         //=================================
         socket.on('enterRoom', function(){
             socket.player.insideRoom = true;
-            updateServerPlayers(socket.player);
-            io.emit('updateList', serverPlayers);
-            console.log(socket.player.nickname+" entre dans le portail...");
             io.to(socket.id).emit("okEnterRoom");
+
+            io.emit('remove', socket.player.id, socket.player.nickname);
+            serverPlayers = deleteDisconnectedPlayer(serverPlayers, socket.player);
+
+            // updateServerPlayers(socket.player);
+            // io.emit('updateList', serverPlayers);
+            console.log(socket.player.nickname+" entre dans le portail...");
         });
         //=================================
         //  Joueur sort d'une pièce
         //=================================
         socket.on('goOutRoom', function(){
             socket.player.insideRoom = false;
-            updateServerPlayers(socket.player);
-            io.emit('updateList', serverPlayers);
-            console.log(socket.player.nickname+" sort du portail...");
             io.to(socket.id).emit("okGoOutRoom");
+
+            io.emit('remove', socket.player.id, socket.player.nickname);
+            serverPlayers = deleteDisconnectedPlayer(serverPlayers, socket.player);
+            
+            // updateServerPlayers(socket.player);
+            // io.emit('updateList', serverPlayers);
+            console.log(socket.player.nickname+" sort du portail...");
         });
         //=================================
         //  Click pour se déplacer
@@ -133,6 +141,11 @@ io.on('connection', function (socket) {
         //  Déconnection d'un joueur
         //=================================
         socket.on('disconnect', function () {
+            io.emit('remove', socket.player.id, socket.player.nickname);
+            serverPlayers = deleteDisconnectedPlayer(serverPlayers, socket.player);
+            //io.emit('updateList', serverPlayers);
+        });
+        socket.on('disconnect_map', function () {
             io.emit('remove', socket.player.id, socket.player.nickname);
             serverPlayers = deleteDisconnectedPlayer(serverPlayers, socket.player);
             //io.emit('updateList', serverPlayers);

@@ -18,7 +18,7 @@ var TemplateScene = new Phaser.Class({
         // Client.socket = io.connect();
         if(localStorage.getItem('personalData') == null){
             //let coordEntrance = this.getCoordEntrance();
-            let coordEntrance = [0,0];
+            let coordEntrance = [1250,950];
             Client.socket.emit('newplayer', localStorage.getItem('pseudo'),coordEntrance, localStorage.getItem('insideRoom'));
             //console.log("localstorage créé!");
         }else{
@@ -141,7 +141,7 @@ var TemplateScene = new Phaser.Class({
         if (personalData["id"] == id) {
             playerMap[id] = player;
         } else {
-            playerMap[id] = Game.physics.add.sprite(x, y, 'playersheet').setDepth(25);
+            playerMap[id] = Game.physics.add.sprite(x, y, 'player-bas').setDepth(25).setScale(0.7);
         }
         playerMap[id].id = id;
         playerMap[id].nickname = nickname;
@@ -247,13 +247,14 @@ var TemplateScene = new Phaser.Class({
                 let tgtSoldier = new Phaser.Math.Vector2();
                 tgtSoldier.x = player.newX;
                 tgtSoldier.y = player.newY;     
-                console.log("step1");
                 if (plId != player.id) {   
                     if(player.insideRoom == "false"){
                         if((player.x == 1)&&(player.y == 1)){
                             Game.physics.moveToObject(playerMap[player.id], tgtSoldier, 3000);                            
                         }else{
-                            Game.physics.moveToObject(playerMap[player.id], tgtSoldier, game.speed);
+                            if(playerMap[player.id] != undefined){
+                                Game.physics.moveToObject(playerMap[player.id], tgtSoldier, game.speed);
+                            }
                         }
                     }
                     //console.log("["+player.insideRoom+"]");

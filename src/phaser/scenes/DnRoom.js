@@ -238,10 +238,10 @@ var DnRoom = new Phaser.Class({
                 var arrayShadows = this.addShadows(toDestroy);
                 arrayShadows.forEach((item) => {toDestroy.push(item);})
                 camSubject = "chevalet";
-                chevaletDNP1.setDepth(1);
-                chevaletDNP2.setDepth(1);
-                chevaletDNP3.setDepth(1);
-                chevaletDNP4.setDepth(1);
+                chevaletDNP1.setDepth(1).disableInteractive();
+                chevaletDNP2.setDepth(1).disableInteractive();
+                chevaletDNP3.setDepth(1).disableInteractive();
+                chevaletDNP4.setDepth(1).disableInteractive();
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -258,10 +258,10 @@ var DnRoom = new Phaser.Class({
                     toDestroy.forEach((item) => {item.destroy();})
                     fondsEcran.setDepth(1);
                     sortieN.setDepth(9100);
-                    chevaletDNP1.setDepth(9001);
-                    chevaletDNP2.setDepth(9001);
-                    chevaletDNP3.setDepth(9001);
-                    chevaletDNP4.setDepth(9001);
+                    chevaletDNP1.setDepth(9001).setInteractive();
+                    chevaletDNP2.setDepth(9001).setInteractive();
+                    chevaletDNP3.setDepth(9001).setInteractive();
+                    chevaletDNP4.setDepth(9001).setInteractive();
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -314,10 +314,10 @@ var DnRoom = new Phaser.Class({
                 var arrayShadows = this.addShadows(toDestroy2);
                 arrayShadows.forEach((item) => {toDestroy2.push(item);})
                 camSubject = "chevalet";
-                chevaletDNP1.setDepth(1);
-                chevaletDNP2.setDepth(1);
-                chevaletDNP3.setDepth(1);
-                chevaletDNP4.setDepth(1);
+                chevaletDNP1.setDepth(1).disableInteractive();
+                chevaletDNP2.setDepth(1).disableInteractive();
+                chevaletDNP3.setDepth(1).disableInteractive();
+                chevaletDNP4.setDepth(1).disableInteractive();
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -332,10 +332,10 @@ var DnRoom = new Phaser.Class({
                     toDestroy2.forEach((item) => {item.destroy();})
                     fondsEcran.setDepth(1);
                     sortieN.setDepth(9100);
-                    chevaletDNP1.setDepth(9001);
-                    chevaletDNP2.setDepth(9001);
-                    chevaletDNP3.setDepth(9001);
-                    chevaletDNP4.setDepth(9001);
+                    chevaletDNP1.setDepth(9001).setInteractive();
+                    chevaletDNP2.setDepth(9001).setInteractive();
+                    chevaletDNP3.setDepth(9001).setInteractive();
+                    chevaletDNP4.setDepth(9001).setInteractive();
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -385,10 +385,10 @@ var DnRoom = new Phaser.Class({
                 var arrayShadows = this.addShadows(toDestroy3);
                 arrayShadows.forEach((item) => {toDestroy3.push(item);})
                 camSubject = "chevalet";
-                chevaletDNP1.setDepth(1);
-                chevaletDNP2.setDepth(1);
-                chevaletDNP3.setDepth(1);
-                chevaletDNP4.setDepth(1);
+                chevaletDNP1.setDepth(1).disableInteractive();
+                chevaletDNP2.setDepth(1).disableInteractive();
+                chevaletDNP3.setDepth(1).disableInteractive();
+                chevaletDNP4.setDepth(1).disableInteractive();
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -403,10 +403,10 @@ var DnRoom = new Phaser.Class({
                     toDestroy3.forEach((item) => {item.destroy();})
                     fondsEcran.setDepth(1);
                     sortieN.setDepth(9100);
-                    chevaletDNP1.setDepth(9001);
-                    chevaletDNP2.setDepth(9001);
-                    chevaletDNP3.setDepth(9001);
-                    chevaletDNP4.setDepth(9001);
+                    chevaletDNP1.setDepth(9001).setInteractive();
+                    chevaletDNP2.setDepth(9001).setInteractive();
+                    chevaletDNP3.setDepth(9001).setInteractive();
+                    chevaletDNP4.setDepth(9001).setInteractive();
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;
@@ -458,10 +458,10 @@ var DnRoom = new Phaser.Class({
                 var arrayShadows = this.addShadows(toDestroy4);
                 arrayShadows.forEach((item) => {toDestroy4.push(item);})
                 camSubject = "chevalet";
-                chevaletDNP1.setDepth(1);
-                chevaletDNP2.setDepth(1);
-                chevaletDNP3.setDepth(1);
-                chevaletDNP4.setDepth(1);
+                chevaletDNP1.setDepth(1).disableInteractive();
+                chevaletDNP2.setDepth(1).disableInteractive();
+                chevaletDNP3.setDepth(1).disableInteractive();
+                chevaletDNP4.setDepth(1).disableInteractive();
                 fondsEcran.setDepth(51);
                 // player.setDepth(1);
                 // player.x = 0;
@@ -476,10 +476,10 @@ var DnRoom = new Phaser.Class({
                     toDestroy4.forEach((item) => {item.destroy();})
                     fondsEcran.setDepth(1);
                     sortieN.setDepth(9100);
-                    chevaletDNP1.setDepth(9001);
-                    chevaletDNP2.setDepth(9001);
-                    chevaletDNP3.setDepth(9001);
-                    chevaletDNP4.setDepth(9001);
+                    chevaletDNP1.setDepth(9001).setInteractive();
+                    chevaletDNP2.setDepth(9001).setInteractive();
+                    chevaletDNP3.setDepth(9001).setInteractive();
+                    chevaletDNP4.setDepth(9001).setInteractive();
                     // player.setDepth(9199);
                     // player.x = 100;
                     // player.y = 600;

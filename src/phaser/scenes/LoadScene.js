@@ -28,7 +28,11 @@ var LoadScene = new Phaser.Class({
             this.load.image('player-droite', '/img/front-right.png');
             this.load.image('player-haut', '/img/front-back.png');
             this.load.image('player-bas', '/img/front-front.png');
-            this.load.spritesheet('playersheet', '/img/grey-shirt-with-snake4.png', {
+            this.load.spritesheet('playersheet', '/img/grey-shirt-with-snake.png', {
+                frameWidth: 85,
+                frameHeight: 169
+            });
+            this.load.spritesheet('playersheetMain', '/img/blue-water-shirt.png', {
                 frameWidth: 85,
                 frameHeight: 169
             });
@@ -70,17 +74,17 @@ var LoadScene = new Phaser.Class({
             //==========================================
             //  AJOUT DU JOUEUR
             //==========================================
-            this.player = this.physics.add.sprite(1250,950,'playersheet').setDepth(25).setScale(0.7);
-            this.anims.create({key:'left',frames: this.anims.generateFrameNumbers('playersheet', {start: 30,end: 35}),frameRate: 10,repeat: -1});
-            this.anims.create({key:'right',frames: this.anims.generateFrameNumbers('playersheet', {start: 6,end: 11}),frameRate: 10,repeat: -1});
-            //this.anims.create({key:'up',frames: this.anims.generateFrameNumbers('playersheet', {start: 18,end: 23}),frameRate: 10,repeat: -1});
-            this.anims.create({key:'up',frames: this.anims.generateFrameNumbers('playersheet', {start: 6,end: 11}),frameRate: 10,repeat: -1});
-            this.anims.create({key:'down',frames: this.anims.generateFrameNumbers('playersheet', {start: 36,end: 41}),frameRate: 10,repeat: -1});
-            this.anims.create({key:'diagLUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 24,end: 29}),frameRate: 10,repeat: -1});
-            this.anims.create({key:'diagLDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 42,end: 47}),frameRate: 10,repeat: -1});
-            this.anims.create({key:'diagRUp',frames: this.anims.generateFrameNumbers('playersheet', {start: 12,end: 17}),frameRate: 10,repeat: -1});
-            this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheet', {start: 0,end: 5}),frameRate: 10,repeat: -1});            
-            this.anims.create({key: 'turn',frames: [{key: 'playersheet',frame: 45}],frameRate: 20})
+            this.player = this.physics.add.sprite(1250,950,'playersheetMain').setDepth(25).setScale(0.7);
+            this.anims.create({key:'left',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 30,end: 35}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'right',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 6,end: 11}),frameRate: 10,repeat: -1});
+            //this.anims.create({key:'up',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 18,end: 23}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'up',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 6,end: 11}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'down',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 36,end: 41}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'diagLUp',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 24,end: 29}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'diagLDown',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 42,end: 47}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'diagRUp',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 12,end: 17}),frameRate: 10,repeat: -1});
+            this.anims.create({key:'diagRDown',frames: this.anims.generateFrameNumbers('playersheetMain', {start: 0,end: 5}),frameRate: 10,repeat: -1});            
+            this.anims.create({key: 'turn',frames: [{key: 'playersheetMain',frame: 45}],frameRate: 20})
             this.player.name = "myPlayer";
             playerVelocity = 2;            
             this.player.body.setVelocity(1,2).setBounce(1, 1).setCollideWorldBounds(true);
