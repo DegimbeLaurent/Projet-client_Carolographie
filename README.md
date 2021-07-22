@@ -13,7 +13,7 @@
 
 ## Où t’étais ? Que faisais-tu ?
 
-  BeCode - 
+  BeCode - Nous réalisions une formation de web dévloppeur, durant celle-ci nous avions à réaliser un projet client qui est celui-ci.
 
 ## Quand as-tu bossé dessus ?
 
@@ -21,6 +21,9 @@
 
 ## A quoi ça ressemble ? 
 
+![Acceuil](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/home.PNG)
+![Login](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/login.PNG)
+![Game](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/game.PNG)
 
 ## La progression… 
 
