@@ -71,7 +71,11 @@ API_PASSWORD=xxx
 
 ## (Re)démarrage du serveur
 
-> Pour (re)lancer le serveur, ouvrez un terminal WEB SSH, rendez vous dans le répertoire de votre site et tapez la commande suivante:
+> Ouvrez un terminal WEB SSH et installez l'application "forever" en tapant la commande suivante:
+
+npm install forever -g
+
+> Pour (re)lancer le serveur, rendez vous dans le répertoire de votre site et tapez la commande suivante:
 
 forever start src/server.js
 
