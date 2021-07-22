@@ -40,10 +40,10 @@ BeCode - Nous réalisions une formation de web dévloppeur, durant celle-ci nous
 ## La progression…
   
   - Expérience solo
-  - Posibilité de le faire en groupe 
+  - Possibilité de le faire en groupe
   - Event aléatoire (nuages, oiseaux, taupe)
-  - Remerciment via les commentaire facebook à la fin de la visite
-  - Ajouter du décore sur la map principal
+  - Remerciement via les commentaire facebook à la fin de la visite
+  - Ajouter du décor sur la map principal
 
 ## Qu’est-ce que ça contient ?
 
