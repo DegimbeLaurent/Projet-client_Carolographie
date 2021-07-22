@@ -24,15 +24,23 @@
 
 > Pour ce faire, connectez-vous à votre [manager Infomaniak](https://manager.infomaniak.com/)
 
-> Rendez-vous dans la section !["Serveur Cloud"](/src/assets/img/installation/cloud.JPG)
+> Rendez-vous dans la section "Serveur Cloud"
 
-> Cliquez sur ![Hébergements Web](/src/assets/img/installation/menu_cloud.JPG) dans le menu à gauche.
+!["Serveur Cloud"](/src/assets/img/installation/cloud.JPG)
+
+> Cliquez sur "Hébergements Web" dans le menu à gauche.
+
+![Hébergements Web](/src/assets/img/installation/menu_cloud.JPG)
 
 > Cliquez ensuite sur le nom de domaine que vous avez réservé
 
-> Une fois sur la page de votre hébergement, cliquez sur ![FTP/SSH](/src/assets/img/installation/ftp_ssh.JPG) dans le menu à gauche.
+> Une fois sur la page de votre hébergement, cliquez sur "FTP/SSH" dans le menu à gauche.
 
-> Cliquez sur le bouton ![Web SSH](/src/assets/img/installation/btn_ssh.JPG) et le terminal s'ouvre dans un nouvel onglet
+![FTP/SSH](/src/assets/img/installation/ftp_ssh.JPG)
+
+> Cliquez sur le bouton "Web SSH" et le terminal s'ouvre dans un nouvel onglet
+
+![Web SSH](/src/assets/img/installation/btn_ssh.JPG)
 
 ## Configuration des packages sur le serveur Node
 
