@@ -38,6 +38,12 @@ BeCode - Nous réalisions une formation de web dévloppeur, durant celle-ci nous
 ![Game](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/game.PNG)
 
 ## La progression…
+  
+  - Expérience solo
+  - Posibilité de le faire en groupe 
+  - Event aléatoire (nuages, oiseaux, taupe)
+  - Remerciment via les commentaire facebook à la fin de la visite
+  - Ajouter du décore sur la map principal
 
 ## Qu’est-ce que ça contient ?
 
@@ -45,12 +51,6 @@ BeCode - Nous réalisions une formation de web dévloppeur, durant celle-ci nous
 
 ## Sounds credit
 
-<<<<<<< HEAD
-
-- [course sur béton](https://www.sound-fishing.net/bruitages/humain)
-- [Bruitage2](https://www.sound-fishing.net/bruitages/oiseaux-ambiances)
-- [](https://www.sound-fishing.net/bruitages/toon)
-- # [](https://www.sound-fishing.net/bruitages/feu)
   - [course sur béton](https://www.sound-fishing.net/bruitages/humain)
   - [Bruitage2](https://www.sound-fishing.net/bruitages/oiseaux-ambiances)
   - [teleportation](https://www.sound-fishing.net/bruitages/toon)
@@ -69,4 +69,3 @@ BeCode - Nous réalisions une formation de web dévloppeur, durant celle-ci nous
 - [Iassogna christine]() Pour les photos prises sur place.
 - [Duchemin Arnaud](https://github.com/Cervant3s) Pour l'aide apportée.
 - [L'équipe Carolographie](https://www.carolographie.be/)
-  > > > > > > > 292ee002fe784a41c8893b779193ed96483361fb
