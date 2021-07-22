@@ -40,10 +40,39 @@
 
 ![Web SSH](/src/assets/img/installation/btn_ssh.JPG)
 
+## Importation des fichiers sur votre serveur depuis le compte Github
+
+> Ouvrez un terminal WEB SSH comme indiqué au point précédent et rendez vous dans le répertoire dans lequel vous souhaitez installer le site (cd repertoire/sous-repertoire)
+
+> Exécutez la commande suivante:
+
+git clone https://github.com/DegimbeLaurent/Projet-client_Carolographie.git
+
 ## Configuration des packages sur le serveur Node
 
-## Importation des fichiers sur votre serveur depuis le compte Github
+> Toujours dans ce même répertoire, installez les packages node via la commande suivante :
+> npm install --save express http-server parcel-bundler socket.io dotenv
 
 ## Ajout des variables d'environnement sur le serveur
 
+> Ouvrez le gestionnaire de fichiers en cliquant sur le bouton "WEB FTP" situé à gauche du bouton "WEB SSH" (voir ouverture terminal ci-dessus)
+
+> Rendez vous dans le répertoire "src" et créer un fichier texte nommé "env.txt"
+
+> Ajouter les variables d'environnement suivantes et prenant bien soin de remplacer les "xxx" par les données qui vous aurons été communiquées séparément:
+> API_KEY=xxx
+> API_USERNAME=xxx
+> API_PASSWORD=xxx
+
+> Sauvegardez puis renommez le fichier en ".env"
+
 ## (Re)démarrage du serveur
+
+> Pour (re)lancer le serveur, ouvrez un terminal WEB SSH, rendez vous dans le répertoire de votre site et tapez la commande suivante:
+> forever start src/server.js
+
+## Lien vers le site
+
+> Afin d'accéder à votre site, tapez simplement votre nom de domaine suivi de ":3000"
+
+> Par exemple: https://www.ma-visite-virtuelle.be:3000
