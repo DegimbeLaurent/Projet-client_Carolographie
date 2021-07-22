@@ -33,11 +33,11 @@ BeCode - Nous réalisions une formation de web dévloppeur, durant celle-ci nous
 
 ## A quoi ça ressemble ?
 
-![Accueil](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/home.PNG)_____________________________________________________________________________________________________________________________________________________
+![Accueil](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/home.PNG)_______________________________________________________________________________________________________________________________________________________
 
-![Login](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/login.PNG)_____________________________________________________________________________________________________________________________________________________
+![Login](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/login.PNG)_______________________________________________________________________________________________________________________________________________________
 
-![Game](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/game.PNG)_____________________________________________________________________________________________________________________________________________________
+![Game](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/game.PNG)_______________________________________________________________________________________________________________________________________________________
 
 
 ## La progression…
