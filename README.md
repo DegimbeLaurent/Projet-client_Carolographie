@@ -63,6 +63,6 @@
 
 ## Remerciment
 
-  * [Iassogna christine]()
-  * [Duchemin Arnaud](https://github.com/Cervant3s)
+  * [Iassogna christine]() Pour les photos prises sur place.
+  * [Duchemin Arnaud](https://github.com/Cervant3s) Pour l'aide apportée.
   * [L'équipe Carolographie](https://www.carolographie.be/)
