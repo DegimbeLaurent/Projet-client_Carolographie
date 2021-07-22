@@ -283,7 +283,7 @@ update: function(time, delta){
         }
         controls.update(delta);
         let plId = parseInt(localStorage.getItem("playerId"));
-        const speed = 1600;
+        const speed = 800;
         const prevVelocity = this.player.body.velocity.clone();
         //this.player.body.setVelocity(0);
         
