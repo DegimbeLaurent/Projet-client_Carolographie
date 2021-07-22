@@ -22,6 +22,7 @@ var DsRoom = new Phaser.Class({
             frameWidth: 85,
             frameHeight: 169
         });
+        this.load.image('nom_district', '/img/sud.png');
         // PICTURES
             // DISTRICT SUD
                 this.load.image('DST1_00', '/img/visit/districtS/DS-T1/DST1_00.png');
@@ -116,6 +117,7 @@ var DsRoom = new Phaser.Class({
         playerVelocity = 2;
         this.player.body.setVelocity(1,2).setBounce(1, 1).setCollideWorldBounds(true);
         cursors = this.input.keyboard.createCursorKeys();
+        this.nomDistrict = this.physics.add.image(120,1200,'nom_district').setDepth(40);
         //==========================================
         //  AJOUT DES COLLISIONS
         //==========================================
