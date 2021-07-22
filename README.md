@@ -49,5 +49,5 @@
 
   * [course sur béton](https://www.sound-fishing.net/bruitages/humain)
   * [Bruitage2](https://www.sound-fishing.net/bruitages/oiseaux-ambiances)
-  * [](https://www.sound-fishing.net/bruitages/toon)
-  * [](https://www.sound-fishing.net/bruitages/feu)
+  * [teleportation](https://www.sound-fishing.net/bruitages/toon)
+  * [Cheminée](https://www.sound-fishing.net/bruitages/feu)
