@@ -26,6 +26,14 @@
 
 > Rendez-vous dans la section !["Serveur Cloud"](/src/assets/img/installation/cloud.JPG)
 
+> Cliquez sur ![Hébergements Web](/src/assets/img/installation/menu_cloud.JPG) dans le menu à gauche.
+
+> Cliquez ensuite sur le nom de domaine que vous avez réservé
+
+> Une fois sur la page de votre hébergement, cliquez sur ![FTP/SSH](/src/assets/img/installation/ftp_ssh.JPG) dans le menu à gauche.
+
+> Cliquez sur le bouton ![Web SSH](/src/assets/img/installation/btn_ssh.JPG) et le terminal s'ouvre dans un nouvel onglet
+
 ## Configuration des packages sur le serveur Node
 
 ## Importation des fichiers sur votre serveur depuis le compte Github
