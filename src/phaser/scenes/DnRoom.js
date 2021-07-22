@@ -25,6 +25,7 @@ var DnRoom = new Phaser.Class({
             frameWidth: 85,
             frameHeight: 169
         });
+        this.load.image('nom_district', '/img/nord.png');
         // PICTURES
             // DISTRICT NORD
                 this.load.image('DNT1_00', '/img/visit/districtN/DN-T1/DNT1_00.jpg');
@@ -122,6 +123,7 @@ var DnRoom = new Phaser.Class({
         playerVelocity = 2;
         this.player.body.setVelocity(1,2).setBounce(1, 1).setCollideWorldBounds(true);
         cursors = this.input.keyboard.createCursorKeys();
+        this.nomDistrict = this.physics.add.image(120,1200,'nom_district').setDepth(40);
         //==========================================
         //  AJOUT DES COLLISIONS
         //==========================================

@@ -97,8 +97,10 @@ var LoadScene = new Phaser.Class({
             //var layer40 = map.createLayer('tp', [tileset10]).setDepth(40);
             var layer50 = map.createLayer('ruine stage 2', [tileset10]).setDepth(50);
             var layer60 = map.createLayer('ruine top', [tileset10]).setDepth(60);
-            var layer70 = map.createLayer('ruine bottom', [tileset10]).setDepth(70);
+            var layer70 = map.createLayer('ruine bottom', [tileset10]).setDepth(70);            
             var layer80 = map.createLayer('ruine stage', [tileset10]).setDepth(80);
+            var layer85 = map.createLayer('murtest', [tileset10]).setDepth(85);
+
             var layer90 = map.createLayer('building bottom', [tileset10]).setDepth(90);
             var layer100 = map.createLayer('building top ', [tileset10]).setDepth(100);
             var layer110 = map.createLayer('building transparanse', [tileset10]).setDepth(110);
@@ -121,12 +123,12 @@ var LoadScene = new Phaser.Class({
             this.addHitboxDiag(350,250,-40,20,25,20); // diagonale côté mur
             this.addHitboxDiag(510,350,-40,20,25,16); // diagonale côté fleurs
         // Murs Ouest
-            let coinsMurs = [[-550,500,250],[-2600,1660,100],[-3150,2150,100],[-3650,2700,100],[-3550,2800,100]]; // quelques coins de murs
+            let coinsMurs = [[-550,500,250],[-2750,1710,100],[-3250,2220,100],[-3750,2950,100],[-3850,3000,100]]; // quelques coins de murs
             this.addHitbox(coinsMurs);
-            this.addHitboxDiag(-710,580,-80,40,50,25); // 1ère section de mur en partant du haut
-            this.addHitboxDiag(-2600,1760,-80,40,50,8); // 2ème section
-            this.addHitboxDiag(-3050,2250,-80,40,50,9); // 3ème section
-            this.addHitboxDiag(-3450,2850,-80,40,50,6); // 4ème section
+            this.addHitboxDiag(-710,580,-80,40,50,26); // 1ère section de mur en partant du haut
+            this.addHitboxDiag(-2760,1840,-80,40,50,7); // 2ème section
+            this.addHitboxDiag(-3290,2330,-80,40,50,7); // 3ème section
+            this.addHitboxDiag(-3750,2650,0,60,50,5); // 4ème section
             this.addHitboxDiag(-3900,3100,80,40,50,11);  // portion de mur qui rejoint le bâtiment sud
         // Mur Est
             this.addHitboxDiag(2400,1370,-80,40,50,21);
@@ -281,7 +283,7 @@ update: function(time, delta){
         }
         controls.update(delta);
         let plId = parseInt(localStorage.getItem("playerId"));
-        const speed = 600;
+        const speed = 1600;
         const prevVelocity = this.player.body.velocity.clone();
         //this.player.body.setVelocity(0);
         
