@@ -41,7 +41,7 @@
 
 ## Qu’est-ce que ça contient ?
 
-  visite virtuelle Carolographie 
+  
 
 ## Comment qu’on l’installe ?
 
@@ -51,3 +51,18 @@
   * [Bruitage2](https://www.sound-fishing.net/bruitages/oiseaux-ambiances)
   * [teleportation](https://www.sound-fishing.net/bruitages/toon)
   * [Cheminée](https://www.sound-fishing.net/bruitages/feu)
+
+
+## Pictures credit
+
+  * [La carte de Ferraris](https://www.kbr.be/fr/projets/la-carte-de-ferraris/)
+  * [Roses](https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=576064)
+  * [Vignes](https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2026424)
+  * [fougères](https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=297080)
+  * [Personnage](https://erikari.itch.io/elements-supremacy-assets)
+
+## Remerciment
+
+  * [Iassogna christine]()
+  * [Duchemin Arnaud](https://github.com/Cervant3s)
+  * [L'équipe Carolographie](https://www.carolographie.be/)
