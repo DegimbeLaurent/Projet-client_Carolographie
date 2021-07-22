@@ -2,9 +2,9 @@
 
 ## Qui a fait le projet :
 
+  * [Maureen Marchal](https://github.com/Maureenm41) Rôle : Design & Graphisme 
   * [Stéphane Englebert](https://github.com/stephane-englebert) Rôle : Backend developer + Project Manager organisation 
   * [Deceulaer Adrien](https://github.com/DeceulaerAdrien) Rôle :  Backend developer
-  * [Maureen Marchal](https://github.com/Maureenm41) Rôle : Design & Graphisme 
   * [Fred Galoppin](https://github.com/fredgaloppin) Rôle : Frontend developer 
   * [Laurent Degimbe](https://github.com/DegimbeLaurent) Rôle : Backend developer + Project Manager technique 
 
