@@ -11,12 +11,16 @@
 ## Qu’est-ce que c’est ? 
 
 
+## Où t’étais ? Que faisais-tu ?
+
+  BeCode - 
 
 ## Quand as-tu bossé dessus ?
 
-## Où t’étais ? Que faisais-tu ?
+ 05/2021 - 07/2021
 
 ## A quoi ça ressemble ? 
+
 
 ## La progression… 
 
