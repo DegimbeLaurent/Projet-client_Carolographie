@@ -24,7 +24,7 @@
 
 > Pour ce faire, connectez-vous à votre [manager Infomaniak](https://manager.infomaniak.com/)
 
-> Rendez-vous dans la section ["Serveur Cloud"](/src/assets/img/installation/cloud.JPG)
+> Rendez-vous dans la section !["Serveur Cloud"](/src/assets/img/installation/cloud.JPG)
 
 ## Configuration des packages sur le serveur Node
 
