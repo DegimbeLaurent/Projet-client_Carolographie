@@ -10,13 +10,11 @@
 
 > Chez Infomaniak, ils proposent la solution de ["Serveur Cloud managé"](https://shop.infomaniak.com/order/select/vps_only).
 
-> Lors de la commande du serveur managé, vous aurez également la possibilité de réserver un nom de domaine.
+> Lors de la commande du serveur managé, vous aurez également la possibilité de réserver un nom de domaine. C'est la solution à privilégier car vraiment plus simple!
 
-> Si vous disposez déjà d'un nom de domaine (non-utilisé chez un autre hébergeur), poursuivez votre commande sans réserver de nom de domaine, sinon réservez-le en même temps.
+> Si vous disposez déjà d'un nom de domaine (non-utilisé chez un autre hébergeur), vous pouvez soit le [transférer chez Infomaniak](https://www.infomaniak.com/fr/support/faq/1814/nom-de-domaine-transferer-vers-infomaniak-code-dautorisation-requis), soit [configurer la gestion des DNS](https://www.infomaniak.com/fr/support/faq/2023/trouverafficher-les-dns-le-a-record-et-le-mx-record) entre Infomaniak et votre registrar, mais c'est un peu plus sportif...
 
 > Si quelque chose ne vous semble pas clair, n'hésitez pas à consulter leur [base de connaissances](https://www.infomaniak.com/fr/support/faq/admin2), elle est très bien faite.
-
-## Lier votre nom de domaine à votre serveur managé
 
 ## Ouverture d'un terminal Web SSH
 
