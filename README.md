@@ -21,6 +21,15 @@
 ## Quand as-tu bossé dessus ?
 
  05/2021 - 07/2021
+ 
+## Technologie:
+
+  * [Html]() 
+  * [SCSS]() 
+  * [NodeJS](https://nodejs.org/en/) Gestion serveur
+  * [Phaser](https://phaser.io/) FrameWork - game
+  * [Tiled](https://www.mapeditor.org/) Création map
+  * [Affinity](https://affinity.serif.com/fr/designer/) Création graphique
 
 ## A quoi ça ressemble ? 
 
@@ -35,8 +44,6 @@
   visite virtuelle Carolographie 
 
 ## Comment qu’on l’installe ?
-
-## D’où ça vient ?
 
 ## Sounds credit
 
