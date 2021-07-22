@@ -52,7 +52,7 @@ BeCode - Nous réalisions une formation de web dévloppeur, durant celle-ci nous
 
 ## Qu’est-ce que ça contient ?
 
-  Une exposition virtuelle où l'on peux découvrire les photos réalicé par carologrphie via jeux en isométrique.
+  Une exposition virtuelle où l'on peut découvrir les photos réalisé par carologrphie via jeux en isométrique
 
 ## Comment qu’on l’installe ?
 
