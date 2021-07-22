@@ -60,16 +60,18 @@ git clone https://github.com/DegimbeLaurent/Projet-client_Carolographie.git
 > Rendez vous dans le répertoire "src" et créer un fichier texte nommé "env.txt"
 
 > Ajouter les variables d'environnement suivantes et prenant bien soin de remplacer les "xxx" par les données qui vous aurons été communiquées séparément:
-> API_KEY=xxx
-> API_USERNAME=xxx
-> API_PASSWORD=xxx
+
+API_KEY=xxx
+API_USERNAME=xxx
+API_PASSWORD=xxx
 
 > Sauvegardez puis renommez le fichier en ".env"
 
 ## (Re)démarrage du serveur
 
 > Pour (re)lancer le serveur, ouvrez un terminal WEB SSH, rendez vous dans le répertoire de votre site et tapez la commande suivante:
-> forever start src/server.js
+
+forever start src/server.js
 
 ## Lien vers le site
 
