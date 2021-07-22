@@ -1,12 +1,12 @@
-# Projet client : Carolographie - visite virtuelle
+# Projet client : Carolographie - visite virtuelle.
 
 ## Qui a fait le projet :
 
-- [Maureen Marchal](https://github.com/Maureenm41) Rôle : Design & Graphisme
-- [Stéphane Englebert](https://github.com/stephane-englebert) Rôle : Backend developer + Project Manager organisation
-- [Deceulaer Adrien](https://github.com/DeceulaerAdrien) Rôle : Backend developer
-- [Fred Galoppin](https://github.com/fredgaloppin) Rôle : Frontend developer
-- [Laurent Degimbe](https://github.com/DegimbeLaurent) Rôle : Backend developer + Project Manager technique
+- [Maureen Marchal](https://github.com/Maureenm41) Rôle : Design & Graphisme.
+- [Stéphane Englebert](https://github.com/stephane-englebert) Rôle : Backend developer + Project Manager organisation.
+- [Deceulaer Adrien](https://github.com/DeceulaerAdrien) Rôle : Backend developer.
+- [Fred Galoppin](https://github.com/fredgaloppin) Rôle : Frontend developer.
+- [Laurent Degimbe](https://github.com/DegimbeLaurent) Rôle : Backend developer + Project Manager technique.
 
 ## Qu’est-ce que c’est ?
 
@@ -24,48 +24,50 @@ BeCode - Nous réalisions une formation de web dévloppeur, durant celle-ci nous
 
 ## Technologie:
 
-- [Html]()
-- [SCSS]()
-- [NodeJS](https://nodejs.org/en/) Gestion serveur
-- [Phaser](https://phaser.io/) FrameWork - game
-- [Tiled](https://www.mapeditor.org/) Création map
-- [Affinity](https://affinity.serif.com/fr/designer/) Création graphique
+- [Html]().
+- [SCSS]().
+- [NodeJS](https://nodejs.org/en/) Gestion serveur.
+- [Phaser](https://phaser.io/) FrameWork - game.
+- [Tiled](https://www.mapeditor.org/) Création map.
+- [Affinity](https://affinity.serif.com/fr/designer/) Création graphique.
 
 ## A quoi ça ressemble ?
 
-![Acceuil](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/home.PNG)
-![Login](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/login.PNG)
-![Game](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/game.PNG)
+![Acceuil](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/home.PNG).
+![Login](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/login.PNG).
+![Game](https://github.com/DegimbeLaurent/Carolographie-App/blob/main/src/assets/readme/game.PNG).
 
 ## La progression…
   
   - Expérience solo
-  - Possibilité de le faire en groupe
-  - Event aléatoire (nuages, oiseaux, taupe)
-  - Remerciement via les commentaire facebook à la fin de la visite
-  - Ajouter du décor sur la map principal
+  - Possibilité de le faire en groupe.
+  - Event aléatoire (nuages, oiseaux, taupe).
+  - Remerciement via les commentaire facebook à la fin de la visite.
+  - Ajouter du décor sur la map principal.
+  - Ajouter fonctionnalité un tchat.
+  - Ajouter fonctionnalité conseil, astuce.
 
 ## Qu’est-ce que ça contient ?
 
 ## Comment qu’on l’installe ?
 
-## Sounds credit
+## Sounds credit.
 
-  - [course sur béton](https://www.sound-fishing.net/bruitages/humain)
-  - [Bruitage2](https://www.sound-fishing.net/bruitages/oiseaux-ambiances)
-  - [teleportation](https://www.sound-fishing.net/bruitages/toon)
-  - [Cheminée](https://www.sound-fishing.net/bruitages/feu)
+  - [course sur béton](https://www.sound-fishing.net/bruitages/humain).
+  - [Bruitage2](https://www.sound-fishing.net/bruitages/oiseaux-ambiances).
+  - [teleportation](https://www.sound-fishing.net/bruitages/toon).
+  - [Cheminée](https://www.sound-fishing.net/bruitages/feu).
 
-## Pictures credit
+## Pictures credit.
 
-- [La carte de Ferraris](https://www.kbr.be/fr/projets/la-carte-de-ferraris/)
-- [Roses](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=576064)
-- [Vignes](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2026424)
-- [fougères](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=297080)
-- [Personnage](https://erikari.itch.io/elements-supremacy-assets)
+- [La carte de Ferraris](https://www.kbr.be/fr/projets/la-carte-de-ferraris/).
+- [Roses](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=576064).
+- [Vignes](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2026424).
+- [fougères](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=297080).
+- [Personnage](https://erikari.itch.io/elements-supremacy-assets).
 
-## Remerciment
+## Remerciment.
 
 - [Iassogna christine]() Pour les photos prises sur place.
 - [Duchemin Arnaud](https://github.com/Cervant3s) Pour l'aide apportée.
-- [L'équipe Carolographie](https://www.carolographie.be/)
+- [L'équipe Carolographie](https://www.carolographie.be/).
