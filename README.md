@@ -1,19 +1,34 @@
 # Carolographie-App
 
-## Who did the project :
+## Qui a fait le projet :
 
-## What is that ? 
+* [Stéphane Englebert](https://github.com/stephane-englebert)
+* [Deceulaer Adrien](https://github.com/DeceulaerAdrien)
+* [Maureen Marchal](https://github.com/Maureenm41)
+* [Fred Galoppin](https://github.com/fredgaloppin)
+* [Laurent Degimbe](https://github.com/DegimbeLaurent)
 
-## When did you work on it?
+## Qu’est-ce que c’est ? 
 
-## Where have you been? What were you doing ?
 
-## What does it look like ?
 
-## Progress…
+## Quand as-tu bossé dessus ?
 
-## What's in it?
+## Où t’étais ? Que faisais-tu ?
 
-## How do we install it? 
+## A quoi ça ressemble ? 
 
-## Where is that from ? 
+## La progression… 
+
+## Qu’est-ce que ça contient ?
+
+## Comment qu’on l’installe ?
+
+## D’où ça vient ?
+
+## Sounds credit
+
+* [course sur béton](https://www.sound-fishing.net/bruitages/humain)
+* [Bruitage2](https://www.sound-fishing.net/bruitages/oiseaux-ambiances)
+* [](https://www.sound-fishing.net/bruitages/toon)
+* [](https://www.sound-fishing.net/bruitages/feu)
