@@ -62,7 +62,9 @@ git clone https://github.com/DegimbeLaurent/Projet-client_Carolographie.git
 > Ajouter les variables d'environnement suivantes et prenant bien soin de remplacer les "xxx" par les données qui vous aurons été communiquées séparément:
 
 API_KEY=xxx
+
 API_USERNAME=xxx
+
 API_PASSWORD=xxx
 
 > Sauvegardez puis renommez le fichier en ".env"
