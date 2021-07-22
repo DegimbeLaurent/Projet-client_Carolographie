@@ -44,7 +44,7 @@ BeCode - Nous réalisions une formation de web dévloppeur, durant celle-ci nous
   - Event aléatoire (nuages, oiseaux, taupe).
   - Remerciement via les commentaire facebook à la fin de la visite.
   - Ajouter du décor sur la map principal.
-  - Ajouter fonctionnalité un tchat.
+  - Ajouter fonctionnalité tchat.
   - Ajouter fonctionnalité conseil, astuce.
 
 ## Qu’est-ce que ça contient ?
