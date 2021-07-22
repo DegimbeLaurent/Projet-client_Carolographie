@@ -1,4 +1,4 @@
-# Carolographie-App
+# Projet client : Carolographie - visite virtuelle
 
 ## Qui a fait le projet :
 
